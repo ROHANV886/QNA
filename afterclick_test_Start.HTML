@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Govt Jobs GK रील्स मंच - The QNA</title>
+    <meta name="description" content="The QNA पर सरकारी नौकरियों के लिए महत्वपूर्ण GK और करंट अफेयर्स के सवाल नए रील्स अंदाज में सीखें।">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .reels-container {
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            height: calc(100vh - 70px);
+        }
+        .reel-section {
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+        }
+        .reels-container::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-500 text-gray-100 font-sans antialiased overflow-hidden">
+
+    <!-- Header / Navigation -->
+    <header class="bg-gray-800 border-b border-gray-700 sticky top-0 z-50 shadow-md w-full h-[70px] flex items-center">
+        <div class="max-w-[96%] mx-auto w-full flex items-center justify-between">
+            <div class="text-2xl font-black text-blue-500 tracking-tight">
+                <a href="/">The <span class="text-white">QNA</span></a>
+            </div>
+            <div class="bg-blue-600/20 text-blue-400 font-black px-4 py-1.5 rounded-full text-xs border border-blue-500/30">
+                🎖️ Govt Jobs GK स्पेशल
+            </div>
+            <nav class="flex items-center space-x-4 text-xs md:text-sm font-bold text-gray-300">
+                <a href="/" class="hover:text-blue-500 transition">Home</a>
+                <a href="/forum" class="hover:text-blue-500 transition">मंच</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- REELS STYLE MAIN CONTAINER -->
+    <main id="reels-wrapper" class="reels-container w-full max-w-lg mx-auto bg-gray-950 border-x border-gray-800">
+        <!-- सवाल और विज्ञापन यहाँ जावास्क्रिप्ट से लोड होंगे -->
+    </main>
+
+    <!-- NEW: DYNAMIC BOTTOM EXPLANATION SHEET (100 Words Context Modal) -->
+    <div id="explanation-sheet" class="fixed inset-x-0 bottom-0 z-50 max-w-lg mx-auto bg-gray-900 border-t-2 border-blue-600 rounded-t-3xl shadow-2xl transform translate-y-full transition-transform duration-300 ease-out p-6 text-gray-200">
+        <div class="w-12 h-1.5 bg-gray-700 rounded-full mx-auto mb-4 cursor-pointer" onclick="closeExplanation()"></div>
+        <div class="flex items-center justify-between border-b border-gray-800 pb-3 mb-4">
+            <h3 class="text-base font-black text-white flex items-center gap-2">
+                📖 उत्तर का प्रामाणिक संदर्भ (Context)
+            </h3>
+            <button onclick="closeExplanation()" class="text-gray-400 hover:text-white font-bold text-sm bg-gray-800 px-2.5 py-1 rounded-full">बंद करें</button>
+        </div>
+        <!-- 100 शब्दों की व्याख्या यहाँ डायनेमिकली लोड होगी -->
+        <div id="explanation-text" class="text-sm text-gray-300 leading-relaxed max-h-[300px] overflow-y-auto font-medium">
+            <!-- Dynamic Content -->
+        </div>
+    </div>
+
+    <!-- Background overlay when context opens -->
+    <div id="sheet-overlay" class="fixed inset-0 bg-black/60 z-40 hidden" onclick="closeExplanation()"></div>
+
+
+    <script>
+        // GK क्वेश्चन बैंक (100 शब्दों के व्याख्या यानी context डेटा के साथ)
+        const gkQuestionBank = [
+            { 
+                id: 1, 
+                q: "भारतीय संविधान का जनक किसे कहा जाता है?", 
+                a: "डॉ. बी.आर. अम्बेडकर", b: "महात्मा गांधी", c: "जवाहरलाल नेहरू", d: "डॉ. राजेन्द्र प्रसाद", 
+                correct: "A", exam: "UPPCS", year: "2024", likes: 245, views: "1.2K",
+                context: "डॉ. भीमराव अम्बेडकर को भारतीय संविधान का जनक और निर्माता कहा जाता है क्योंकि वह संविधान का मसौदा तैयार करने वाली 'प्रारूप समिति' (Drafting Committee) के अध्यक्ष थे। उन्होंने दुनिया भर के विभिन्न संविधानों का गहरा अध्ययन किया और भारतीय समाज की विविधताओं और अधिकारों को ध्यान में रखते हुए एक मजबूत ढांचा तैयार किया। संविधान सभा में उनकी अद्वितीय भूमिका और कानूनी समझ के कारण ही उन्हें यह गौरवशाली स्थान प्राप्त हुआ है, जो परीक्षाओं में बार-बार पूछा जाने वाला एक प्रामाणिक ऐतिहासिक तथ्य है।"
+            },
+            { 
+                id: 2, 
+                q: "भारत में किस राज्य की तटरेखा (Coastline) सबसे लंबी है?", 
+                a: "महाराष्ट्र", b: "तमिलनाडु", c: "गुजरात", d: "आंध्र प्रदेश", 
+                correct: "C", exam: "SSC CGL", year: "2023", likes: 189, views: "940",
+                context: "भारत की मुख्य भूमि की कुल तटरेखा लगभग 5422 किलोमीटर लंबी है, जिसमें अकेले गुजरात राज्य की तटरेखा सबसे लंबी है, जिसकी कुल लंबाई लगभग 1214.7 किलोमीटर है। गुजरात के बाद दूसरे स्थान पर आंध्र प्रदेश आता है। गुजरात की भौगोलिक स्थिति ऐसी है कि इसमें कच्छ और खंभात की खाड़ियां शामिल हैं, जिससे इसकी तटीय सीमा अत्यधिक घुमावदार और लंबी हो जाती है। यह सवाल भूगोल के अंतर्गत सरकारी परीक्षाओं में हमेशा एक अकादमिक और प्रामाणिक तथ्य के रूप में पूछा जाता है।"
+            }
+        ];
+
+        const wrapper = document.getElementById('reels-wrapper');
+        let activeTimers = {};
+
+        // रील कार्ड जनरेटर कोड
+        function createQuestionReelHTML(item, index) {
+            return `
+                <div id="reel-${index}" class="reel-section h-full w-full p-6 flex flex-col justify-between border-b border-gray-900 bg-gradient-to-b from-gray-950 to-gray-900 relative" data-correct="${item.correct}" data-index="${index}">
+                    
+                    <!-- Top Bar: Timer & Number -->
+                    <div class="w-full pt-2">
+                        <div class="flex items-center justify-between text-xs text-gray-400 mb-2">
+                            <span>सवाल नंबर: #0${index + 1}</span>
+                            <span class="text-red-400 font-mono font-bold bg-red-950/40 border border-red-900/40 px-2.5 py-0.5 rounded-full flex items-center gap-1">
+                                ⏱️ <span class="timer-text">15</span>s
+                            </span>
+                        </div>
+                        <div class="w-full h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                            <div class="timer-bar h-full bg-blue-500 w-full transition-all duration-1000 ease-linear"></div>
+                        </div>
+                    </div>
+
+                    <!-- Question & Options Block -->
+                    <div class="my-auto space-y-4 relative">
+                        <div>
+                            <h2 class="text-lg md:text-xl font-black text-white leading-snug tracking-wide mb-2">
+                                ${item.q}
+                            </h2>
+                            <div class="text-right">
+                                <span class="inline-block bg-gray-800 text-[10px] text-gray-400 font-extrabold px-2 py-0.5 rounded border border-gray-700 uppercase tracking-wider">
+                                    📋 ${item.exam} (${item.year})
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- 4 Options Grid -->
+                        <div class="space-y-2.5 options-group">
+                            <button onclick="checkAnswer(this, 'A')" class="option-btn w-full text-left bg-gray-800/60 border border-gray-700 p-3.5 rounded-xl text-sm font-medium transition flex items-center space-x-3">
+                                <span class="badge bg-gray-700 text-white w-6 h-6 flex items-center justify-center rounded-lg text-xs font-bold shrink-0">A</span>
+                                <span>${item.a}</span>
+                            </button>
+                            <button onclick="checkAnswer(this, 'B')" class="option-btn w-full text-left bg-gray-800/60 border border-gray-700 p-3.5 rounded-xl text-sm font-medium transition flex items-center space-x-3">
+                                <span class="badge bg-gray-700 text-white w-6 h-6 flex items-center justify-center rounded-lg text-xs font-bold shrink-0">B</span>
+                                <span>${item.b}</span>
+                            </button>
+                            <button onclick="checkAnswer(this, 'C')" class="option-btn w-full text-left bg-gray-800/60 border border-gray-700 p-3.5 rounded-xl text-sm font-medium transition flex items-center space-x-3">
+                                <span class="badge bg-gray-700 text-white w-6 h-6 flex items-center justify-center rounded-lg text-xs font-bold shrink-0">C</span>
+                                <span>${item.c}</span>
+                            </button>
+                            <button onclick="checkAnswer(this, 'D')" class="option-btn w-full text-left bg-gray-800/60 border border-gray-700 p-3.5 rounded-xl text-sm font-medium transition flex items-center space-x-3">
+                                <span class="badge bg-gray-700 text-white w-6 h-6 flex items-center justify-center rounded-lg text-xs font-bold shrink-0">D</span>
+                                <span>${item.d}</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Safety & Social Area -->
+                    <div class="pb-4 border-t border-gray-800/60 pt-3 space-y-3">
+                        
+                        <!-- NEW ANSWER BOX WITH EXPLANATION BUTTON -->
+                        <div class="answer-box hidden w-full bg-green-950/30 border border-green-500/30 p-3 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-2">
+                            <span class="text-green-400 font-black text-sm tracking-wide">
+                                सही उत्तर: Option (${item.correct}) - प्रामाणिक सवाल।
+                            </span>
+                            <!-- 100 Word Trigger Button -->
+                            <button onclick="openExplanation(${index})" class="bg-green-600 hover:bg-green-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition flex items-center gap-1 shrink-0 shadow-md">
+                                <span>विस्तृत व्याख्या पढ़ें 📖</span>
+                            </button>
+                        </div>
+
+                        <!-- COMPACT INTERACTIONS BAR -->
+                        <div class="flex items-center justify-between text-xs text-gray-500">
+                            <div class="flex items-center space-x-3 bg-gray-900/80 px-3 py-1.5 rounded-full border border-gray-800">
+                                <button onclick="toggleLike(this)" class="flex items-center space-x-1 font-bold hover:text-red-500 transition">
+                                    <span>🤍</span> <span><span class="like-count">${item.likes}</span></span>
+                                </button>
+                                <span class="text-gray-700">|</span>
+                                <div class="flex items-center space-x-1 font-bold">
+                                    <span>👁️</span> <span>${item.views}</span>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center space-x-2">
+                                <span class="text-[9px] text-gray-600 italic hidden sm:inline">उत्तर में त्रुटि है?</span>
+                                <button onclick="reportQuestionError(${item.id})" class="bg-red-950/40 text-red-400 border border-red-900/50 hover:bg-red-900 hover:text-white font-bold px-3 py-1.5 rounded-full transition text-[11px] flex items-center space-x-1">
+                                    <span>🚨</span> <span>रिपोर्ट करें</span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            `;
+        }
+
+        // 10वें प्रश्न के बाद फुल स्क्रीन विज्ञापन
+        function createFullScreenAdHTML() {
+            return `
+                <div class="reel-section h-full w-full p-6 flex flex-col justify-between bg-gradient-to-b from-indigo-950 via-slate-900 to-indigo-950 border-b border-gray-900 text-center relative">
+                    <span class="text-[10px] font-bold text-indigo-400 uppercase tracking-widest pt-2 block">Sponsored Advertisement</span>
+                    <div class="my-auto space-y-4">
+                        <div class="w-16 h-16 bg-blue-600 text-white text-2xl font-black flex items-center justify-center rounded-2xl mx-auto shadow-xl">AD</div>
+                        <h3 class="text-xl font-extrabold text-white px-4 leading-tight">Google AdSense Full-Display</h3>
+                        <p class="text-xs text-gray-400 max-w-xs mx-auto">High CPM इंटरस्टिशियल फुल-स्क्रीन विज्ञापन स्लॉट।</p>
+                    </div>
+                    <div class="pb-6 animate-bounce text-xs text-indigo-300 font-bold">⬇️ आगे बढ़ने के लिए स्क्रॉल करें</div>
+                </div>
+            `;
+        }
+
+        // NEW JAVASCRIPT: व्याख्या खोलने और बंद करने का लॉजिक (Bottom Sheet Modal)
+        function openExplanation(originalIndex) {
+            // चूँकि हम लूप में रेंडर कर रहे हैं, हमें ओरिजिनल अरे इंडेक्स निकालने के लिए मॉड्यूलो का प्रयोग करना होगा
+            const itemIndex = originalIndex % gkQuestionBank.length;
+            const item = gkQuestionBank[itemIndex];
+            
+            document.getElementById('explanation-text').innerText = item.context;
+            
+            // शीट और ओवरले दिखाएं
+            document.getElementById('sheet-overlay').classList.remove('hidden');
+            const sheet = document.getElementById('explanation-sheet');
+            sheet.classList.remove('translate-y-full');
+            sheet.classList.add('translate-y-0');
+        }
+
+        function closeExplanation() {
+            document.getElementById('sheet-overlay').classList.add('hidden');
+            const sheet = document.getElementById('explanation-sheet');
+            sheet.classList.remove('translate-y-0');
+            sheet.classList.add('translate-y-full');
+        }
+
+        // रिपोर्ट एरर ट्रिगर
+        function reportQuestionError(questionId) {
+            alert(`⚠️ कोर्ट केस सुरक्षा अलर्ट:\n\nसवाल संख्या #${questionId} की रिपोर्ट दर्ज कर ली गई है। प्रशासनिक टीम 12 घंटे के भीतर इसकी समीक्षा करेगी।`);
+        }
+
+        // राइट/रॉन्ग आंसर इवैल्यूएशन एल्गोरिदम
+        function checkAnswer(selectedBtn, selectedOption) {
+            const reel = selectedBtn.closest('.reel-section');
+            const correctOption = reel.getAttribute('data-correct');
+            const optionsGroup = reel.querySelector('.options-group');
+            const allButtons = optionsGroup.querySelectorAll('.option-btn');
+            
+            const reelIndex = reel.getAttribute('data-index');
+            clearInterval(activeTimers[reelIndex]);
+
+            allButtons.forEach(btn => btn.disabled = true);
+
+            allButtons.forEach(btn => {
+                const optionLetter = btn.querySelector('.badge').innerText;
+                
+                if (optionLetter === correctOption) {
+                    btn.classList.remove('bg-gray-800/60', 'border-gray-700');
+                    btn.classList.add('bg-green-600', 'border-green-500', 'text-white');
+                } else if (optionLetter === selectedOption && selectedOption !== correctOption) {
+                    btn.classList.remove('bg-gray-800/60', 'border-gray-700');
+                    btn.classList.add('bg-red-600', 'border-red-500', 'text-white');
+                }
+            });
+
+            reel.querySelector('.answer-box').classList.remove('hidden');
+        }
+
+        // टाइमर कोर इंजन
+        function startTimerForReel(reelElement, index) {
+            let timeLeft = 15;
+            const timerText = reelElement.querySelector('.timer-text');
+            const timerBar = reelElement.querySelector('.timer-bar');
+            
+            if(activeTimers[index]) clearInterval(activeTimers[index]);
+
+            timerBar.style.width = '100%';
+            timerBar.classList.remove('bg-red-500');
+            timerBar.classList.add('bg-blue-500');
+
+            activeTimers[index] = setInterval(() => {
+                timeLeft--;
+                if(timerText) timerText.innerText = timeLeft;
+
+                let percentage = (timeLeft / 15) * 100;
+                if(timerBar) timerBar.style.width = percentage + '%';
+
+                if (timeLeft <= 5 && timerBar) {
+                    timerBar.classList.remove('bg-blue-500');
+                    timerBar.classList.add('bg-red-500');
+                }
+
+                if (timeLeft <= 0) {
+                    clearInterval(activeTimers[index]);
+                    const correctOption = reelElement.getAttribute('data-correct');
+                    const firstCorrectBtn = Array.from(reelElement.querySelectorAll('.option-btn')).find(btn => btn.querySelector('.badge').innerText === correctOption);
+                    if(firstCorrectBtn) checkAnswer(firstCorrectBtn, null);
+                }
+            }, 1000);
+        }
+
+        // विज़िबल स्क्रीन ट्रैकर
+        function initScrollObserver() {
+            const observerOptions = { root: wrapper, threshold: 0.6 };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const reelIndex = entry.target.getAttribute('data-index');
+                        if (reelIndex !== null) {
+                            startTimerForReel(entry.target, reelIndex);
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reel-section[data-index]').forEach(reel => {
+                observer.observe(reel);
+            });
+        }
+
+        // लूप रेंडरिंग मैनेजर (कुल 10 सवाल जनरेट करने के लिए)
+        function renderReelsEngine() {
+            let combinedHTML = "";
+            let totalQuestions = 0;
+
+            for (let loop = 0; loop < 5; loop++) {
+                gkQuestionBank.forEach((item) => {
+                    combinedHTML += createQuestionReelHTML(item, totalQuestions);
+                    totalQuestions++;
+
+                    if (totalQuestions % 10 === 0) {
+                        combinedHTML += createFullScreenAdHTML();
+                    }
+                });
+            }
+            wrapper.innerHTML = combinedHTML;
+            setTimeout(initScrollObserver, 100);
+        }
+
+        // सोशल हार्ट टॉगल
+        function toggleLike(btn) {
+            const heartIcon = btn.querySelector('span:first-child');
+            const countSpan = btn.querySelector('.like-count');
+            let currentCount = parseInt(countSpan.innerText);
+            if (heartIcon.innerText === '🤍') {
+                heartIcon.innerText = '❤️'; countSpan.innerText = currentCount + 1; btn.classList.add('text-red-500');
+            } else {
+                heartIcon.innerText = '🤍'; countSpan.innerText = currentCount - 1; btn.classList.remove('text-red-500');
+            }
+        }
+
+        renderReelsEngine();
+    </script>
+</body>
+</html>

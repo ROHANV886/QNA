@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>The QNA - Login</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body{
+            background:#030712;
+            color:white;
+            font-family:sans-serif;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="flex flex-col items-center justify-center h-screen p-6 text-center">
+
+        <h1 class="text-4xl font-black text-blue-500 mb-3">
+            The QNA
+        </h1>
+
+        <p class="text-gray-400 mb-8">
+            टेस्ट शुरू करने के लिए नाम और मोबाइल नंबर दर्ज करें
+        </p>
+
+        <input
+            type="text"
+            id="name"
+            placeholder="अपना नाम लिखें"
+            class="w-full max-w-sm p-4 mb-4 rounded-xl text-black"
+        >
+
+        <input
+            type="tel"
+            id="mobile"
+            placeholder="10 अंकों का मोबाइल नंबर"
+            maxlength="10"
+            class="w-full max-w-sm p-4 mb-6 rounded-xl text-black"
+        >
+
+        <button
+            onclick="startTest()"
+            class="bg-blue-600 px-10 py-4 rounded-full font-black text-xl hover:bg-blue-700"
+        >
+            टेस्ट शुरू करें
+        </button>
+
+    </div>
+
+    <script>
+
+        function startTest() {
+
+            const name = document.getElementById("name").value.trim();
+            const mobile = document.getElementById("mobile").value.trim();
+
+            if (!name) {
+                alert("कृपया अपना नाम दर्ज करें");
+                return;
+            }
+
+            if (!/^[6-9]\d{9}$/.test(mobile)) {
+                alert("कृपया सही 10 अंकों का मोबाइल नंबर दर्ज करें");
+                return;
+            }
+
+            // User data save
+            localStorage.setItem("userName", name);
+            localStorage.setItem("userMobile", mobile);
+
+            // Open next page
+            window.location.href = "afterclick_test_Start.HTML";
+        }
+
+    </script>
+
+</body>
+</html>

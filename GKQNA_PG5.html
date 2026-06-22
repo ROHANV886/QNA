@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="hi" class="scroll-smooth h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>The QNA - प्रीमियम पास एक्टिवेट करें</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Orbitron:wght@600;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root { 
+            --gold: #d4af37; --blue: #00d4ff; --dark: #020617; 
+            --glass: rgba(15, 23, 42, 0.75); --border: rgba(255, 255, 255, 0.1);
+        }
+        body { background-color: var(--dark); color: #f8fafc; font-family: 'Rajdhani', sans-serif; -webkit-tap-highlight-color: transparent; }
+        .font-hero { font-family: 'Cinzel', serif; }
+        .font-tech { font-family: 'Orbitron', sans-serif; }
+        
+        .glass-card { background: var(--glass); backdrop-filter: blur(12px); border: 1px solid var(--border); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .glass-card:hover { border-color: var(--gold); }
+        
+        .blob { position: fixed; width: 400px; height: 400px; background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, rgba(2, 6, 23, 0) 70%); z-index: -1; filter: blur(50px); }
+
+        /* 3D नियॉन बॉक्स डिज़ाइन */
+        .neon-pay-box {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.02);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .neon-gpay:hover {
+            border-color: #4285F4;
+            box-shadow: 0 0 20px rgba(66, 133, 244, 0.25), inset 0 0 10px rgba(66, 133, 244, 0.1);
+        }
+        .neon-phonepe:hover {
+            border-color: #5f259f;
+            box-shadow: 0 0 20px rgba(95, 37, 159, 0.3), inset 0 0 10px rgba(95, 37, 159, 0.15);
+        }
+        .neon-paytm:hover {
+            border-color: #00baf2;
+            box-shadow: 0 0 20px rgba(0, 186, 242, 0.25), inset 0 0 10px rgba(0, 186, 242, 0.1);
+        }
+    </style>
+</head>
+<body class="min-h-full flex flex-col justify-between overflow-x-hidden selection:bg-blue-500/30">
+
+    <div class="blob" style="top: -100px; left: -100px;"></div>
+    <div class="blob" style="bottom: -100px; right: -100px; background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, rgba(2, 6, 23, 0) 70%);"></div>
+
+    <!-- === 1. बेस हेडर (Base Header) === -->
+    <header class="sticky top-0 z-[100] glass-card border-none border-b border-white/5 bg-slate-950/80">
+        <div class="max-w-[96%] mx-auto py-4 flex items-center justify-between">
+            <div class="text-3xl font-black text-blue-500 font-hero tracking-tighter">
+                <a href="/">THE <span class="text-white">QNA</span></a>
+            </div>
+            <nav class="flex items-center gap-4 sm:gap-8 font-tech text-[10px] sm:text-xs tracking-widest text-gray-400">
+                <a href="/" class="hover:text-blue-400 transition uppercase">Home</a>
+                <a href="/forum" class="hover:text-blue-400 transition uppercase">मंच</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- === 2. मुख्य पेमेंट सेक्शन === -->
+    <main class="flex-1 max-w-md w-full mx-auto px-4 py-6 flex flex-col justify-center">
+        
+        <div class="text-center mb-5">
+            <span class="text-blue-400 font-tech text-xs tracking-[0.2em] uppercase">OFFICIAL MEMBERSHIP PASS</span>
+            <h1 class="text-3xl font-black font-hero text-white mt-1">
+                ज्ञान महाकुंभ <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-600">पास अनलॉक</span>
+            </h1>
+        </div>
+
+        <!-- मोबाइल फ्रेंडली सब्सक्रिप्शन कार्ड -->
+        <div class="glass-card rounded-[30px] p-5 border border-white/10 shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 right-0 bg-gradient-to-l from-red-600 to-amber-600 text-white font-tech text-[9px] font-black px-4 py-1 rounded-bl-xl uppercase tracking-wider animate-pulse">
+                LIMITED SEATS
+            </div>
+
+            <!-- ऑफर प्राइसिंग डिस्प्ले -->
+            <div class="text-center py-2 border-b border-white/5 mb-4">
+                <p class="text-gray-400 text-xs font-bold uppercase tracking-wider">प्रथम माह ट्रायल शुल्क</p>
+                <h2 class="display-5 font-black text-amber-500 font-tech my-0.5">₹1</h2>
+                <p class="text-[11px] text-gray-400">इसके बाद अगले महीने से स्वतः <span class="text-blue-400 font-bold">₹99/महीना</span> (UPI AutoPay) लागू होगा।</p>
+            </div>
+
+            <!-- आकर्षक वैल्यू बॉक्स: छात्र को क्या-क्या मिलेगा -->
+            <div class="bg-slate-900/60 border border-white/5 rounded-2xl p-4 mb-4 space-y-2.5">
+                <p class="text-[10px] font-tech text-blue-400 uppercase tracking-widest font-bold"><i class="fa-solid fa-gift mr-1"></i> इस पास के साथ आपको मिलेगा:</p>
+                <div class="grid grid-cols-1 gap-2 text-xs">
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-bolt text-yellow-400 shrink-0"></i> <span><strong>100% विज्ञापन मुक्त (Ads-Free) अनुभव</strong> - कोई रुकावट नहीं।</span></div>
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-calendar-day text-emerald-400 shrink-0"></i> <span><strong>रोज़ाना अपडेटेड टेस्ट सीरीज़</strong> - परीक्षा के नए पैटर्न पर।</span></div>
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-newspaper text-cyan-400 shrink-0"></i> <span><strong>लेटेस्ट करेंट अफेयर्स स्पेशल</strong> - डेली पीडीएफ व रील्स।</span></div>
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-chart-pie text-purple-400 shrink-0"></i> <span><strong>एडवांस एआई स्कोर रिपोर्ट</strong> - कमियों को सुधारने के लिए।</span></div>
+                </div>
+            </div>
+
+            <!-- कानूनी सुरक्षा और नो-कैंसिलेशन माइंडसेट -->
+            <div class="bg-red-500/5 border border-red-500/20 rounded-2xl p-3.5 mb-5 space-y-2 text-[11px] text-gray-300">
+                <p class="font-bold text-red-400 flex items-center gap-1 font-tech uppercase tracking-wide">
+                    <i class="fa-solid fa-gavel"></i> महत्वपूर्ण कानूनी एवं तकनीकी शर्तें:
+                </p>
+                <ul class="list-disc pl-4 space-y-1 text-gray-400">
+                    <li><strong>लॉगिन सुरक्षा:</strong> यह पास केवल 1 डिवाइस के लिए वैध है। डिवाइस बदलने पर अकाउंट ब्लॉक हो जाएगा।</li>
+                    <li><strong>कैंसिलेशन पॉलिसी:</strong> सब्सक्रिप्शन कैंसिल करने पर आपका **संचित स्कोर, ऑल-इंडिया रैंक डेटा और सेव किए गए प्रश्न** हमेशा के लिए डिलीट कर दिए जाएंगे।</li>
+                    <li><strong>प्राइस锁 गारंटी:</strong> यदि आप जुड़े रहते हैं, तो कीमत बढ़ने पर भी आपके लिए शुल्क हमेशा ₹99 ही रहेगा।</li>
+                </ul>
+            </div>
+
+            <!-- === असली लोगोज़ के साथ आकर्षक पेमेंट ऑप्शंस === -->
+            <div class="space-y-4">
+                <p class="text-[10px] font-tech text-gray-500 uppercase tracking-widest text-center font-bold">भुगतान का माध्यम चुनें (UPI AutoPay)</p>
+                
+                <!-- Google Pay Box -->
+                <button onclick="triggerAutoPay('Google Pay')" class="w-full neon-pay-box neon-gpay flex items-center justify-between p-4 rounded-2xl transition-all transform active:scale-[0.98]">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-white border border-white/10 rounded-xl flex items-center justify-center shadow-inner overflow-hidden p-1">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg" alt="Google Pay Real Logo" class="w-full h-full object-contain">
+                        </div>
+                        <div class="text-left">
+                            <h4 class="text-sm font-bold text-white tracking-wide">Google Pay</h4>
+                            <p class="text-[10px] text-gray-400 font-medium">Fast One-Click Verification</p>
+                        </div>
+                    </div>
+                    <span class="text-[10px] font-tech bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2.5 py-1 rounded-md font-bold uppercase tracking-wider shadow-sm">Pay ₹1</span>
+                </button>
+
+                <!-- PhonePe Box -->
+                <button onclick="triggerAutoPay('PhonePe')" class="w-full neon-pay-box neon-phonepe flex items-center justify-between p-4 rounded-2xl transition-all transform active:scale-[0.98]">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-white border border-white/10 rounded-xl flex items-center justify-center shadow-inner overflow-hidden p-1.5">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/PhonePe_Logo.svg" alt="PhonePe Real Logo" class="w-full h-full object-contain">
+                        </div>
+                        <div class="text-left">
+                            <h4 class="text-sm font-bold text-white tracking-wide">PhonePe AutoPay</h4>
+                            <p class="text-[10px] text-gray-400 font-medium">Instant Bank Mandate Setup</p>
+                        </div>
+                    </div>
+                    <span class="text-[10px] font-tech bg-purple-500/10 text-purple-400 border border-purple-500/20 px-2.5 py-1 rounded-md font-bold uppercase tracking-wider shadow-sm">Pay ₹1</span>
+                </button>
+
+                <!-- Paytm Box -->
+                <button onclick="triggerAutoPay('Paytm')" class="w-full neon-pay-box neon-paytm flex items-center justify-between p-4 rounded-2xl transition-all transform active:scale-[0.98]">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-white border border-white/10 rounded-xl flex items-center justify-center shadow-inner overflow-hidden p-1">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Paytm_Logo_%28standalone%29.svg" alt="Paytm Real Logo" class="w-full h-full object-contain">
+                        </div>
+                        <div class="text-left">
+                            <h4 class="text-sm font-bold text-white tracking-wide">Paytm / Other UPI</h4>
+                            <p class="text-[10px] text-gray-400 font-medium">Secure NPCI Protocol Gateway</p>
+                        </div>
+                    </div>
+                    <span class="text-[10px] font-tech bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 px-2.5 py-1 rounded-md font-bold uppercase tracking-wider shadow-sm">Pay ₹1</span>
+                </button>
+            </div>
+
+            <!-- सुरक्षा गाइडलाइंस -->
+            <div class="text-[9px] text-gray-500 font-tech uppercase tracking-widest text-center mt-5 pt-4 border-t border-white/5">
+                <i class="fa-solid fa-shield-halved text-blue-500 mr-1"></i> NPCI UPI AUTOPAY SECURED INTERFACE
+            </div>
+        </div>
+
+    </main>
+
+    <!-- === 3. बेस फुटर (Base Footer) === -->
+    <footer class="glass-card border-none border-t border-white/5 py-6 mt-6">
+        <div class="max-w-[96%] mx-auto flex flex-col md:flex-row items-center justify-between gap-3 text-center md:text-left">
+            <div class="text-xl font-black text-blue-500 font-hero tracking-tighter">THE <span class="text-white">QNA</span></div>
+            <div class="text-[10px] font-tech text-gray-600 tracking-widest uppercase">
+                &copy; 2026 THE QNA PLATFORM. ALL RIGHTS RESERVED.
+            </div>
+            <div class="flex justify-center gap-4 text-gray-500 text-sm">
+                <a href="#" class="hover:text-white transition"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#" class="hover:text-white transition"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#" class="hover:text-white transition"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ऑटो डेबिट ट्रिगर स्क्रिप्ट -->
+    <script>
+        function triggerAutoPay(appName) {
+            alert(`💳 UPI AutoPay API सुरक्षित रूप से लोड हो रही है...\n\nNPCI नियमों के तहत आपके ${appName} में मैंडेट अप्रूवल स्क्रीन खुलेगी। पहले महीने का शुल्क ₹1 है।`);
+        }
+    </script>
+
+</body>
+</html>
