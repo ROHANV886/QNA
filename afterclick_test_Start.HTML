@@ -10,7 +10,7 @@
         .reels-container {
             scroll-snap-type: y mandatory;
             overflow-y: scroll;
-            height: calc(100vh - 70px);
+            height: 100dvh;
         }
         .reel-section {
             scroll-snap-align: start;
@@ -21,26 +21,24 @@
         }
     </style>
 </head>
-<body class="bg-gray-500 text-gray-100 font-sans antialiased overflow-hidden">
+<body class="bg-gray-950 text-gray-100 font-sans antialiased overflow-hidden">
 
     <!-- Header / Navigation -->
-    <header class="bg-gray-800 border-b border-gray-700 sticky top-0 z-50 shadow-md w-full h-[70px] flex items-center">
+    <header class="fixed top-0 left-0 right-0 z-50 bg-black/40 backdrop-blur-md w-full h-[26px] flex items-center">
         <div class="max-w-[96%] mx-auto w-full flex items-center justify-between">
             <div class="text-2xl font-black text-blue-500 tracking-tight">
                 <a href="/">The <span class="text-white">QNA</span></a>
             </div>
-            <div class="bg-blue-600/20 text-blue-400 font-black px-4 py-1.5 rounded-full text-xs border border-blue-500/30">
-                🎖️ Govt Jobs GK स्पेशल
-            </div>
+     
             <nav class="flex items-center space-x-4 text-xs md:text-sm font-bold text-gray-300">
-                <a href="/" class="hover:text-blue-500 transition">Home</a>
-                <a href="/forum" class="hover:text-blue-500 transition">मंच</a>
+                <a href="/index.html" class="hover:text-blue-500 transition">Home</a>
+                <a href="/GK_catogery.html" class="hover:text-blue-500 transition">मंच</a>
             </nav>
         </div>
     </header>
 
     <!-- REELS STYLE MAIN CONTAINER -->
-    <main id="reels-wrapper" class="reels-container w-full max-w-lg mx-auto bg-gray-950 border-x border-gray-800">
+    <main id="reels-wrapper" class="reels-container w-full bg-gray-950">
         <!-- सवाल और विज्ञापन यहाँ जावास्क्रिप्ट से लोड होंगे -->
     </main>
 
@@ -88,7 +86,7 @@
         // रील कार्ड जनरेटर कोड
         function createQuestionReelHTML(item, index) {
             return `
-                <div id="reel-${index}" class="reel-section h-full w-full p-6 flex flex-col justify-between border-b border-gray-900 bg-gradient-to-b from-gray-950 to-gray-900 relative" data-correct="${item.correct}" data-index="${index}">
+                <div id="reel-${index}" class="reel-section h-screen w-full px-3 py-2 flex flex-col justify-between border-b border-gray-900 bg-gradient-to-b from-gray-950 to-gray-900 relative" data-correct="${item.correct}" data-index="${index}">
                     
                     <!-- Top Bar: Timer & Number -->
                     <div class="w-full pt-2">
@@ -104,9 +102,9 @@
                     </div>
 
                     <!-- Question & Options Block -->
-                    <div class="my-auto space-y-4 relative">
+                    <div class="flex-1 flex flex-col justify-center space-y-2 relative">
                         <div>
-                            <h2 class="text-lg md:text-xl font-black text-white leading-snug tracking-wide mb-2">
+                            <h2 class="text-lg md:text-lg font-black text-white leading-snug tracking-wide mb-2">
                                 ${item.q}
                             </h2>
                             <div class="text-right">
@@ -117,20 +115,20 @@
                         </div>
 
                         <!-- 4 Options Grid -->
-                        <div class="space-y-2.5 options-group">
-                            <button onclick="checkAnswer(this, 'A')" class="option-btn w-full text-left bg-gray-800/60 border border-gray-700 p-3.5 rounded-xl text-sm font-medium transition flex items-center space-x-3">
+                        <div class="space-y-2 options-group">
+                            <button onclick="checkAnswer(this, 'A')" class="option-btn w-full text-left bg-gray-800/60 border border-gray-700 p-2.5 rounded-lg text-sm font-medium transition flex items-center space-x-3">
                                 <span class="badge bg-gray-700 text-white w-6 h-6 flex items-center justify-center rounded-lg text-xs font-bold shrink-0">A</span>
                                 <span>${item.a}</span>
                             </button>
-                            <button onclick="checkAnswer(this, 'B')" class="option-btn w-full text-left bg-gray-800/60 border border-gray-700 p-3.5 rounded-xl text-sm font-medium transition flex items-center space-x-3">
+                            <button onclick="checkAnswer(this, 'B')" class="option-btn w-full text-left bg-gray-800/60 border border-gray-700 p-2.5 rounded-lg text-sm font-medium transition flex items-center space-x-3">
                                 <span class="badge bg-gray-700 text-white w-6 h-6 flex items-center justify-center rounded-lg text-xs font-bold shrink-0">B</span>
                                 <span>${item.b}</span>
                             </button>
-                            <button onclick="checkAnswer(this, 'C')" class="option-btn w-full text-left bg-gray-800/60 border border-gray-700 p-3.5 rounded-xl text-sm font-medium transition flex items-center space-x-3">
+                            <button onclick="checkAnswer(this, 'C')" class="option-btn w-full text-left bg-gray-800/60 border border-gray-700 p-2.5 rounded-lg text-sm font-medium transition flex items-center space-x-3">
                                 <span class="badge bg-gray-700 text-white w-6 h-6 flex items-center justify-center rounded-lg text-xs font-bold shrink-0">C</span>
                                 <span>${item.c}</span>
                             </button>
-                            <button onclick="checkAnswer(this, 'D')" class="option-btn w-full text-left bg-gray-800/60 border border-gray-700 p-3.5 rounded-xl text-sm font-medium transition flex items-center space-x-3">
+                            <button onclick="checkAnswer(this, 'D')" class="option-btn w-full text-left bg-gray-800/60 border border-gray-700 p-2.5 rounded-lg text-sm font-medium transition flex items-center space-x-3">
                                 <span class="badge bg-gray-700 text-white w-6 h-6 flex items-center justify-center rounded-lg text-xs font-bold shrink-0">D</span>
                                 <span>${item.d}</span>
                             </button>
@@ -138,7 +136,7 @@
                     </div>
 
                     <!-- Bottom Safety & Social Area -->
-                    <div class="pb-4 border-t border-gray-800/60 pt-3 space-y-3">
+                    <div class="pb-2 border-t border-gray-800/60 pt-2 space-y-2">
                         
                         <!-- NEW ANSWER BOX WITH EXPLANATION BUTTON -->
                         <div class="answer-box hidden w-full bg-green-950/30 border border-green-500/30 p-3 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-2">
@@ -179,8 +177,8 @@
         // 10वें प्रश्न के बाद फुल स्क्रीन विज्ञापन
         function createFullScreenAdHTML() {
             return `
-                <div class="reel-section h-full w-full p-6 flex flex-col justify-between bg-gradient-to-b from-indigo-950 via-slate-900 to-indigo-950 border-b border-gray-900 text-center relative">
-                    <span class="text-[10px] font-bold text-indigo-400 uppercase tracking-widest pt-2 block">Sponsored Advertisement</span>
+                <div class="reel-section h-screen w-full px-3 py-2 flex flex-col justify-between bg-gradient-to-b from-indigo-950 via-slate-900 to-indigo-950 border-b border-gray-900 text-center relative">
+                    <span class="text-[10px] font-bold text-indigo-400 uppercase tracking-widest pt-1 block">Sponsored Advertisement</span>
                     <div class="my-auto space-y-4">
                         <div class="w-16 h-16 bg-blue-600 text-white text-2xl font-black flex items-center justify-center rounded-2xl mx-auto shadow-xl">AD</div>
                         <h3 class="text-xl font-extrabold text-white px-4 leading-tight">Google AdSense Full-Display</h3>
