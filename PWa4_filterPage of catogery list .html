@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="hi" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>The QNA - Test Navigator</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            -webkit-tap-highlight-color: transparent;
+            background-color: #0B0F19; /* डार्क बैकग्राउंड */
+        }
+        
+        /* Pocket FM जैसा कस्टम कलर पैलेट */
+        .sheet-bg { background-color: #171921; }
+        .grid-btn { background-color: #272A35; color: #9CA3AF; }
+        .grid-btn-active { background-color: #D61F52; color: #FFFFFF; } /* पॉकेट एफएम वाला पिंक-रेड कलर */
+        .close-btn { background-color: #272A35; color: #FFFFFF; }
+
+        /* बॉटम शीट स्लाइड एनीमेशन */
+        .slide-up { animation: slideUp 0.3s ease-out forwards; }
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+        
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom, 20px); }
+    </style>
+</head>
+<body class="h-full flex flex-col text-slate-800 relative">
+
+    <!-- बैकग्राउंड का डमी कंटेंट (टेस्ट लिस्ट) -->
+    <main class="p-5 opacity-40 blur-[2px] pointer-events-none">
+        <h2 class="text-xl font-bold text-white mb-4">इतिहास टेस्ट सीरीज़</h2>
+        <div class="space-y-3">
+            <div class="h-20 bg-slate-800 rounded-xl"></div>
+            <div class="h-20 bg-slate-800 rounded-xl"></div>
+            <div class="h-20 bg-slate-800 rounded-xl"></div>
+            <div class="h-20 bg-slate-800 rounded-xl"></div>
+        </div>
+    </main>
+
+    <!-- === असली जादू: Bottom Sheet Modal (Pocket FM Style) === -->
+    <div id="testNavigatorModal" class="fixed inset-0 z-[100] flex flex-col justify-end bg-black/70 backdrop-blur-sm transition-opacity">
+        
+        <!-- फ्लोटिंग क्लोज बटन (X) -->
+        <div class="w-full flex justify-center mb-4 z-10">
+            <button onclick="closeModal()" class="w-12 h-12 close-btn rounded-full flex items-center justify-center text-xl shadow-lg active:scale-95 transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <!-- शीट का मुख्य कंटेनर -->
+        <div class="sheet-bg w-full rounded-t-[24px] pt-6 pb-safe px-5 slide-up shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
+            
+            <!-- 1. हेडर (Subject Info) -->
+            <div class="flex items-center gap-4 border-b border-white/10 pb-5 mb-5">
+                <!-- थंबनेल इमेज (विषय का आइकॉन) -->
+                <div class="w-14 h-14 bg-gradient-to-tr from-blue-900 to-slate-800 rounded-xl flex items-center justify-center text-amber-500 text-2xl shadow-inner border border-white/5 shrink-0">
+                    <i class="fa-solid fa-landmark"></i>
+                </div>
+                <!-- विषय की जानकारी -->
+                <div>
+                    <h3 class="text-white font-bold text-[17px] tracking-wide">इतिहास | History Tests</h3>
+                    <p class="text-gray-400 text-xs mt-1 font-medium">1000+ Tests &nbsp;•&nbsp; 4.8 <i class="fa-solid fa-star text-[10px] text-gray-500"></i></p>
+                </div>
+            </div>
+
+            <!-- 2. ग्रिड नेविगेशन (Test Chunks) -->
+            <div class="h-[50vh] overflow-y-auto no-scrollbar pb-10">
+                <div class="grid grid-cols-3 gap-3">
+                    <button class="grid-btn py-3.5 rounded-xl text-[13px] font-bold active:scale-95 transition">1 - 20</button>
+                    <button class="grid-btn py-3.5 rounded-xl text-[13px] font-bold active:scale-95 transition">21 - 40</button>
+                    <button class="grid-btn py-3.5 rounded-xl text-[13px] font-bold active:scale-95 transition">41 - 60</button>
+                    
+                    <button class="grid-btn py-3.5 rounded-xl text-[13px] font-bold active:scale-95 transition">61 - 80</button>
+                    <button class="grid-btn py-3.5 rounded-xl text-[13px] font-bold active:scale-95 transition">81 - 100</button>
+                    <button class="grid-btn py-3.5 rounded-xl text-[13px] font-bold active:scale-95 transition">101 - 120</button>
+                    
+                    <button class="grid-btn py-3.5 rounded-xl text-[13px] font-bold active:scale-95 transition">121 - 140</button>
+                    <button class="grid-btn py-3.5 rounded-xl text-[13px] font-bold active:scale-95 transition">141 - 160</button>
+                    
+                    <!-- Active Chunk (जैसे इमेज में 161-180 पिंक था) -->
+                    <button class="grid-btn-active py-3.5 rounded-xl text-[13px] font-bold shadow-[0_4px_15px_rgba(214,31,82,0.4)] active:scale-95 transition">
+                        161 - 180
+                    </button>
+                    
+                    <button class="grid-btn py-3.5 rounded-xl text-[13px] font-bold active:scale-95 transition">181 - 200</button>
+                    <button class="grid-btn py-3.5 rounded-xl text-[13px] font-bold active:scale-95 transition">201 - 220</button>
+                    <button class="grid-btn py-3.5 rounded-xl text-[13px] font-bold active:scale-95 transition">221 - 240</button>
+
+                    <button class="grid-btn py-3.5 rounded-xl text-[13px] font-bold active:scale-95 transition">241 - 260</button>
+                    <button class="grid-btn py-3.5 rounded-xl text-[13px] font-bold active:scale-95 transition">261 - 280</button>
+                    <button class="grid-btn py-3.5 rounded-xl text-[13px] font-bold active:scale-95 transition">281 - 300</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- डमी स्क्रिप्ट क्लोज करने के लिए -->
+    <script>
+        function closeModal() {
+            document.getElementById('testNavigatorModal').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('testNavigatorModal').style.display = 'none';
+            }, 300);
+        }
+    </script>
+</body>
+</html>

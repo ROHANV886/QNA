@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="hi" class="scroll-smooth h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>The QNA - प्रीमियम पास अनलॉक करें</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Orbitron:wght@600;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root { 
+            --gold: #d4af37; --blue: #00d4ff; --dark: #020617; 
+            --glass: rgba(15, 23, 42, 0.7); --border: rgba(255, 255, 255, 0.1);
+        }
+        body { background-color: var(--dark); color: #f8fafc; font-family: 'Rajdhani', sans-serif; -webkit-tap-highlight-color: transparent; }
+        .font-hero { font-family: 'Cinzel', serif; }
+        .font-tech { font-family: 'Orbitron', sans-serif; }
+        
+        /* बेस डिज़ाइन की ग्लास क्लासेज[cite: 10] */
+        .glass-card { background: var(--glass); backdrop-filter: blur(12px); border: 1px solid var(--border); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .glass-card:hover { border-color: var(--gold); }
+        
+        /* बेस डिज़ाइन के एनिमेटेड ब्लॉब्स[cite: 10] */
+        .blob { position: fixed; width: 500px; height: 500px; background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, rgba(2, 6, 23, 0) 70%); z-index: -1; filter: blur(60px); }
+        
+        /* सक्रिय पेमेंट मेथड के लिए विशेष स्टाइल[cite: 10] */
+        .pay-method-active { border-color: var(--blue) !important; background: rgba(0, 212, 255, 0.05) !important; }
+
+        /* आकर्षक 3D नियॉन पेमेंट बॉक्स स्टाइल */
+        .neon-pay-box {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.02);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .neon-gpay:hover { border-color: #4285F4; box-shadow: 0 0 15px rgba(66, 133, 244, 0.2); }
+        .neon-phonepe:hover { border-color: #5f259f; box-shadow: 0 0 15px rgba(95, 37, 159, 0.3); }
+        .neon-paytm:hover { border-color: #00baf2; box-shadow: 0 0 15px rgba(0, 186, 242, 0.2); }
+        
+        .upi-input:focus {
+            outline: none;
+            border-color: var(--blue);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.25);
+        }
+    </style>
+</head>
+<body class="min-h-full flex flex-col justify-between overflow-x-hidden selection:bg-blue-500/30">
+
+    <!-- बेस डिज़ाइन के ब्लॉब्स[cite: 10] -->
+    <div class="blob" style="top: -100px; left: -100px;"></div>
+    <div class="blob" style="bottom: -100px; right: -100px; background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, rgba(2, 6, 23, 0) 70%);"></div>
+
+    <!-- === 1. बेस हेडर (Exact Copy from Base Code)[cite: 10] === -->
+    <header class="sticky top-0 z-[100] glass-card border-none border-b border-white/5 bg-slate-950/80">
+        <div class="max-w-[96%] mx-auto py-4 flex items-center justify-between">
+            <div class="text-3xl font-black text-blue-500 font-hero tracking-tighter">
+                <a href="/">THE <span class="text-white">QNA</span></a>
+            </div>
+            
+            <nav class="flex items-center gap-4 sm:gap-8 font-tech text-[10px] sm:text-xs tracking-widest text-gray-400">
+                <a href="/" class="hover:text-blue-400 transition uppercase">Home</a>
+                <a href="/forum" class="hover:text-blue-400 transition uppercase">मंच</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- === 2. मुख्य पेमेंट सेक्शन === -->
+    <main class="flex-1 max-w-4xl w-full mx-auto px-4 py-8">
+        
+        <div class="text-center mb-8">
+            <span class="text-blue-400 font-tech text-xs tracking-[0.2em] uppercase">Premium Subscription Pass</span>
+            <h1 class="text-3xl md:text-5xl font-black font-hero text-white mt-1">
+                सफलता का <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-600">पास अनलॉक करें</span>
+            </h1>
+            <p class="text-gray-400 text-sm mt-2">पहले महीने मात्र ₹1 में पाएं ज्ञान का महाकुंभ पास।</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+            
+            <!-- [परिवर्तन]: पेमेंट गेटवे इंटरफेस अब सबसे पहले और ऊपर दिखेगा (2 कॉलम) -->
+            <div class="glass-card rounded-[28px] p-6 md:p-8 border border-white/10 md:col-span-2 space-y-6 md:order-1 order-1">
+                <h3 class="text-xl font-bold text-white flex items-center gap-2 font-hero">
+                    <i class="fa-solid fa-credit-card text-blue-400 text-sm"></i> भुगतान का माध्यम चुनें (UPI AutoPay)
+                </h3>
+
+                <!-- पेमेंट ऑप्शंस टैब्स[cite: 10] -->
+                <div class="grid grid-cols-2 gap-3">
+                    <button onclick="selectMethod('upi-apps')" id="btn-upi-apps" class="pay-method-active flex flex-col items-center justify-center p-3 border border-white/10 rounded-xl transition hover:border-blue-400/50">
+                        <i class="fa-solid fa-mobile-screen text-lg mb-1 text-blue-400"></i>
+                        <span class="text-xs font-bold">UPI One-Click Apps</span>
+                    </button>
+                    <button onclick="selectMethod('qr-code')" id="btn-qr-code" class="flex flex-col items-center justify-center p-3 border border-white/10 rounded-xl transition hover:border-blue-400/50">
+                        <i class="fa-solid fa-qrcode text-lg mb-1 text-amber-500"></i>
+                        <span class="text-xs font-bold">QR AutoPay Scanner</span>
+                    </button>
+                </div>
+
+                <!-- डायनेमिक पेमेंट एरिया[cite: 10] -->
+                <div class="bg-slate-900/40 border border-white/5 rounded-2xl p-4 sm:p-6 min-h-[160px] flex items-center justify-center">
+                    
+                    <!-- 1. 3D नियॉन ऐप्स विकल्प -->
+                    <div id="area-upi-apps" class="w-full space-y-3">
+                        <!-- Google Pay Box -->
+                        <button onclick="triggerPayment('Google Pay')" class="w-full neon-pay-box neon-gpay flex items-center justify-between p-3 rounded-xl transition-all transform active:scale-[0.98]">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-white border border-white/10 rounded-lg flex items-center justify-center overflow-hidden p-1 shadow-inner">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg" alt="Google Pay" class="w-full h-full object-contain">
+                                </div>
+                                <h4 class="text-xs font-bold text-white tracking-wide">Google Pay</h4>
+                            </div>
+                            <span class="text-[9px] font-tech bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded font-bold uppercase tracking-wider">Pay ₹1</span>
+                        </button>
+
+                        <!-- PhonePe Box (REAL SVG INBUILT LOGO FIXED) -->
+                        <button onclick="triggerPayment('PhonePe')" class="w-full neon-pay-box neon-phonepe flex items-center justify-between p-3 rounded-xl transition-all transform active:scale-[0.98]">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-white border border-white/10 rounded-lg flex items-center justify-center p-1.5 shadow-inner">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-full h-full">
+                                        <path fill="#5f259f" d="M15,5 C9.5,5 5,9.5 5,15 L5,85 C5,90.5 9.5,95 15,95 L85,95 C90.5,95 95,90.5 95,85 L95,15 C95,94.5 90.5,5 85,5 L15,5 Z" />
+                                        <path fill="#FFFFFF" d="M72.2,46.2 C71.3,37.3 64.1,30.3 55.2,29.4 C52.2,29.1 40.1,29.1 37.1,29.4 C28.2,30.3 21,37.3 20.1,46.2 C19.8,49.2 19.8,56.1 20.1,59.1 C21,68 28.2,75 37.1,75.9 C39.5,76.1 42,76.2 44.5,76.2 L44.5,85.5 C44.5,87 46.1,87.9 47.4,87.1 L57.8,81 C65.2,79.5 71.1,73.6 72.2,66.2 C72.5,63.2 72.5,49.2 72.2,46.2 Z M46.3,64 L37.2,64 C35.4,64 34,62.6 34,60.8 L34,44 C34,42.2 35.4,40.8 37.2,40.8 L46.3,40.8 C52.7,40.8 57.9,46 57.9,52.4 C57.9,58.8 52.7,64 46.3,64 Z" />
+                                        <circle fill="#E0B0FF" cx="46.5" cy="52.4" r="5" />
+                                    </svg>
+                                </div>
+                                <h4 class="text-xs font-bold text-white tracking-wide">PhonePe AutoPay</h4>
+                            </div>
+                            <span class="text-[9px] font-tech bg-purple-500/10 text-purple-400 border border-purple-500/20 px-2 py-0.5 rounded font-bold uppercase tracking-wider">Pay ₹1</span>
+                        </button>
+
+                        <!-- Paytm Box -->
+                        <button onclick="triggerPayment('Paytm')" class="w-full neon-pay-box neon-paytm flex items-center justify-between p-3 rounded-xl transition-all transform active:scale-[0.98]">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-white border border-white/10 rounded-lg flex items-center justify-center overflow-hidden p-0.5 shadow-inner">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Paytm_Logo_%28standalone%29.svg" alt="Paytm" class="w-full h-full object-contain">
+                                </div>
+                                <h4 class="text-xs font-bold text-white tracking-wide">Paytm / BHIM</h4>
+                            </div>
+                            <span class="text-[9px] font-tech bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 px-2 py-0.5 rounded font-bold uppercase tracking-wider">Pay ₹1</span>
+                        </button>
+
+                        <!-- Custom UPI ID का खाली बॉक्स -->
+                        <div class="pt-2 border-t border-white/5 mt-3">
+                            <p class="text-[10px] font-tech text-gray-500 uppercase tracking-widest text-center font-bold mb-2">अथवा अपनी UPI ID दर्ज करें</p>
+                            <div class="relative flex items-center">
+                                <input type="text" id="custom-upi-id" placeholder="example@upi, @apl, @ybl" class="upi-input w-full bg-slate-900/50 border border-white/10 p-3 pr-24 rounded-xl text-xs text-white transition-all font-mono">
+                                <button onclick="payWithCustomUPI()" class="absolute right-1.5 top-1/2 -translate-y-1/2 bg-gradient-to-r from-amber-500 to-yellow-600 text-slate-950 px-3 py-1.5 rounded-lg text-[10px] font-black tracking-wider uppercase font-tech transition active:scale-[0.95] shadow-md">
+                                    Verify & Pay
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. QR Code का इंटरफ़ेस[cite: 10] -->
+                    <div id="area-qr-code" class="hidden text-center space-y-3">
+                        <p class="text-xs text-gray-400">स्कैन करके ऑटो-डेबिट मैंडेट सेट करें</p>
+                        <div class="bg-white p-3 inline-block rounded-xl shadow-lg border-2 border-amber-500">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=theqna@bank%26am=1%26cu=INR" alt="Payment QR Code" class="w-[140px] h-[140px]">[cite: 10]
+                        </div>
+                        <p class="text-xs text-amber-400 font-tech animate-pulse"><i class="fa-solid fa-spinner fa-spin mr-1"></i> भुगतान का इंतज़ार कर रहे हैं...</p>[cite: 10]
+                    </div>
+
+                </div>
+
+                <!-- सिक्योरिटी और ट्रस्ट बैज[cite: 10] -->
+                <div class="flex justify-center items-center gap-6 text-[10px] text-gray-500 font-tech uppercase tracking-widest pt-2 border-t border-white/5">
+                    <span><i class="fa-solid fa-lock text-green-500 mr-1"></i> 256-Bit SSL Encrypted</span>[cite: 10]
+                    <span><i class="fa-solid fa-shield-halved text-blue-500 mr-1"></i> NPCI UPI AUTOPAY</span>
+                </div>
+            </div>
+
+            <!-- [परिवर्तन]: समरी, फीचर्स और कानूनी जानकारी अब इसके नीचे दिखेगी (1 कॉलम) -->
+            <div class="space-y-4 md:order-2 order-2">
+                <!-- समरी कार्ड -->
+                <div class="glass-card rounded-[28px] p-6 border border-white/10 space-y-4">
+                    <h3 class="text-lg font-bold text-white border-b border-white/5 pb-2 font-hero">ऑर्डर समरी</h3>[cite: 10]
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-400 text-sm">पैकेज का नाम:</span>
+                        <span class="font-bold text-blue-400 text-sm">मंथली प्रीमियम पास</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-400 text-sm">प्रथम माह शुल्क:</span>
+                        <span class="font-bold text-amber-500 text-sm">₹1 (ट्रायल ऑफर)</span>
+                    </div>
+                    <div class="flex justify-between items-center border-t border-white/5 pt-3">
+                        <span class="text-white font-bold">अगले माह से स्वतः शुल्क:</span>
+                        <span class="text-xl font-black text-amber-500 font-tech">₹99/माह</span>
+                    </div>
+                </div>
+
+                <!-- फीचर्स बॉक्स: छात्र को क्या मिलेगा -->
+                <div class="glass-card rounded-[28px] p-5 border border-white/10 space-y-3">
+                    <h4 class="text-xs font-tech text-blue-400 uppercase tracking-widest font-bold border-b border-white/5 pb-2"><i class="fa-solid fa-gift mr-1"></i> पास के प्रीमियम फीचर्स:</h4>
+                    <div class="grid grid-cols-1 gap-2.5 text-xs text-gray-300">
+                        <div class="flex items-center gap-2"><i class="fa-solid fa-bolt text-yellow-400 shrink-0"></i> <span>100% विज्ञापन मुक्त (Ads-Free) अनुभव</span></div>
+                        <div class="flex items-center gap-2"><i class="fa-solid fa-calendar-day text-emerald-400 shrink-0"></i> <span>रोज़ाना अपडेटेड टेस्ट सीरीज़</span></div>
+                        <div class="flex items-center gap-2"><i class="fa-solid fa-newspaper text-cyan-400 shrink-0"></i> <span>लेटेस्ट करेंट अफेयर्स स्पेशल रील्स</span></div>
+                        <div class="flex items-center gap-2"><i class="fa-solid fa-chart-pie text-purple-400 shrink-0"></i> <span>एडवांस एआई स्कोर विश्लेषण</span></div>
+                    </div>
+                </div>
+
+                <!-- कानूनी एवं नो-कैंसिलेशन माइंडसेट शर्तें -->
+                <div class="bg-red-500/5 border border-red-500/20 rounded-[24px] p-4 space-y-2 text-[11px] text-gray-300">
+                    <p class="font-bold text-red-400 flex items-center gap-1 font-tech uppercase tracking-wide">
+                        <i class="fa-solid fa-gavel"></i> महत्वपूर्ण कानूनी शर्तें:
+                    </p>
+                    <ul class="list-disc pl-4 space-y-1 text-gray-400">
+                        <li><strong>लॉगिन सुरक्षा:</strong> पास केवल 1 डिवाइस के लिए वैध है।</li>
+                        <li><strong>डेटा डिलीट पॉलिसी:</strong> ऑटो-डेबिट सक्रिय होने के बाद यदि आप पास रद्द करते हैं, तो आपका **संचित स्कोर और ऑल-इंडिया रैंक डेटा** हमेशा के लिए डिलीट हो जाएगा।</li>
+                        <li><strong>प्राइस लॉक गारंटी:</strong> वर्तमान छात्रों के लिए भविष्य में भी रिन्यूअल फीस हमेशा ₹99 ही लॉक रहेगी।</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- === 3. Base Footer (Exact Copy from Base Code)[cite: 10] === -->
+    <footer class="glass-card border-none border-t border-white/5 py-8 mt-10">
+        <div class="max-w-[96%] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="text-xl font-black text-blue-500 font-hero tracking-tighter">THE <span class="text-white">QNA</span></div>[cite: 10]
+            <div class="text-[10px] font-tech text-gray-600 tracking-widest uppercase">
+                &copy; 2026 THE QNA PLATFORM. ALL RIGHTS RESERVED.
+            </div>[cite: 10]
+            <div class="flex gap-4 text-gray-500 text-sm">
+                <a href="#" class="hover:text-white transition"><i class="fa-brands fa-facebook"></i></a>[cite: 10]
+                <a href="#" class="hover:text-white transition"><i class="fa-brands fa-x-twitter"></i></a>[cite: 10]
+                <a href="#" class="hover:text-white transition"><i class="fa-brands fa-instagram"></i></a>[cite: 10]
+            </div>
+        </div>
+    </footer>
+
+    <!-- फ्रंटएंड टैब और डमी पेमेंट ट्रिगर स्क्रिप्ट -->
+    <script>
+        function selectMethod(methodId) {
+            document.getElementById('area-upi-apps').classList.add('hidden');[cite: 10]
+            document.getElementById('area-qr-code').classList.add('hidden');[cite: 10]
+            
+            document.getElementById('btn-upi-apps').classList.remove('pay-method-active');[cite: 10]
+            document.getElementById('btn-qr-code').classList.remove('pay-method-active');[cite: 10]
+            
+            document.getElementById('area-' + methodId).classList.remove('hidden');[cite: 10]
+            document.getElementById('btn-' + methodId).classList.add('pay-method-active');[cite: 10]
+        }
+
+        function triggerPayment(appName) {
+            alert(`💳 UPI AutoPay API लोड हो रही है...\n\nआपके ${appName} ऐप में ₹1 पेमेंट व ₹99 मंथली ऑटो-डेबिट मैंडेट स्क्रीन ओपन होगी।`);
+        }
+
+        function payWithCustomUPI() {
+            const upiId = document.getElementById('custom-upi-id').value;
+            if (!upiId || !upiId.includes('@')) {
+                alert('⚠️ कृपया एक वैध UPI ID दर्ज करें (जैसे: name@upi)');
+                return;
+            }
+            alert(`🚀 UPI ID: ${upiId} का सत्यापन किया जा रहा है...\n\nडेवलपर यहाँ Razorpay/Cashfree Collect Subscriptions API कनेक्ट करेगा।`);
+        }
+    </script>
+
+</body>
+</html>

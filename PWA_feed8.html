@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="hi" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>QNA Shorts - Perfect Centered UI</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        body { 
+            background-color: #000000; 
+            color: #ffffff; 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            -webkit-tap-highlight-color: transparent;
+            overscroll-behavior-y: none;
+        }
+        
+        .reels-container {
+            height: 100dvh;
+            width: 100%;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+        
+        .reel-item {
+            height: 100dvh;
+            width: 100%;
+            scroll-snap-align: start;
+            position: relative;
+            /* अब यह कंटेंट को स्क्रीन के बिल्कुल बीच में रखेगा */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; 
+        }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .icon-shadow { filter: drop-shadow(0px 2px 5px rgba(0,0,0,0.9)); }
+        .text-shadow { text-shadow: 0px 1px 4px rgba(0,0,0,1); }
+        
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2; /* 2 लाइन दिखाने के लिए */
+            -webkit-box-orient: vertical;  
+            overflow: hidden;
+        }
+
+        .glass-option {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+    </style>
+</head>
+<body class="h-full flex flex-col overflow-hidden">
+
+    <!-- मुख्य रील्स कंटेनर -->
+    <main id="reelsContainer" class="reels-container no-scrollbar"></main>
+
+    <!-- === POPUP AD MODAL === -->
+    <div id="adModal" class="fixed inset-0 z-[1000] bg-black/95 backdrop-blur-lg hidden flex-col items-center justify-center px-4 transition-opacity duration-300">
+        <button onclick="closeAd()" class="absolute top-12 right-6 w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-white active:scale-90 transition border border-white/20 z-50">
+            <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+        <span class="bg-gray-800 text-gray-400 text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-widest mb-4">Advertisement</span>
+        
+        <div class="w-full max-w-sm h-[320px] bg-[#111] border border-white/10 rounded-2xl flex flex-col justify-center items-center relative overflow-hidden shadow-2xl">
+            <i class="fa-brands fa-google text-4xl text-gray-500 mb-4"></i>
+            <h3 class="text-lg font-bold text-gray-200 text-center px-4">Your Sponsored Ad Here</h3>
+            <p class="text-xs text-gray-500 mt-2 text-center px-6">यह फुल-स्क्रीन विज्ञापन रिवेन्यू जनरेट करेगा। यूज़र इसे काटकर ही पूरी जानकारी पढ़ सकेगा।</p>
+            <button onclick="closeAd()" class="mt-6 bg-white text-black font-extrabold py-3 px-10 rounded-full text-sm shadow-[0_0_20px_rgba(255,255,255,0.2)] active:scale-95">
+                Skip Ad
+            </button>
+        </div>
+    </div>
+
+    <!-- === जावास्क्रिप्ट === -->
+    <script>
+        const questions = [
+          {subject:"इतिहास", test:"Test #1000", color:"amber", question:"1857 की क्रांति के समय भारत का गवर्नर जनरल कौन था?", options:["लॉर्ड डलहौजी","लॉर्ड कैनिंग","लॉर्ड कर्जन","लॉर्ड मिंटो"], answer:1, info:"1857 की क्रांति के समय भारत का गवर्नर जनरल लॉर्ड कैनिंग था। यह विद्रोह 10 मई 1857 को मेरठ से शुरू हुआ था और जल्द ही उत्तर और मध्य भारत के बड़े हिस्सों में फैल गया।"},
+          {subject:"भूगोल", test:"Test #1002", color:"emerald", question:"भारत का सबसे दक्षिणी बिंदु कौन सा है?", options:["कन्याकुमारी","रामेश्वरम","इंदिरा पॉइंट","लक्षद्वीप"], answer:2, info:"भारत का सबसे दक्षिणी बिंदु इंदिरा पॉइंट है, जो अंडमान और निकोबार द्वीप समूह के ग्रेट निकोबार द्वीप पर स्थित है।"},
+          {subject:"सामान्य ज्ञान", test:"Test #1003", color:"sky", question:"भारत का राष्ट्रीय पशु कौन है?", options:["शेर","बाघ","हाथी","मोर"], answer:1, info:"बाघ भारत का राष्ट्रीय पशु है। इसे 1973 में राष्ट्रीय पशु घोषित किया गया था।"}
+        ];
+
+        const container = document.getElementById("reelsContainer");
+        let index = 0;
+        function optionHTML(q, i) {
+          const correct = i === q.answer;
+          return `<div class="${correct ? 'bg-green-500/20 backdrop-blur-md border border-green-500/50 text-green-400 font-bold flex justify-between items-center shadow-[0_0_15px_rgba(34,197,94,0.15)]' : 'glass-option text-gray-100 font-medium'} p-4 rounded-xl text-[14px] shadow-md">
+            <span>${String.fromCharCode(65+i)}. ${q.options[i]}</span>${correct ? '<i class="fa-solid fa-circle-check text-lg icon-shadow"></i>' : ''}</div>`;
+        }
+        function reelHTML(q, n) {
+          return `<section class="reel-item">
+            <div class="absolute inset-0 bg-gradient-to-br from-[#0B0F19] via-[#020617] to-black z-0 pointer-events-none"></div>
+            <div class="relative z-10 w-[85%] px-5 flex flex-col gap-4 mb-20">
+              <div class="flex items-center gap-2 mb-2"><span class="bg-${q.color}-500 text-black text-[11px] font-black px-3 py-1 rounded uppercase tracking-widest shadow-lg">${q.subject}</span><span class="text-xs text-gray-400 font-semibold text-shadow">${q.test}</span></div>
+              <h2 class="text-[20px] md:text-[22px] font-bold text-white leading-snug text-shadow mb-2">${q.question}</h2>
+              <div class="space-y-3">${q.options.map((_,i)=>optionHTML(q,i)).join("")}</div>
+            </div>
+            <div class="absolute bottom-6 left-5 right-16 z-10"><p id="context-${n}" class="text-[12px] text-gray-300 leading-relaxed text-shadow line-clamp-2"><span class="font-bold text-${q.color}-400">विस्तृत जानकारी:</span> ${q.info}</p><button id="btn-${n}" onclick="handleReadMore('context-${n}','btn-${n}')" class="text-white bg-white/20 px-3 py-1.5 rounded-lg text-[11px] font-bold mt-2">...Read more</button></div>
+            <div class="absolute right-3 bottom-6 flex flex-col items-center gap-7 z-20"><button><i class="fa-solid fa-heart text-[30px] text-white icon-shadow"></i><span class="block text-[11px] font-bold">12K</span></button><button><i class="fa-solid fa-bookmark text-[30px] text-white icon-shadow"></i><span class="block text-[11px] font-bold">Save</span></button><button><i class="fa-solid fa-share text-[30px] text-white icon-shadow"></i><span class="block text-[11px] font-bold">Share</span></button></div>
+          </section>`;
+        }
+        function addQuestion(){ container.insertAdjacentHTML("beforeend", reelHTML(questions[index % questions.length], index)); index++; }
+        for(let i=0;i<questions.length;i++) addQuestion();
+
+        container.addEventListener("scroll", () => {
+          if (container.scrollTop + container.clientHeight >= container.scrollHeight - 150) addQuestion();
+        });
+
+        let currentTargetText=null, currentTargetBtn=null;
+        function handleReadMore(textId,btnId){currentTargetText=textId;currentTargetBtn=btnId;adModal.classList.remove("hidden");adModal.classList.add("flex");}
+        function closeAd(){adModal.classList.add("hidden");adModal.classList.remove("flex");if(currentTargetText){document.getElementById(currentTargetText).classList.remove("line-clamp-2");document.getElementById(currentTargetBtn).style.display="none";}}
+    </script>
+
+</body>
+</html>
