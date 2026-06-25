@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Govt Jobs GK रील्स मंच - The QNA</title>
-    <meta name="description" content="The QNA पर सरकारी नौकरियों के लिए महत्वपूर्ण GK और करंट अफेयर्स के सवाल नए रील्स अंदाज में सीखें।">
+    <meta name="description" content="The QNA पर सरकारी नौकरियों के लिए महत्वपूर्ण GK और傳 अफेयर्स के सवाल नए रील्स अंदाज में सीखें।">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .reels-container {
@@ -21,7 +21,7 @@
         }
     </style>
 </head>
-<body class="bg-gray-950 text-gray-100 font-sans antialiased overflow-hidden">
+<body class="bg-gray-950 text-gray-100 font-sans antialiased overflow-hidden h-[100dvh] w-full">
 
     <!-- Header / Navigation -->
     <header class="fixed top-0 left-0 right-0 z-50 bg-black/40 backdrop-blur-md w-full h-[26px] flex items-center">
@@ -76,101 +76,107 @@
                 q: "भारत में किस राज्य की तटरेखा (Coastline) सबसे लंबी है?", 
                 a: "महाराष्ट्र", b: "तमिलनाडु", c: "गुजरात", d: "आंध्र प्रदेश", 
                 correct: "C", exam: "SSC CGL", year: "2023", likes: 189, views: "940",
-                context: "भारत की मुख्य भूमि की कुल तटरेखा लगभग 5422 किलोमीटर लंबी है, जिसमें अकेले गुजरात राज्य की तटरेखा सबसे लंबी है, जिसकी कुल लंबाई लगभग 1214.7 किलोमीटर है। गुजरात के बाद दूसरे स्थान पर आंध्र प्रदेश आता है। गुजरात की भौगोलिक स्थिति ऐसी है कि इसमें कच्छ और खंभात की खाड़ियां शामिल हैं, जिससे इसकी तटीय सीमा अत्यधिक घुमावदार और लंबी हो जाती है। यह सवाल भूगोल के अंतर्गत सरकारी परीक्षाओं में हमेशा एक अकादमिक और प्रामाणिक तथ्य के रूप में पूछा जाता है।"
+                context: "भारत की मुख्य भूमि की कुल तटरेखा लगभग 5422 किलोमीटर लंबी है, जिसमें अकेले गुजरात राज्य की तटरेखा सबसे लंबी है, जिसकी कुल लंबाई लगभग 1214.7 किलोमीटर है। गुजरात के बाद दूसरे स्थान पर आंध्र प्रदेश आता है। गुजरात की भौगोलिक स्थिति ऐसी है कि इसमें कच्छ और खंभात की खाड़ियां शामिल हैं, जिससे इसकी तटीय सीमा अत्यधिक घुमावدار और लंबी हो जाती है। यह सवाल भूगोल के अंतर्गत सरकारी परीक्षाओं में हमेशा एक अकादमिक और प्रामाणिक तथ्य के रूप में पूछा जाता है।"
             }
         ];
 
         const wrapper = document.getElementById('reels-wrapper');
         let activeTimers = {};
 
-        // रील कार्ड जनरेटर कोड
-   // रील कार्ड जनरेटर कोड (संशोधित - मार्जिन फिक्स के साथ)
-function createQuestionReelHTML(item, index) {
-    return `
-        <div id="reel-${index}" class="reel-section h-screen w-full px-3 py-2 flex flex-col justify-start border-b border-gray-900 bg-gradient-to-b from-gray-950 to-gray-900 relative" data-correct="${item.correct}" data-index="${index}">
-            
-            <div class="w-full pt-2 shrink-0">
-                <div class="flex items-center justify-between text-xs text-gray-400 mb-2">
-                    <span>सवाल नंबर: #0${index + 1}</span>
-                    <span class="text-red-400 font-mono font-bold bg-red-950/40 border border-red-900/40 px-2.5 py-0.5 rounded-full flex items-center gap-1">
-                        ⏱️ <span class="timer-text">15</span>s
-                    </span>
-                </div>
-                <div class="w-full h-1.5 bg-gray-800 rounded-full overflow-hidden">
-                    <div class="timer-bar h-full bg-blue-500 w-full transition-all duration-1000 ease-linear"></div>
-                </div>
-            </div>
-
-            <div class="flex-1 flex flex-col justify-start mt-6 space-y-3 relative">
-                <div>
-                    <h2 class="text-lg md:text-lg font-black text-white leading-snug tracking-wide mb-2">
-                        ${item.q}
-                    </h2>
-                    <div class="text-right">
-                        <span class="inline-block bg-gray-800 text-[10px] text-gray-400 font-extrabold px-2 py-0.5 rounded border border-gray-700 uppercase tracking-wider">
-                            📋 ${item.exam} (${item.year})
-                        </span>
-                    </div>
-                </div>
-
-                <div class="space-y-2 options-group">
-                    <button onclick="checkAnswer(this, 'A')" class="option-btn w-full text-left bg-gray-800/60 border border-gray-700 p-2.5 rounded-lg text-sm font-medium transition flex items-center space-x-3">
-                        <span class="badge bg-gray-700 text-white w-6 h-6 flex items-center justify-center rounded-lg text-xs font-bold shrink-0">A</span>
-                        <span>${item.a}</span>
-                    </button>
-                    <button onclick="checkAnswer(this, 'B')" class="option-btn w-full text-left bg-gray-800/60 border border-gray-700 p-2.5 rounded-lg text-sm font-medium transition flex items-center space-x-3">
-                        <span class="badge bg-gray-700 text-white w-6 h-6 flex items-center justify-center rounded-lg text-xs font-bold shrink-0">B</span>
-                        <span>${item.b}</span>
-                    </button>
-                    <button onclick="checkAnswer(this, 'C')" class="option-btn w-full text-left bg-gray-800/60 border border-gray-700 p-2.5 rounded-lg text-sm font-medium transition flex items-center space-x-3">
-                        <span class="badge bg-gray-700 text-white w-6 h-6 flex items-center justify-center rounded-lg text-xs font-bold shrink-0">C</span>
-                        <span>${item.c}</span>
-                    </button>
-                    <button onclick="checkAnswer(this, 'D')" class="option-btn w-full text-left bg-gray-800/60 border border-gray-700 p-2.5 rounded-lg text-sm font-medium transition flex items-center space-x-3">
-                        <span class="badge bg-gray-700 text-white w-6 h-6 flex items-center justify-center rounded-lg text-xs font-bold shrink-0">D</span>
-                        <span>${item.d}</span>
-                    </button>
-                </div>
-            </div>
-
-            <div class="pb-2 border-t border-gray-800/60 pt-2 space-y-2 mt-auto shrink-0">
-                
-                <div class="answer-box hidden w-full bg-green-950/30 border border-green-500/30 p-3 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-2">
-                    <span class="text-green-400 font-black text-sm tracking-wide">
-                        सही उत्तर: Option (${item.correct}) - प्रामाणिक सवाल।
-                    </span>
-                    <button onclick="openExplanation(${index})" class="bg-green-600 hover:bg-green-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition flex items-center gap-1 shrink-0 shadow-md">
-                        <span>विस्तृत व्याख्या पढ़ें 📖</span>
-                    </button>
-                </div>
-
-                <div class="flex items-center justify-between text-xs text-gray-500">
-                    <div class="flex items-center space-x-3 bg-gray-900/80 px-3 py-1.5 rounded-full border border-gray-800">
-                        <button onclick="toggleLike(this)" class="flex items-center space-x-1 font-bold hover:text-red-500 transition">
-                            <span>🤍</span> <span><span class="like-count">${item.likes}</span></span>
-                        </button>
-                        <span class="text-gray-700">|</span>
-                        <div class="flex items-center space-x-1 font-bold">
-                            <span>👁️</span> <span>${item.views}</span>
+        // रील कार्ड जनरेटर कोड (संशोधित - मार्जिन और h-[100dvh] मोबाइल रिस्पॉन्सिव फिक्स के साथ)
+        function createQuestionReelHTML(item, index) {
+            return `
+                <div id="reel-${index}" class="reel-section h-[100dvh] w-full px-3 py-2 flex flex-col justify-start border-b border-gray-900 bg-gradient-to-b from-gray-950 to-gray-900 relative" data-correct="${item.correct}" data-index="${index}">
+                    
+                    <!-- Top Bar: Timer & Number -->
+                    <div class="w-full pt-2 shrink-0">
+                        <div class="flex items-center justify-between text-xs text-gray-400 mb-2">
+                            <span>सवाल नंबर: #0${index + 1}</span>
+                            <span class="text-red-400 font-mono font-bold bg-red-950/40 border border-red-900/40 px-2.5 py-0.5 rounded-full flex items-center gap-1">
+                                ⏱️ <span class="timer-text">15</span>s
+                            </span>
+                        </div>
+                        <div class="w-full h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                            <div class="timer-bar h-full bg-blue-500 w-full transition-all duration-1000 ease-linear"></div>
                         </div>
                     </div>
 
-                    <div class="flex items-center space-x-2">
-                        <span class="text-[9px] text-gray-600 italic hidden sm:inline">उत्तर में त्रुटि है?</span>
-                        <button onclick="reportQuestionError(${item.id})" class="bg-red-950/40 text-red-400 border border-red-900/50 hover:bg-red-900 hover:text-white font-bold px-3 py-1.5 rounded-full transition text-[11px] flex items-center space-x-1">
-                            <span>🚨</span> <span>रिपोर्ट करें</span>
-                        </button>
+                    <!-- Question & Options Block -->
+                    <div class="flex-1 flex flex-col justify-start mt-6 space-y-3 relative">
+                        <div>
+                            <h2 class="text-lg md:text-lg font-black text-white leading-snug tracking-wide mb-2">
+                                ${item.q}
+                            </h2>
+                            <div class="text-right">
+                                <span class="inline-block bg-gray-800 text-[10px] text-gray-400 font-extrabold px-2 py-0.5 rounded border border-gray-700 uppercase tracking-wider">
+                                    📋 ${item.exam} (${item.year})
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- 4 Options Grid -->
+                        <div class="space-y-2 options-group">
+                            <button onclick="checkAnswer(this, 'A')" class="option-btn w-full text-left bg-gray-800/60 border border-gray-700 p-2.5 rounded-lg text-sm font-medium transition flex items-center space-x-3">
+                                <span class="badge bg-gray-700 text-white w-6 h-6 flex items-center justify-center rounded-lg text-xs font-bold shrink-0">A</span>
+                                <span>${item.a}</span>
+                            </button>
+                            <button onclick="checkAnswer(this, 'B')" class="option-btn w-full text-left bg-gray-800/60 border border-gray-700 p-2.5 rounded-lg text-sm font-medium transition flex items-center space-x-3">
+                                <span class="badge bg-gray-700 text-white w-6 h-6 flex items-center justify-center rounded-lg text-xs font-bold shrink-0">B</span>
+                                <span>${item.b}</span>
+                            </button>
+                            <button onclick="checkAnswer(this, 'C')" class="option-btn w-full text-left bg-gray-800/60 border border-gray-700 p-2.5 rounded-lg text-sm font-medium transition flex items-center space-x-3">
+                                <span class="badge bg-gray-700 text-white w-6 h-6 flex items-center justify-center rounded-lg text-xs font-bold shrink-0">C</span>
+                                <span>${item.c}</span>
+                            </button>
+                            <button onclick="checkAnswer(this, 'D')" class="option-btn w-full text-left bg-gray-800/60 border border-gray-700 p-2.5 rounded-lg text-sm font-medium transition flex items-center space-x-3">
+                                <span class="badge bg-gray-700 text-white w-6 h-6 flex items-center justify-center rounded-lg text-xs font-bold shrink-0">D</span>
+                                <span>${item.d}</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Safety & Social Area -->
+                    <div class="pb-2 border-t border-gray-800/60 pt-2 space-y-2 mt-auto shrink-0">
+                        
+                        <!-- NEW ANSWER BOX WITH EXPLANATION BUTTON -->
+                        <div class="answer-box hidden w-full bg-green-950/30 border border-green-500/30 p-3 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-2">
+                            <span class="text-green-400 font-black text-sm tracking-wide">
+                                सही उत्तर: Option (${item.correct}) - प्रामाणिक सवाल।
+                            </span>
+                            <button onclick="openExplanation(${index})" class="bg-green-600 hover:bg-green-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition flex items-center gap-1 shrink-0 shadow-md">
+                                <span>विस्तृत व्याख्या पढ़ें 📖</span>
+                            </button>
+                        </div>
+
+                        <!-- COMPACT INTERACTIONS BAR -->
+                        <div class="flex items-center justify-between text-xs text-gray-500">
+                            <div class="flex items-center space-x-3 bg-gray-900/80 px-3 py-1.5 rounded-full border border-gray-800">
+                                <button onclick="toggleLike(this)" class="flex items-center space-x-1 font-bold hover:text-red-500 transition">
+                                    <span>🤍</span> <span><span class="like-count">${item.likes}</span></span>
+                                </button>
+                                <span class="text-gray-700">|</span>
+                                <div class="flex items-center space-x-1 font-bold">
+                                    <span>👁️</span> <span>${item.views}</span>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center space-x-2">
+                                <span class="text-[9px] text-gray-600 italic hidden sm:inline">उत्तर में त्रुटि है?</span>
+                                <button onclick="reportQuestionError(${item.id})" class="bg-red-950/40 text-red-400 border border-red-900/50 hover:bg-red-900 hover:text-white font-bold px-3 py-1.5 rounded-full transition text-[11px] flex items-center space-x-1">
+                                    <span>🚨</span> <span>रिपोर्ट करें</span>
+                                </button>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
+            `;
+        }
 
-            </div>
-        </div>
-    `;
-}
-        // 10वें प्रश्न के बाद फुल स्क्रीन विज्ञापन
+        // 10वें प्रश्न के बाद फुल स्क्रीन विज्ञापन (संशोधित - h-[100dvh] फिक्स के साथ)
         function createFullScreenAdHTML() {
             return `
-                <div class="reel-section h-screen w-full px-3 py-2 flex flex-col justify-between bg-gradient-to-b from-indigo-950 via-slate-900 to-indigo-950 border-b border-gray-900 text-center relative">
+                <div class="reel-section h-[100dvh] w-full px-3 py-2 flex flex-col justify-between bg-gradient-to-b from-indigo-950 via-slate-900 to-indigo-950 border-b border-gray-900 text-center relative">
                     <span class="text-[10px] font-bold text-indigo-400 uppercase tracking-widest pt-1 block">Sponsored Advertisement</span>
                     <div class="my-auto space-y-4">
                         <div class="w-16 h-16 bg-blue-600 text-white text-2xl font-black flex items-center justify-center rounded-2xl mx-auto shadow-xl">AD</div>
@@ -184,19 +190,18 @@ function createQuestionReelHTML(item, index) {
 
         // NEW JAVASCRIPT: व्याख्या खोलने और बंद करने का लॉजिक (Bottom Sheet Modal)
         function openExplanation(originalIndex) {
-            // चूँकि हम लूप में रेंडर कर रहे हैं, हमें ओरिजिनल अरे इंडेक्स निकालने के लिए मॉड्यूलो का प्रयोग करना होगा
             const itemIndex = originalIndex % gkQuestionBank.length;
             const item = gkQuestionBank[itemIndex];
             
             document.getElementById('explanation-text').innerText = item.context;
             
-            // शीट और ओवरले दिखाएं
             document.getElementById('sheet-overlay').classList.remove('hidden');
             const sheet = document.getElementById('explanation-sheet');
             sheet.classList.remove('translate-y-full');
             sheet.classList.add('translate-y-0');
         }
 
+        // क्लोज शीट लॉजिक
         function closeExplanation() {
             document.getElementById('sheet-overlay').classList.add('hidden');
             const sheet = document.getElementById('explanation-sheet');
@@ -289,7 +294,7 @@ function createQuestionReelHTML(item, index) {
             });
         }
 
-        // लूप रेंडरिंग मैनेजर (कुल 10 सवाल जनरेट करने के लिए)
+        // लूप रेंडरिंग मैनेजर
         function renderReelsEngine() {
             let combinedHTML = "";
             let totalQuestions = 0;
