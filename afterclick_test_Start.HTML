@@ -7,34 +7,31 @@
     <meta name="description" content="The QNA पर सरकारी नौकरियों के लिए महत्वपूर्ण GK और करंट अफेयर्स के सवाल नए रील्स अंदाज में सीखें।">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* [बदलाव] यहाँ से mandatory snap-locking हटा दी है ताकि नॉर्मल और continuous स्क्रॉल हो सके */
         .reels-container {
-            scroll-snap-type: y mandatory;
             overflow-y: scroll;
             height: 100dvh;
-        }
-        .reel-section {
-            scroll-snap-align: start;
-            scroll-snap-stop: always;
         }
         .reels-container::-webkit-scrollbar {
             display: none;
         }
     </style>
 </head>
-<body class="bg-gray-950 text-gray-100 font-sans antialiased overflow-hidden h-[100dvh] w-full">
-
-    <header class="fixed top-0 left-0 right-0 z-50 bg-black/40 backdrop-blur-md w-full h-[26px] flex items-center">
-        <div class="max-w-[96%] mx-auto w-full flex items-center justify-between">
-            <div class="text-2xl font-black text-blue-500 tracking-tight">
-                <a href="/index.html">The <span class="text-white">QNA</span></a>
-            </div>
-     
-            <nav class="flex items-center space-x-4 text-xs md:text-sm font-bold text-gray-300">
-                <a href="/index.html" class="hover:text-blue-500 transition">Home</a>
-                <a href="/GK_catogery.html" class="hover:text-blue-500 transition">मंच</a>
-            </nav>
+<!-- Header -->
+<header class="w-full bg-slate-950/80 border-b border-gray-900 py-3 flex items-center shrink-0">
+    <div class="max-w-[96%] mx-auto w-full flex items-center justify-between">
+        <div class="text-2xl font-black text-blue-500 tracking-tight">
+            <a href="/index.html">The <span class="text-white">QNA</span></a>
         </div>
-    </header>
+ 
+        <nav class="flex items-center space-x-4 text-xs font-bold text-gray-300">
+            <a href="/index.html" class="hover:text-blue-500 transition">Home</a>
+            <a href="/GK_catogery.html" class="hover:text-blue-500 transition">मंच</a>
+        </nav>
+    </div>
+</header>
+<!-- Header -->
+<body class="bg-gray-950 text-gray-100 font-sans antialiased overflow-hidden">
 
     <main id="reels-wrapper" class="reels-container w-full bg-gray-950">
         </main>
@@ -69,19 +66,19 @@
                 q: "भारत में किस राज्य की तटरेखा (Coastline) सबसे लंबी है?", 
                 a: "महाराष्ट्र", b: "तमिलनाडु", c: "गुजरात", d: "आंध्र प्रदेश", 
                 correct: "C", exam: "SSC CGL", year: "2023", likes: 189, views: "940",
-                context: "भारत की मुख्य भूमि की कुल तटरेखा लगभग 5422 किलोमीटर लंबी है, जिसमें अकेले गुजरात राज्य की तटरेखा सबसे लंबी है, जिसकी कुल लंबाई लगभग 1214.7 किलोमीटर है। गुजरात के बाद दूसरे स्थान पर आंध्र प्रदेश आता है। गुजरात की भौगोलिक स्थिति ऐसी है कि इसमें कच्छ और खंभात की खाड़ियां शामिल हैं, जिससे इसकी तटीय सीमा अत्यधिक घुमावदार और लंबी हो जाती है। यह सवाल भूगोल के अंतर्गत सरकारी परीक्षाओं में हमेशा एक अकादमिक और प्रामाणिक तथ्य के रूप में पूछा जाता है।"
+                context: "भारत की मुख्य भूमि की कुल तटरेखा लगभग 5422 किलोमीटर लंबी है, जिसमें अकेले गुजरात राज्य की तटरेखा सबसे लंबी है, जिसकी कुल लंबाई लगभग 1214.7 किलोमीटर है। गुजरात के बाद दूसरे स्थान पर आंध्र प्रदेश आता है। गुजरात की भौगोलिक स्थिति ऐसी है कि इसमें कच्छ और खंभात की खाड़ियां शामिल हैं, जिससे इसकी तटीय सीमा अत्यधिक घुमावदार और लंबी हो जाती है। यह सवाल भूगोल के अंतर्गत सरकारी परीक्षाओं में हमेशा एक अकादमिक and प्रामाणिक तथ्य के रूप में पूछा जाता है।"
             }
         ];
 
         const wrapper = document.getElementById('reels-wrapper');
         let activeTimers = {};
 
-        // रील कार्ड जनरेटर कोड (संशोधित - फुल स्क्रीन, हेडर पैडिंग और नेविगेशन बार सेफ ज़ोन फिक्स)
+        // रील कार्ड जनरेटर कोड (संशोधित - continuous scrolling के लिए h-[100dvh] हटाकर py-10 किया गया है)
         function createQuestionReelHTML(item, index) {
             return `
-                <div id="reel-${index}" class="reel-section h-[100dvh] w-full px-4 pt-[38px] pb-[24px] flex flex-col justify-between border-b border-gray-900 bg-gradient-to-b from-gray-950 to-gray-900 relative" data-correct="${item.correct}" data-index="${index}">
+                <div id="reel-${index}" class="reel-section w-full px-4 py-10 flex flex-col justify-start border-b border-gray-900 bg-gradient-to-b from-gray-950 to-gray-900 relative" data-correct="${item.correct}" data-index="${index}">
                     
-                    <div class="w-full pt-1 shrink-0">
+                    <div class="w-full shrink-0 mb-5">
                         <div class="flex items-center justify-between text-xs text-gray-400 mb-1.5">
                             <span>सवाल नंबर: #0${index + 1}</span>
                             <span class="text-red-400 font-mono font-bold bg-red-950/40 border border-red-900/40 px-2.5 py-0.5 rounded-full flex items-center gap-1">
@@ -93,8 +90,8 @@
                         </div>
                     </div>
 
-                    <div class="flex-1 flex flex-col justify-center my-auto min-h-0 relative">
-                        <div class="mb-2">
+                    <div class="w-full flex flex-col justify-start space-y-4 relative mb-6">
+                        <div>
                             <h2 class="text-base md:text-lg font-black text-white leading-snug tracking-wide mb-1">
                                 ${item.q}
                             </h2>
@@ -105,29 +102,29 @@
                             </div>
                         </div>
 
-                        <div class="space-y-1.5 options-group overflow-y-auto">
-                            <button onclick="checkAnswer(this, 'A')" class="option-btn w-full text-left bg-gray-800/60 border border-gray-700 p-2 rounded-lg text-sm font-medium transition flex items-center space-x-3">
+                        <div class="space-y-1.5 options-group">
+                            <button onclick="checkAnswer(this, 'A')" class="option-btn w-full text-left bg-gray-800/60 border border-gray-700 p-2.5 rounded-lg text-sm font-medium transition flex items-center space-x-3">
                                 <span class="badge bg-gray-700 text-white w-6 h-6 flex items-center justify-center rounded-lg text-xs font-bold shrink-0">A</span>
-                                <span class="truncate">${item.a}</span>
+                                <span>${item.a}</span>
                             </button>
-                            <button onclick="checkAnswer(this, 'B')" class="option-btn w-full text-left bg-gray-800/60 border border-gray-700 p-2 rounded-lg text-sm font-medium transition flex items-center space-x-3">
+                            <button onclick="checkAnswer(this, 'B')" class="option-btn w-full text-left bg-gray-800/60 border border-gray-700 p-2.5 rounded-lg text-sm font-medium transition flex items-center space-x-3">
                                 <span class="badge bg-gray-700 text-white w-6 h-6 flex items-center justify-center rounded-lg text-xs font-bold shrink-0">B</span>
-                                <span class="truncate">${item.b}</span>
+                                <span>${item.b}</span>
                             </button>
-                            <button onclick="checkAnswer(this, 'C')" class="option-btn w-full text-left bg-gray-800/60 border border-gray-700 p-2 rounded-lg text-sm font-medium transition flex items-center space-x-3">
+                            <button onclick="checkAnswer(this, 'C')" class="option-btn w-full text-left bg-gray-800/60 border border-gray-700 p-2.5 rounded-lg text-sm font-medium transition flex items-center space-x-3">
                                 <span class="badge bg-gray-700 text-white w-6 h-6 flex items-center justify-center rounded-lg text-xs font-bold shrink-0">C</span>
-                                <span class="truncate">${item.c}</span>
+                                <span>${item.c}</span>
                             </button>
-                            <button onclick="checkAnswer(this, 'D')" class="option-btn w-full text-left bg-gray-800/60 border border-gray-700 p-2 rounded-lg text-sm font-medium transition flex items-center space-x-3">
+                            <button onclick="checkAnswer(this, 'D')" class="option-btn w-full text-left bg-gray-800/60 border border-gray-700 p-2.5 rounded-lg text-sm font-medium transition flex items-center space-x-3">
                                 <span class="badge bg-gray-700 text-white w-6 h-6 flex items-center justify-center rounded-lg text-xs font-bold shrink-0">D</span>
-                                <span class="truncate">${item.d}</span>
+                                <span>${item.d}</span>
                             </button>
                         </div>
                     </div>
 
-                    <div class="pt-2 space-y-2 shrink-0 w-full z-10">
+                    <div class="space-y-3 w-full z-10">
                         
-                        <div class="answer-box hidden w-full bg-green-950/30 border border-green-500/30 p-2 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-2">
+                        <div class="answer-box hidden w-full bg-green-950/30 border border-green-500/30 p-2.5 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-2">
                             <span class="text-green-400 font-black text-xs tracking-wide text-center sm:text-left">
                                 सही उत्तर: Option (${item.correct}) - प्रामाणिक सवाल।
                             </span>
@@ -137,7 +134,7 @@
                         </div>
 
                         <div class="flex items-center justify-between text-xs text-gray-400">
-                            <div class="flex items-center space-x-3 bg-gray-900/90 px-3 py-1.5 rounded-full border border-gray-800 shadow-md">
+                            <div class="flex items-center space-x-3 bg-gray-900/80 px-3 py-1.5 rounded-full border border-gray-800 shadow-md">
                                 <button onclick="toggleLike(this)" class="flex items-center space-x-1 font-bold hover:text-red-500 transition">
                                     <span>🤍</span> <span><span class="like-count">${item.likes}</span></span>
                                 </button>
@@ -159,22 +156,22 @@
             `;
         }
 
-        // 10वें प्रश्न के बाद फुल स्क्रीन विज्ञापन (h-[100dvh] रिस्पॉन्सिव फिक्स)
+        // 10वें प्रश्न के बाद विज्ञापन ब्लॉक (continuous के लिए संशोधित)
         function createFullScreenAdHTML() {
             return `
-                <div class="reel-section h-[100dvh] w-full px-3 py-2 flex flex-col justify-between bg-gradient-to-b from-indigo-950 via-slate-900 to-indigo-950 border-b border-gray-900 text-center relative">
-                    <span class="text-[10px] font-bold text-indigo-400 uppercase tracking-widest pt-1 block">Sponsored Advertisement</span>
-                    <div class="my-auto space-y-4">
+                <div class="reel-section w-full px-4 py-12 flex flex-col justify-between bg-gradient-to-b from-indigo-950 via-slate-900 to-indigo-950 border-b border-gray-900 text-center relative">
+                    <span class="text-[10px] font-bold text-indigo-400 uppercase tracking-widest block mb-4">Sponsored Advertisement</span>
+                    <div class="my-6 space-y-4">
                         <div class="w-16 h-16 bg-blue-600 text-white text-2xl font-black flex items-center justify-center rounded-2xl mx-auto shadow-xl">AD</div>
                         <h3 class="text-xl font-extrabold text-white px-4 leading-tight">Google AdSense Full-Display</h3>
                         <p class="text-xs text-gray-400 max-w-xs mx-auto">High CPM इंटरस्टिशियल फुल-स्क्रीन विज्ञापन स्लॉट।</p>
                     </div>
-                    <div class="pb-6 animate-bounce text-xs text-indigo-300 font-bold">⬇️ आगे बढ़ने के लिए充क्लिक या स्क्रॉल करें</div>
+                    <div class="text-xs text-indigo-300 font-bold">⬇️ आगे बढ़ने के लिए स्क्रॉल करें</div>
                 </div>
             `;
         }
 
-        // NEW JAVASCRIPT: व्याख्या खोलने और बंद करने का लॉजिक (Bottom Sheet Modal)
+        // व्याख्या खोलने और बंद करने का लॉजिक
         function openExplanation(originalIndex) {
             const itemIndex = originalIndex % gkQuestionBank.length;
             const item = gkQuestionBank[itemIndex];
@@ -191,7 +188,7 @@
             document.getElementById('sheet-overlay').classList.add('hidden');
             const sheet = document.getElementById('explanation-sheet');
             sheet.classList.remove('translate-y-0');
-            sheet.classList.add('translate-y-full');
+            sheet.append(document.getElementById('explanation-sheet').classList.add('translate-y-full'));
         }
 
         // रिपोर्ट एरर ट्रिगर
@@ -259,9 +256,9 @@
             }, 1000);
         }
 
-        // विज़िबल स्क्रीन ट्रैकर
+        // विज़िबल स्क्रीन ट्रैकर (स्क्रॉल करने पर टाइमर एक्टिव करने के लिए)
         function initScrollObserver() {
-            const observerOptions = { root: wrapper, threshold: 0.6 };
+            const observerOptions = { root: wrapper, threshold: 0.4 };
 
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
