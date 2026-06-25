@@ -7,10 +7,15 @@
     <meta name="description" content="The QNA पर सरकारी नौकरियों के लिए महत्वपूर्ण GK और करंट अफेयर्स के सवाल नए रील्स अंदाज में सीखें।">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* [बदलाव] यहाँ से mandatory snap-locking हटा दी है ताकि नॉर्मल और continuous स्क्रॉल हो सके */
+        /* रील्स मोड स्नैप-लॉकिंग */
         .reels-container {
+            scroll-snap-type: y mandatory;
             overflow-y: scroll;
             height: 100dvh;
+        }
+        .reel-section {
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
         }
         .reels-container::-webkit-scrollbar {
             display: none;
@@ -30,12 +35,14 @@
         </nav>
     </div>
 </header>
-<!-- Header -->
+
 <body class="bg-gray-950 text-gray-100 font-sans antialiased overflow-hidden">
 
+    <!-- REELS STYLE MAIN CONTAINER -->
     <main id="reels-wrapper" class="reels-container w-full bg-gray-950">
-        </main>
+    </main>
 
+    <!-- DYNAMIC BOTTOM EXPLANATION SHEET -->
     <div id="explanation-sheet" class="fixed inset-x-0 bottom-0 z-50 max-w-lg mx-auto bg-gray-900 border-t-2 border-blue-600 rounded-t-3xl shadow-2xl transform translate-y-full transition-transform duration-300 ease-out p-6 text-gray-200">
         <div class="w-12 h-1.5 bg-gray-700 rounded-full mx-auto mb-4 cursor-pointer" onclick="closeExplanation()"></div>
         <div class="flex items-center justify-between border-b border-gray-800 pb-3 mb-4">
@@ -45,14 +52,14 @@
             <button onclick="closeExplanation()" class="text-gray-400 hover:text-white font-bold text-sm bg-gray-800 px-2.5 py-1 rounded-full">बंद करें</button>
         </div>
         <div id="explanation-text" class="text-sm text-gray-300 leading-relaxed max-h-[300px] overflow-y-auto font-medium">
-            </div>
+        </div>
     </div>
 
     <div id="sheet-overlay" class="fixed inset-0 bg-black/60 z-40 hidden" onclick="closeExplanation()"></div>
 
 
     <script>
-        // GK क्वेश्चन बैंक (100 शब्दों के व्याख्या यानी context डेटा के साथ)
+        // GK क्वेश्चन बैंक
         const gkQuestionBank = [
             { 
                 id: 1, 
@@ -73,12 +80,14 @@
         const wrapper = document.getElementById('reels-wrapper');
         let activeTimers = {};
 
-        // रील कार्ड जनरेटर कोड (संशोधित - continuous scrolling के लिए h-[100dvh] हटाकर py-10 किया गया है)
+        // रील कार्ड जनरेटर कोड (मार्जिन और गैप को पूरी तरह फिक्स किया गया है)
         function createQuestionReelHTML(item, index) {
             return `
-                <div id="reel-${index}" class="reel-section w-full px-4 py-10 flex flex-col justify-start border-b border-gray-900 bg-gradient-to-b from-gray-950 to-gray-900 relative" data-correct="${item.correct}" data-index="${index}">
+                <!-- [बदलाव] यहाँ justify-between हटाकर justify-start किया गया है ताकि फालतू वर्टिकल गैप खत्म हो जाए -->
+                <div id="reel-${index}" class="reel-section h-[100dvh] w-full px-4 pt-6 pb-[45px] flex flex-col justify-start border-b border-gray-900 bg-gradient-to-b from-gray-950 to-gray-900 relative" data-correct="${item.correct}" data-index="${index}">
                     
-                    <div class="w-full shrink-0 mb-5">
+                    <!-- Top Bar: Timer & Number -->
+                    <div class="w-full shrink-0 pt-1">
                         <div class="flex items-center justify-between text-xs text-gray-400 mb-1.5">
                             <span>सवाल नंबर: #0${index + 1}</span>
                             <span class="text-red-400 font-mono font-bold bg-red-950/40 border border-red-900/40 px-2.5 py-0.5 rounded-full flex items-center gap-1">
@@ -90,8 +99,9 @@
                         </div>
                     </div>
 
-                    <div class="w-full flex flex-col justify-start space-y-4 relative mb-6">
-                        <div>
+                    <!-- Question & Options Block (mt-6 से सवाल और टाइमर बार में एक सटीक गैप बनेगा) -->
+                <div class="flex flex-col justify-start mt-6 relative">
+                        <div class="mb-3">
                             <h2 class="text-base md:text-lg font-black text-white leading-snug tracking-wide mb-1">
                                 ${item.q}
                             </h2>
@@ -102,7 +112,8 @@
                             </div>
                         </div>
 
-                        <div class="space-y-1.5 options-group">
+                        <!-- 4 Options Grid (space-y-2 से ऑप्शंस का बीच का फालतू गैप एकदम खत्म हो गया है) -->
+                        <div class="space-y-2 options-group overflow-y-auto mt-2">
                             <button onclick="checkAnswer(this, 'A')" class="option-btn w-full text-left bg-gray-800/60 border border-gray-700 p-2.5 rounded-lg text-sm font-medium transition flex items-center space-x-3">
                                 <span class="badge bg-gray-700 text-white w-6 h-6 flex items-center justify-center rounded-lg text-xs font-bold shrink-0">A</span>
                                 <span>${item.a}</span>
@@ -122,10 +133,10 @@
                         </div>
                     </div>
 
-                    <div class="space-y-3 w-full z-10">
+                    <!-- Bottom Safety & Social Area (mt-auto लगाने से यह हमेशा स्क्रीन के बॉटम में सही जगह पर लॉक रहेगा) -->
+                  <div class="pt-3 space-y-2 shrink-0 w-full z-10 mt-6">
                         
-                        <div class="answer-box hidden w-full bg-green-950/30 border border-green-500/30 p-2.5 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-2">
-                            <span class="text-green-400 font-black text-xs tracking-wide text-center sm:text-left">
+<div class="answer-box hidden w-full bg-green-950/30 p-2.5 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-2">                            <span class="text-green-400 font-black text-xs tracking-wide text-center sm:text-left">
                                 सही उत्तर: Option (${item.correct}) - प्रामाणिक सवाल।
                             </span>
                             <button onclick="openExplanation(${index})" class="bg-green-600 hover:bg-green-700 text-white text-[11px] font-bold px-3 py-1 rounded-lg transition flex items-center gap-1 shrink-0 shadow-md">
@@ -133,8 +144,9 @@
                             </button>
                         </div>
 
-                        <div class="flex items-center justify-between text-xs text-gray-400">
-                            <div class="flex items-center space-x-3 bg-gray-900/80 px-3 py-1.5 rounded-full border border-gray-800 shadow-md">
+                        <!-- COMPACT INTERACTIONS BAR -->
+                        <div class="flex items-center justify-between text-xs text-gray-400 ">
+                            <div class="flex items-center space-x-3 bg-gray-900/90 px-3 py-1.5 rounded-full border border-gray-800 shadow-md">
                                 <button onclick="toggleLike(this)" class="flex items-center space-x-1 font-bold hover:text-red-500 transition">
                                     <span>🤍</span> <span><span class="like-count">${item.likes}</span></span>
                                 </button>
@@ -156,17 +168,17 @@
             `;
         }
 
-        // 10वें प्रश्न के बाद विज्ञापन ब्लॉक (continuous के लिए संशोधित)
+        // विज्ञापन ब्लॉक
         function createFullScreenAdHTML() {
             return `
-                <div class="reel-section w-full px-4 py-12 flex flex-col justify-between bg-gradient-to-b from-indigo-950 via-slate-900 to-indigo-950 border-b border-gray-900 text-center relative">
-                    <span class="text-[10px] font-bold text-indigo-400 uppercase tracking-widest block mb-4">Sponsored Advertisement</span>
-                    <div class="my-6 space-y-4">
+                <div class="reel-section h-[100dvh] w-full px-4 py-12 flex flex-col justify-between bg-gradient-to-b from-indigo-950 via-slate-900 to-indigo-950 border-b border-gray-900 text-center relative">
+                    <span class="text-[10px] font-bold text-indigo-400 uppercase tracking-widest pt-1 block mb-4">Sponsored Advertisement</span>
+                    <div class="my-auto space-y-4">
                         <div class="w-16 h-16 bg-blue-600 text-white text-2xl font-black flex items-center justify-center rounded-2xl mx-auto shadow-xl">AD</div>
                         <h3 class="text-xl font-extrabold text-white px-4 leading-tight">Google AdSense Full-Display</h3>
-                        <p class="text-xs text-gray-400 max-w-xs mx-auto">High CPM इंटरस्टिशियल फुल-स्क्रीन विज्ञापन स्लॉट।</p>
+                        <p class="text-xs text-gray-400 max-w-xs mx-auto">High CPM Interstitial Full-Screen Ad Slot.</p>
                     </div>
-                    <div class="text-xs text-indigo-300 font-bold">⬇️ आगे बढ़ने के लिए स्क्रॉल करें</div>
+                    <div class="pb-6 animate-bounce text-xs text-indigo-300 font-bold">⬇️ आगे बढ़ने के लिए स्क्रॉल करें</div>
                 </div>
             `;
         }
@@ -175,9 +187,7 @@
         function openExplanation(originalIndex) {
             const itemIndex = originalIndex % gkQuestionBank.length;
             const item = gkQuestionBank[itemIndex];
-            
             document.getElementById('explanation-text').innerText = item.context;
-            
             document.getElementById('sheet-overlay').classList.remove('hidden');
             const sheet = document.getElementById('explanation-sheet');
             sheet.classList.remove('translate-y-full');
@@ -188,15 +198,13 @@
             document.getElementById('sheet-overlay').classList.add('hidden');
             const sheet = document.getElementById('explanation-sheet');
             sheet.classList.remove('translate-y-0');
-            sheet.append(document.getElementById('explanation-sheet').classList.add('translate-y-full'));
+            sheet.classList.add('translate-y-full');
         }
 
-        // रिपोर्ट एरर ट्रिगर
         function reportQuestionError(questionId) {
-            alert(`⚠️ कोर्ट केस सुरक्षा अलर्ट:\n\nसवाल संख्या #${questionId} की रिपोर्ट दर्ज कर ली गई है। प्रशासनिक टीम 12 घंटे के भीतर इसकी समीक्षा करेगी।`);
+            alert(`⚠️ कोर्ट केस सुरक्षा अलर्ट:\n\nसवाल संख्या #${questionId} की रिपोर्ट दर्ज कर ली गई है।`);
         }
 
-        // राइट/रॉन्ग आंसर इवैल्यूएशन एल्गोरिदम
         function checkAnswer(selectedBtn, selectedOption) {
             const reel = selectedBtn.closest('.reel-section');
             const correctOption = reel.getAttribute('data-correct');
@@ -207,10 +215,8 @@
             clearInterval(activeTimers[reelIndex]);
 
             allButtons.forEach(btn => btn.disabled = true);
-
             allButtons.forEach(btn => {
                 const optionLetter = btn.querySelector('.badge').innerText;
-                
                 if (optionLetter === correctOption) {
                     btn.classList.remove('bg-gray-800/60', 'border-gray-700');
                     btn.classList.add('bg-green-600', 'border-green-500', 'text-white');
@@ -219,26 +225,19 @@
                     btn.classList.add('bg-red-600', 'border-red-500', 'text-white');
                 }
             });
-
             reel.querySelector('.answer-box').classList.remove('hidden');
         }
 
-        // टाइमर कोर इंजन
         function startTimerForReel(reelElement, index) {
             let timeLeft = 15;
             const timerText = reelElement.querySelector('.timer-text');
             const timerBar = reelElement.querySelector('.timer-bar');
-            
             if(activeTimers[index]) clearInterval(activeTimers[index]);
-
             timerBar.style.width = '100%';
-            timerBar.classList.remove('bg-red-500');
-            timerBar.classList.add('bg-blue-500');
 
             activeTimers[index] = setInterval(() => {
                 timeLeft--;
                 if(timerText) timerText.innerText = timeLeft;
-
                 let percentage = (timeLeft / 15) * 100;
                 if(timerBar) timerBar.style.width = percentage + '%';
 
@@ -256,10 +255,8 @@
             }, 1000);
         }
 
-        // विज़िबल स्क्रीन ट्रैकर (स्क्रॉल करने पर टाइमर एक्टिव करने के लिए)
         function initScrollObserver() {
-            const observerOptions = { root: wrapper, threshold: 0.4 };
-
+            const observerOptions = { root: wrapper, threshold: 0.6 };
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -270,32 +267,25 @@
                     }
                 });
             }, observerOptions);
-
             document.querySelectorAll('.reel-section[data-index]').forEach(reel => {
                 observer.observe(reel);
             });
         }
 
-        // लूप रेंडरिंग मैनेजर
         function renderReelsEngine() {
             let combinedHTML = "";
             let totalQuestions = 0;
-
             for (let loop = 0; loop < 5; loop++) {
                 gkQuestionBank.forEach((item) => {
                     combinedHTML += createQuestionReelHTML(item, totalQuestions);
                     totalQuestions++;
-
-                    if (totalQuestions % 10 === 0) {
-                        combinedHTML += createFullScreenAdHTML();
-                    }
+                    if (totalQuestions % 10 === 0) combinedHTML += createFullScreenAdHTML();
                 });
             }
             wrapper.innerHTML = combinedHTML;
             setTimeout(initScrollObserver, 100);
         }
 
-        // सोशल हार्ट टॉगल
         function toggleLike(btn) {
             const heartIcon = btn.querySelector('span:first-child');
             const countSpan = btn.querySelector('.like-count');
