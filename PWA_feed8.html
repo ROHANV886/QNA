@@ -26,17 +26,16 @@
             scroll-behavior: smooth;
         }
         
-        .reel-item {
-            height: 100dvh;
-            width: 100%;
-            scroll-snap-align: start;
-            position: relative;
-            /* अब यह कंटेंट को स्क्रीन के बिल्कुल बीच में रखेगा */
-            display: flex;
-            flex-direction: column;
-            justify-content: center; 
-        }
-
+.reel-item {
+    height: 100dvh;
+    width: 100%;
+    scroll-snap-align: start;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 60px;
+}
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
@@ -98,13 +97,13 @@
         function reelHTML(q, n) {
           return `<section class="reel-item">
             <div class="absolute inset-0 bg-gradient-to-br from-[#0B0F19] via-[#020617] to-black z-0 pointer-events-none"></div>
-            <div class="relative z-10 w-[85%] px-5 flex flex-col gap-4 mb-20">
+            <div class="relative z-10 w-[85%] px-5 flex flex-col gap-4 mb-20 -mt-24">
               <div class="flex items-center gap-2 mb-2"><span class="bg-${q.color}-500 text-black text-[11px] font-black px-3 py-1 rounded uppercase tracking-widest shadow-lg">${q.subject}</span><span class="text-xs text-gray-400 font-semibold text-shadow">${q.test}</span></div>
               <h2 class="text-[20px] md:text-[22px] font-bold text-white leading-snug text-shadow mb-2">${q.question}</h2>
               <div class="space-y-3">${q.options.map((_,i)=>optionHTML(q,i)).join("")}</div>
             </div>
-            <div class="absolute bottom-6 left-5 right-16 z-10"><p id="context-${n}" class="text-[12px] text-gray-300 leading-relaxed text-shadow line-clamp-2"><span class="font-bold text-${q.color}-400">विस्तृत जानकारी:</span> ${q.info}</p><button id="btn-${n}" onclick="handleReadMore('context-${n}','btn-${n}')" class="text-white bg-white/20 px-3 py-1.5 rounded-lg text-[11px] font-bold mt-2">...Read more</button></div>
-            <div class="absolute right-3 bottom-6 flex flex-col items-center gap-7 z-20"><button><i class="fa-solid fa-heart text-[30px] text-white icon-shadow"></i><span class="block text-[11px] font-bold">12K</span></button><button><i class="fa-solid fa-bookmark text-[30px] text-white icon-shadow"></i><span class="block text-[11px] font-bold">Save</span></button><button><i class="fa-solid fa-share text-[30px] text-white icon-shadow"></i><span class="block text-[11px] font-bold">Share</span></button></div>
+            <div class="absolute bottom-24 left-5 right-16 z-10"><p id="context-${n}" class="text-[12px] text-gray-300 leading-relaxed text-shadow line-clamp-2"><span class="font-bold text-${q.color}-400">विस्तृत जानकारी:</span> ${q.info}</p><button id="btn-${n}" onclick="handleReadMore('context-${n}','btn-${n}')" class="text-white bg-white/20 px-3 py-1.5 rounded-lg text-[11px] font-bold mt-2">...Read more</button></div>
+            <div class="absolute right-3 top-24 flex flex-col items-center gap-7 z-20"><button><i class="fa-solid fa-heart text-[30px] text-white icon-shadow"></i><span class="block text-[11px] font-bold">12K</span></button><button><i class="fa-solid fa-bookmark text-[30px] text-white icon-shadow"></i><span class="block text-[11px] font-bold">Save</span></button><button><i class="fa-solid fa-share text-[30px] text-white icon-shadow"></i><span class="block text-[11px] font-bold">Share</span></button></div>
           </section>`;
         }
         function addQuestion(){ container.insertAdjacentHTML("beforeend", reelHTML(questions[index % questions.length], index)); index++; }
