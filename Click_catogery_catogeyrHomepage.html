@@ -1,82 +1,80 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>इतिहास टेस्ट सीरीज़ - The QNA</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The QNA Dynamic Tests</title>
+<script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-50 font-sans text-gray-800 p-4">
+<body class="bg-gray-50 p-5">
+<div class="max-w-6xl mx-auto">
+<h1 class="text-3xl font-black mb-8">🏛️ इतिहास टेस्ट सीरीज़</h1>
+<div id="tests" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+</div>
 
-    <main class="max-w-6xl mx-auto py-10">
-        <div class="mb-10">
-            <h2 class="text-3xl font-black text-gray-900">🏛️ इतिहास (History) - टेस्ट सीरीज़</h2>
-            <p class="text-gray-500 mt-2">1000 से अधिक टेस्ट्स का संग्रह। एक-एक कदम सफलता की ओर।</p>
-        </div>
+<script>
+const sampleOptions=[
+"A. बहादुर शाह जफर",
+"B. रानी लक्ष्मीबाई",
+"C. कुंवर सिंह",
+"D. तात्या टोपे"
+];
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            
-            <!-- TEST #1000: Unlocked/Latest -->
-            <div class="bg-white p-6 rounded-3xl border-2 border-blue-600 shadow-xl">
-                <div class="flex justify-between items-center mb-4">
-                    <span class="bg-blue-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest">Unlocked</span>
-                    <span class="font-bold text-gray-500">टेस्ट #1000</span>
-                </div>
-                <h4 class="font-black text-xl mb-4">आधुनिक भारत का उदय</h4>
-                <div class="bg-gray-50 p-4 rounded-xl mb-6">
-                    <p class="font-bold text-sm mb-4">Q1: 1857 की क्रांति का नेतृत्व किसने किया?</p>
-                    
-                    <!-- ऑप्शंस लिस्ट (क्लिक करने के लिए तैयार) -->
-                    <div id="quiz-options" class="grid grid-cols-2 gap-2 text-[11px] font-bold">
-                        <div onclick="selectOption(this)" class="quiz-opt p-2 bg-white border border-gray-200 rounded cursor-pointer hover:bg-gray-100 transition duration-150">A. बहादुर शाह जफर</div>
-                        <div onclick="selectOption(this)" class="quiz-opt p-2 bg-white border border-gray-200 rounded cursor-pointer hover:bg-gray-100 transition duration-150">B. रानी लक्ष्मीबाई</div>
-                        <div onclick="selectOption(this)" class="quiz-opt p-2 bg-white border border-gray-200 rounded cursor-pointer hover:bg-gray-100 transition duration-150">C. कुंवर सिंह</div>
-                        <div onclick="selectOption(this)" class="quiz-opt p-2 bg-white border border-gray-200 rounded cursor-pointer hover:bg-gray-100 transition duration-150">D. तात्या टोपे</div>
-                    </div>
+const data=[];
+for(let i=1000;i>=986;i--){
+ data.push({
+   id:i,
+   title:`इतिहास का महत्वपूर्ण विषय #${i}`,
+   question:"1857 की क्रांति का नेतृत्व किसने किया?",
+   options:[...sampleOptions]
+ });
+}
 
-                </div>
-                <a href="/test/1000" class="block w-full text-center bg-blue-600 text-white py-3 rounded-xl font-bold hover:bg-blue-700 transition">टेस्ट जारी रखें</a>
-            </div>
+const box=document.getElementById("tests");
 
-            <!-- TEST #999 to #986 (14 Locked Tests) -->
-            <script>
-                for (let i = 999; i >= 986; i--) {
-                    document.write(`
-                     <div class="group relative bg-white p-6 rounded-3xl border border-gray-200 opacity-75 shadow-sm overflow-hidden">
-                            <div class="flex justify-between items-center mb-4">
-                                <span class="bg-gray-200 text-gray-600 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest">🔒 Locked</span>
-                                <span class="font-bold text-gray-500">टेस्ट #${i}</span>
-                            </div>
-                            <h4 class="font-black text-xl mb-4">इतिहास का महत्वपूर्ण विषय #${i}</h4>
-                            <div class="bg-gray-50 p-4 rounded-xl mb-6 text-center py-8">
-                                <p class="text-gray-400 font-bold text-sm">टेस्ट अनलॉक करने के लिए पिछला टेस्ट पूरा करें</p>
-                            </div>
-                            <button disabled class="w-full text-center bg-gray-200 text-gray-500 py-3 rounded-xl font-bold cursor-not-allowed">Locked</button>
-                        </div>
-                    `);
-                }
-            </script>
+data.forEach(test=>{
+const card=document.createElement("div");
+card.className="bg-white rounded-3xl p-6 shadow border-2 border-blue-600";
 
-        </div>
-    </main>
+card.innerHTML=`
+<div class="flex justify-between items-center mb-4">
+<span class="bg-blue-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase">Unlocked</span>
+<span class="font-bold text-gray-500">टेस्ट #${test.id}</span>
+</div>
 
-    <!-- प्योर Tailwind CSS क्लास को टॉगल करने वाली जावास्क्रिप्ट -->
-    <script>
-        function selectOption(selectedElement) {
-            // 1. सबसे पहले सभी ऑप्शंस को ढूंढें
-            const allOptions = document.querySelectorAll('.quiz-opt');
-            
-            // 2. सभी ऑप्शंस से नीला रंग हटाकर उन्हें वापस सामान्य (सफ़ेद) करें
-            allOptions.forEach(opt => {
-                opt.classList.remove('border-blue-600', 'bg-blue-50', 'text-blue-600');
-                opt.classList.add('bg-white', 'border-gray-200', 'text-gray-800');
-            });
-            
-            // 3. सिर्फ उसी ऑप्शन पर नीला रंग लगाएं जिसपर क्लिक किया गया है
-            selectedElement.classList.remove('bg-white', 'border-gray-200', 'text-gray-800');
-            selectedElement.classList.add('border-blue-600', 'bg-blue-50', 'text-blue-600');
-        }
-    </script>
+<h3 class="font-black text-xl mb-4">${test.title}</h3>
 
+<div class="bg-gray-50 rounded-xl p-4">
+<p class="font-bold mb-4">Q1: ${test.question}</p>
+
+<div class="grid grid-cols-2 gap-2 options"></div>
+</div>
+
+<a href="upi.html"
+class="block mt-5 text-center bg-blue-600 hover:bg-blue-700 text-white rounded-xl py-3 font-bold">
+टेस्ट जारी रखें
+</a>
+`;
+
+const optBox=card.querySelector(".options");
+
+test.options.forEach(op=>{
+const div=document.createElement("div");
+div.className="p-2 border rounded cursor-pointer bg-white hover:bg-gray-100 font-bold text-xs";
+div.textContent=op;
+
+div.onclick=function(){
+optBox.querySelectorAll("div").forEach(x=>{
+x.className="p-2 border rounded cursor-pointer bg-white hover:bg-gray-100 font-bold text-xs";
+});
+this.className="p-2 border-2 border-blue-600 bg-blue-50 text-blue-600 rounded cursor-pointer font-bold text-xs";
+};
+
+optBox.appendChild(div);
+});
+
+box.appendChild(card);
+});
+</script>
 </body>
 </html>
