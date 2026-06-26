@@ -25,22 +25,24 @@
                 <h4 class="font-black text-xl mb-4">आधुनिक भारत का उदय</h4>
                 <div class="bg-gray-50 p-4 rounded-xl mb-6">
                     <p class="font-bold text-sm mb-4">Q1: 1857 की क्रांति का नेतृत्व किसने किया?</p>
-                    <div class="grid grid-cols-2 gap-2 text-[11px] font-bold">
-                        <div class="p-2 bg-white border rounded">A. बहादुर शाह जफर</div>
-                        <div class="p-2 bg-white border rounded">B. रानी लक्ष्मीबाई</div>
-                        <div class="p-2 bg-white border rounded">C. कुंवर सिंह</div>
-                        <div class="p-2 bg-white border rounded">D. तात्या टोपे</div>
+                    
+                    <!-- ऑप्शंस लिस्ट (क्लिक करने के लिए तैयार) -->
+                    <div id="quiz-options" class="grid grid-cols-2 gap-2 text-[11px] font-bold">
+                        <div onclick="selectOption(this)" class="quiz-opt p-2 bg-white border border-gray-200 rounded cursor-pointer hover:bg-gray-100 transition duration-150">A. बहादुर शाह जफर</div>
+                        <div onclick="selectOption(this)" class="quiz-opt p-2 bg-white border border-gray-200 rounded cursor-pointer hover:bg-gray-100 transition duration-150">B. रानी लक्ष्मीबाई</div>
+                        <div onclick="selectOption(this)" class="quiz-opt p-2 bg-white border border-gray-200 rounded cursor-pointer hover:bg-gray-100 transition duration-150">C. कुंवर सिंह</div>
+                        <div onclick="selectOption(this)" class="quiz-opt p-2 bg-white border border-gray-200 rounded cursor-pointer hover:bg-gray-100 transition duration-150">D. तात्या टोपे</div>
                     </div>
+
                 </div>
                 <a href="/test/1000" class="block w-full text-center bg-blue-600 text-white py-3 rounded-xl font-bold hover:bg-blue-700 transition">टेस्ट जारी रखें</a>
             </div>
 
             <!-- TEST #999 to #986 (14 Locked Tests) -->
-            <!-- हम यहाँ 14 लूप वाले कार्ड्स बनाएंगे -->
             <script>
                 for (let i = 999; i >= 986; i--) {
                     document.write(`
-                        <div class="bg-white p-6 rounded-3xl border border-gray-200 opacity-75 shadow-sm">
+                     <div class="group relative bg-white p-6 rounded-3xl border border-gray-200 opacity-75 shadow-sm overflow-hidden">
                             <div class="flex justify-between items-center mb-4">
                                 <span class="bg-gray-200 text-gray-600 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest">🔒 Locked</span>
                                 <span class="font-bold text-gray-500">टेस्ट #${i}</span>
@@ -57,6 +59,24 @@
 
         </div>
     </main>
+
+    <!-- प्योर Tailwind CSS क्लास को टॉगल करने वाली जावास्क्रिप्ट -->
+    <script>
+        function selectOption(selectedElement) {
+            // 1. सबसे पहले सभी ऑप्शंस को ढूंढें
+            const allOptions = document.querySelectorAll('.quiz-opt');
+            
+            // 2. सभी ऑप्शंस से नीला रंग हटाकर उन्हें वापस सामान्य (सफ़ेद) करें
+            allOptions.forEach(opt => {
+                opt.classList.remove('border-blue-600', 'bg-blue-50', 'text-blue-600');
+                opt.classList.add('bg-white', 'border-gray-200', 'text-gray-800');
+            });
+            
+            // 3. सिर्फ उसी ऑप्शन पर नीला रंग लगाएं जिसपर क्लिक किया गया है
+            selectedElement.classList.remove('bg-white', 'border-gray-200', 'text-gray-800');
+            selectedElement.classList.add('border-blue-600', 'bg-blue-50', 'text-blue-600');
+        }
+    </script>
 
 </body>
 </html>
