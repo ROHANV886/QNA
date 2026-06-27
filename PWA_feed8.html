@@ -1,16 +1,25 @@
 <!DOCTYPE html>
-<html lang="hi" class="h-full">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>QNA Shorts - Perfect Centered UI</title>
+    <title>QNA Shorts - Perfect Parallel UI</title>
     
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2=family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
-        body { 
+        /* === बेसिक रिसेट === */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
             background-color: #000000; 
             color: #ffffff; 
             font-family: 'Plus Jakarta Sans', sans-serif; 
@@ -18,6 +27,7 @@
             overscroll-behavior-y: none;
         }
         
+        /* === रील्स कंटेनर === */
         .reels-container {
             height: 100dvh;
             width: 100%;
@@ -26,60 +36,201 @@
             scroll-behavior: smooth;
         }
         
-.reel-item {
-    height: 100dvh;
-    width: 100%;
-    scroll-snap-align: start;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding-top: 60px;
-}
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        
-        .icon-shadow { filter: drop-shadow(0px 2px 5px rgba(0,0,0,0.9)); }
-        .text-shadow { text-shadow: 0px 1px 4px rgba(0,0,0,1); }
-        
-        .line-clamp-2 {
-            display: -webkit-box;
-            -webkit-line-clamp: 2; /* 2 लाइन दिखाने के लिए */
-            -webkit-box-orient: vertical;  
-            overflow: hidden;
+
+        .reel-item {
+            height: 100dvh;
+            width: 100%;
+            scroll-snap-align: start;
+            position: relative;
         }
+
+        .reel-bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #0B0F19, #020617, #000000);
+            z-index: 0;
+        }
+
+        /* =======================================================
+           ध्यान दें: यहीं पर असली जादू हो रहा है (Layout Alignment)
+           ======================================================= */
+
+        /* 1. कन्टेंट बॉक्स (सवाल और ऑप्शंस) */
+        .content-box {
+            position: absolute;
+            top: 14%; /* ऊपर से दूरी */
+            left: 4%;  /* लेफ्ट से थोड़ा सटा हुआ ताकि राइट में आइकन्स के लिए जगह बचे */
+            z-index: 10;
+            width: 80%; /* चौड़ाई को 80% रखा है ताकि राइट का 20% हिस्सा आइकन्स ले सकें */
+            max-width: 420px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* 2. साइड एक्शन्स (लाइक, सेव, शेयर बटन्स) */
+        .side-actions {
+            position: absolute;
+            right: 12px; /* राइट से बिल्कुल फिक्स */
+            top: 26%;    /* बिल्कुल कन्टेंट बॉक्स के बराबर (Parallel) रखने के लिए दोनों का TOP सेम (14%) रखा है */
+            width: 14%;  /* सीमित चौड़ाई */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 22px;   /* बटन्स के बीच का गैप */
+            z-index: 20;
+        }
+
+        /* === बाकी की डिज़ाइनिंग स्टाइल्स === */
+        .meta-header { display: flex; align-items: center; gap: 8px; }
+        
+        .subject-tag {
+            color: #000000; font-size: 10px; font-weight: 900; 
+            padding: 4px 10px; border-radius: 4px; text-transform: uppercase;
+        }
+
+        /* डायनामिक कलर्स */
+        .bg-amber { background-color: #f59e0b; }
+        .bg-emerald { background-color: #10b981; }
+        .bg-sky { background-color: #0ea5e9; }
+        .text-amber { color: #fbbf24; }
+        .text-emerald { color: #34d399; }
+        .text-sky { color: #38bdf8; }
+
+        .test-tag { font-size: 11px; color: #9ca3af; font-weight: 600; }
+
+        .question-text {
+            font-size: 18px; font-weight: 700; color: #ffffff;
+            line-height: 1.4; margin-bottom: 4px;
+        }
+
+        .options-list { display: flex; flex-direction: column; gap: 10px; }
+
+        .glass-option, .correct-option { padding: 14px; border-radius: 12px; font-size: 13px; }
 
         .glass-option {
             background: rgba(255, 255, 255, 0.12);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08); color: #f3f4f6; font-weight: 500;
         }
+
+        .correct-option {
+            background: rgba(34, 197, 94, 0.2);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(34, 197, 94, 0.5); color: #4ade80; font-weight: 700;
+            display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.15);
+        }
+
+        /* विस्तृत जानकारी (यह नीचे ही रहेगी ताकि पढ़ने में आसानी हो) */
+        .bottom-info {
+            position: absolute;
+            bottom: 392px;
+            left: 20px;
+            right: 20px; /* अब इसे पूरा फैला दिया क्योंकि यहाँ ऊपर वाले बटन का लफड़ा नहीं है */
+            z-index: 10;
+        }
+
+        .info-text { font-size: 12px; color: #d1d5db; line-height: 1.5; }
+        
+        .read-more-btn {
+            background: rgba(255, 255, 255, 0.2); border: none; color: white;
+            padding: 4px 10px; border-radius: 6px; font-size: 10px; font-weight: 700;
+            margin-top: 6px; cursor: pointer;
+        }
+
+        .action-btn { background: none; border: none; color: white; cursor: pointer; text-align: center; }
+        .action-btn i { font-size: 24px; margin-bottom: 2px; display: block; }
+        .action-btn span { font-size: 10px; font-weight: 700; display: block; }
+
+        /* =======================================================
+           MEDIA QUERIES: स्क्रीन साइज़ के हिसाब से ऑटो-एडजस्टमेंट
+           ======================================================= */
+
+        /* 1. मध्यम और बड़ी स्क्रीन के लिए (जैसे 720px या बड़ी स्क्रीन) */
+        @media (min-width: 550px) {
+            .content-box {
+                top: 16%;
+                left: 8%;
+                width: 76%;
+                max-width: 480px;
+                gap: 16px;
+            }
+            .side-actions {
+                top: 32%; /* यहाँ भी दोनों का TOP मैच कर दिया */
+                right: 24px;
+                gap: 28px;
+            }
+            .question-text { font-size: 22px; }
+            .glass-option, .correct-option { padding: 16px; font-size: 15px; }
+            .action-btn i { font-size: 28px; }
+            .action-btn span { font-size: 11px; }
+            .bottom-info { bottom: 120px; left: 30px; right: 30px; }
+        }
+
+        /* 2. बहुत छोटे फोन या कम हाइट वाली स्क्रीन के लिए (जैसे 360x640) */
+        @media (max-height: 650px) {
+           .content-box { top: 6%; gap: 8px; }
+    .side-actions { 
+        top: 26%; /* छोटी स्क्रीन पर ऑप्शंस थोड़े ऊपर होते हैं, इसलिए इसे 26% किया */
+        gap: 16px; 
+    } 
+    .question-text { font-size: 16px; margin-bottom: 2px; }
+    .glass-option, .correct-option { padding: 10px; font-size: 12px; }
+    .bottom-info { bottom: 75px; }
+        }
+
+        /* === AD MODAL === */
+        .modal-overlay {
+            position: fixed; inset: 0; z-index: 1000; background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            display: none; flex-direction: column; align-items: center; justify-content: center; padding: 0 16px;
+        }
+        .modal-overlay.flex-show { display: flex; }
+        .close-ad-btn {
+            position: absolute; top: 48px; right: 24px; width: 40px; height: 40px;
+            background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; cursor: pointer;
+        }
+        .ad-tag {
+            background-color: #1f2937; color: #9ca3af; font-size: 10px; font-weight: 700;
+            padding: 4px 12px; border-radius: 2px; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 16px;
+        }
+        .ad-card {
+            width: 100%; max-width: 350px; height: 300px; background-color: #111111;
+            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px;
+        }
+        .ad-card i { font-size: 36px; color: #6b7280; margin-bottom: 16px; }
+        .ad-title { font-size: 18px; font-weight: 700; color: #e5e7eb; text-align: center; }
+        .ad-desc { font-size: 12px; color: #6b7280; margin-top: 8px; text-align: center; }
+        .skip-btn {
+            margin-top: 24px; background: #ffffff; color: #000000; font-weight: 800;
+            padding: 12px 40px; border: none; border-radius: 9999px; font-size: 14px; cursor: pointer;
+        }
+
+        .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .icon-shadow { filter: drop-shadow(0px 2px 5px rgba(0,0,0,0.9)); }
+        .text-shadow { text-shadow: 0px 1px 4px rgba(0,0,0,1); }
     </style>
 </head>
-<body class="h-full flex flex-col overflow-hidden">
+<body>
 
-    <!-- मुख्य रील्स कंटेनर -->
     <main id="reelsContainer" class="reels-container no-scrollbar"></main>
 
-    <!-- === POPUP AD MODAL === -->
-    <div id="adModal" class="fixed inset-0 z-[1000] bg-black/95 backdrop-blur-lg hidden flex-col items-center justify-center px-4 transition-opacity duration-300">
-        <button onclick="closeAd()" class="absolute top-12 right-6 w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-white active:scale-90 transition border border-white/20 z-50">
-            <i class="fa-solid fa-xmark text-lg"></i>
-        </button>
-        <span class="bg-gray-800 text-gray-400 text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-widest mb-4">Advertisement</span>
-        
-        <div class="w-full max-w-sm h-[320px] bg-[#111] border border-white/10 rounded-2xl flex flex-col justify-center items-center relative overflow-hidden shadow-2xl">
-            <i class="fa-brands fa-google text-4xl text-gray-500 mb-4"></i>
-            <h3 class="text-lg font-bold text-gray-200 text-center px-4">Your Sponsored Ad Here</h3>
-            <p class="text-xs text-gray-500 mt-2 text-center px-6">यह फुल-स्क्रीन विज्ञापन रिवेन्यू जनरेट करेगा। यूज़र इसे काटकर ही पूरी जानकारी पढ़ सकेगा।</p>
-            <button onclick="closeAd()" class="mt-6 bg-white text-black font-extrabold py-3 px-10 rounded-full text-sm shadow-[0_0_20px_rgba(255,255,255,0.2)] active:scale-95">
-                Skip Ad
-            </button>
+    <div id="adModal" class="modal-overlay">
+        <button onclick="closeAd()" class="close-ad-btn"><i class="fa-solid fa-xmark"></i></button>
+        <span class="ad-tag">Advertisement</span>
+        <div class="ad-card">
+            <i class="fa-brands fa-google"></i>
+            <h3 class="ad-title">Your Sponsored Ad Here</h3>
+            <p class="ad-desc">यह फुल-स्क्रीन विज्ञापन रिवेन्यू जनरेट करेगा। यूज़र इसे काटकर ही पूरी जानकारी पढ़ सकेगा।</p>
+            <button onclick="closeAd()" class="skip-btn">Skip Ad</button>
         </div>
     </div>
 
-    <!-- === जावास्क्रिप्ट === -->
     <script>
         const questions = [
           {subject:"इतिहास", test:"Test #1000", color:"amber", question:"1857 की क्रांति के समय भारत का गवर्नर जनरल कौन था?", options:["लॉर्ड डलहौजी","लॉर्ड कैनिंग","लॉर्ड कर्जन","लॉर्ड मिंटो"], answer:1, info:"1857 की क्रांति के समय भारत का गवर्नर जनरल लॉर्ड कैनिंग था। यह विद्रोह 10 मई 1857 को मेरठ से शुरू हुआ था और जल्द ही उत्तर और मध्य भारत के बड़े हिस्सों में फैल गया।"},
@@ -88,25 +239,50 @@
         ];
 
         const container = document.getElementById("reelsContainer");
+        const adModal = document.getElementById("adModal");
         let index = 0;
+
         function optionHTML(q, i) {
           const correct = i === q.answer;
-          return `<div class="${correct ? 'bg-green-500/20 backdrop-blur-md border border-green-500/50 text-green-400 font-bold flex justify-between items-center shadow-[0_0_15px_rgba(34,197,94,0.15)]' : 'glass-option text-gray-100 font-medium'} p-4 rounded-xl text-[14px] shadow-md">
-            <span>${String.fromCharCode(65+i)}. ${q.options[i]}</span>${correct ? '<i class="fa-solid fa-circle-check text-lg icon-shadow"></i>' : ''}</div>`;
+          return `<div class="${correct ? 'correct-option' : 'glass-option'}">
+            <span>${String.fromCharCode(65+i)}. ${q.options[i]}</span>
+            ${correct ? '<i class="fa-solid fa-circle-check icon-shadow"></i>' : ''}
+          </div>`;
         }
+
         function reelHTML(q, n) {
           return `<section class="reel-item">
-            <div class="absolute inset-0 bg-gradient-to-br from-[#0B0F19] via-[#020617] to-black z-0 pointer-events-none"></div>
-           <div class="absolute top-[160px] left-0 right-0 z-10 w-[85%] mx-auto px-5 flex flex-col gap-4">
-              <div class="flex items-center gap-2 mb-2"><span class="bg-${q.color}-500 text-black text-[11px] font-black px-3 py-1 rounded uppercase tracking-widest shadow-lg">${q.subject}</span><span class="text-xs text-gray-400 font-semibold text-shadow">${q.test}</span></div>
-              <h2 class="text-[20px] md:text-[22px] font-bold text-white leading-snug text-shadow mb-2">${q.question}</h2>
-              <div class="space-y-3">${q.options.map((_,i)=>optionHTML(q,i)).join("")}</div>
+            <div class="reel-bg"></div>
+            
+            <div class="content-box">
+              <div class="meta-header">
+                <span class="subject-tag bg-${q.color}">${q.subject}</span>
+                <span class="test-tag text-shadow">${q.test}</span>
+              </div>
+              <h2 class="question-text text-shadow">${q.question}</h2>
+              <div class="options-list">${q.options.map((_,i)=>optionHTML(q,i)).join("")}</div>
             </div>
-            <div class="absolute bottom-[298px] left-5 right-16 z-10"><p id="context-${n}" class="text-[12px] text-gray-300 leading-relaxed text-shadow line-clamp-2"><span class="font-bold text-${q.color}-400">विस्तृत जानकारी:</span> ${q.info}</p><button id="btn-${n}" onclick="handleReadMore('context-${n}','btn-${n}')" class="text-white bg-white/20 px-3 py-1.5 rounded-lg text-[11px] font-bold mt-2">...Read more</button></div>
-            <div class="absolute right-3 top-80 flex flex-col items-center gap-7 z-20"><button><i class="fa-solid fa-heart text-[30px] text-white icon-shadow"></i><span class="block text-[11px] font-bold">12K</span></button><button><i class="fa-solid fa-bookmark text-[30px] text-white icon-shadow"></i><span class="block text-[11px] font-bold">Save</span></button><button><i class="fa-solid fa-share text-[30px] text-white icon-shadow"></i><span class="block text-[11px] font-bold">Share</span></button></div>
+            
+            <div class="side-actions">
+              <button class="action-btn"><i class="fa-solid fa-heart icon-shadow"></i><span>12K</span></button>
+              <button class="action-btn"><i class="fa-solid fa-bookmark icon-shadow"></i><span>Save</span></button>
+              <button class="action-btn"><i class="fa-solid fa-share icon-shadow"></i><span>Share</span></button>
+            </div>
+            
+            <div class="bottom-info">
+              <p id="context-${n}" class="info-text text-shadow line-clamp-2">
+                <span class="font-bold text-${q.color}" style="font-weight:bold;">विस्तृत जानकारी:</span> ${q.info}
+              </p>
+              <button id="btn-${n}" onclick="handleReadMore('context-${n}','btn-${n}')" class="read-more-btn">...Read more</button>
+            </div>
           </section>`;
         }
-        function addQuestion(){ container.insertAdjacentHTML("beforeend", reelHTML(questions[index % questions.length], index)); index++; }
+
+        function addQuestion(){ 
+            container.insertAdjacentHTML("beforeend", reelHTML(questions[index % questions.length], index)); 
+            index++; 
+        }
+        
         for(let i=0;i<questions.length;i++) addQuestion();
 
         container.addEventListener("scroll", () => {
@@ -114,9 +290,20 @@
         });
 
         let currentTargetText=null, currentTargetBtn=null;
-        function handleReadMore(textId,btnId){currentTargetText=textId;currentTargetBtn=btnId;adModal.classList.remove("hidden");adModal.classList.add("flex");}
-        function closeAd(){adModal.classList.add("hidden");adModal.classList.remove("flex");if(currentTargetText){document.getElementById(currentTargetText).classList.remove("line-clamp-2");document.getElementById(currentTargetBtn).style.display="none";}}
+        
+        function handleReadMore(textId,btnId){
+            currentTargetText=textId;
+            currentTargetBtn=btnId;
+            adModal.classList.add("flex-show");
+        }
+        
+        function closeAd(){
+            adModal.classList.remove("flex-show");
+            if(currentTargetText){
+                document.getElementById(currentTargetText).classList.remove("line-clamp-2");
+                document.getElementById(currentTargetBtn).style.display="none";
+            }
+        }
     </script>
-
 </body>
 </html>
