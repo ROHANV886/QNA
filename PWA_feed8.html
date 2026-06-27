@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="hi" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>QNA Shorts - Perfect Parallel UI</title>
+    <title>QNA Shorts - Flow UI</title>
     
-    <link href="https://fonts.googleapis.com/css2=family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
-        /* === बेसिक रिसेट === */
+        /* === रिसेट और बेस स्टाइल्स === */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -27,7 +27,6 @@
             overscroll-behavior-y: none;
         }
         
-        /* === रील्स कंटेनर === */
         .reels-container {
             height: 100dvh;
             width: 100%;
@@ -39,11 +38,17 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
+        /* मुख्य डिब्बा: flex-start करने से सब कुछ ऊपर से एक के नीचे एक सट कर आएगा */
         .reel-item {
             height: 100dvh;
             width: 100%;
             scroll-snap-align: start;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* यहाँ बदलाव किया - अब पूरा माल ऊपर से नीचे बहेगा */
+            gap: 16px; /* हर सेक्शन के बीच का गैप */
+            padding: 60px 16px 30px 16px;
         }
 
         .reel-bg {
@@ -51,40 +56,19 @@
             inset: 0;
             background: linear-gradient(135deg, #0B0F19, #020617, #000000);
             z-index: 0;
+            pointer-events: none;
         }
 
-        /* =======================================================
-           ध्यान दें: यहीं पर असली जादू हो रहा है (Layout Alignment)
-           ======================================================= */
-
-        /* 1. कन्टेंट बॉक्स (सवाल और ऑप्शंस) */
-        .content-box {
-            position: absolute;
-            top: 14%; /* ऊपर से दूरी */
-            left: 4%;  /* लेफ्ट से थोड़ा सटा हुआ ताकि राइट में आइकन्स के लिए जगह बचे */
+        /* सवाल का एरिया */
+        .main-content-area {
             z-index: 10;
-            width: 80%; /* चौड़ाई को 80% रखा है ताकि राइट का 20% हिस्सा आइकन्स ले सकें */
-            max-width: 420px;
             display: flex;
             flex-direction: column;
             gap: 12px;
+            width: 100%;
         }
 
-        /* 2. साइड एक्शन्स (लाइक, सेव, शेयर बटन्स) */
-        .side-actions {
-            position: absolute;
-            right: 12px; /* राइट से बिल्कुल फिक्स */
-            top: 26%;    /* बिल्कुल कन्टेंट बॉक्स के बराबर (Parallel) रखने के लिए दोनों का TOP सेम (14%) रखा है */
-            width: 14%;  /* सीमित चौड़ाई */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 22px;   /* बटन्स के बीच का गैप */
-            z-index: 20;
-        }
-
-        /* === बाकी की डिज़ाइनिंग स्टाइल्स === */
-        .meta-header { display: flex; align-items: center; gap: 8px; }
+        .meta-header { display: flex; align-items: center; gap: 8px; margin-bottom: 2px; }
         
         .subject-tag {
             color: #000000; font-size: 10px; font-weight: 900; 
@@ -102,11 +86,35 @@
         .test-tag { font-size: 11px; color: #9ca3af; font-weight: 600; }
 
         .question-text {
-            font-size: 18px; font-weight: 700; color: #ffffff;
-            line-height: 1.4; margin-bottom: 4px;
+            font-size: 18px; font-weight: 700; color: #ffffff; line-height: 1.4;
         }
 
-        .options-list { display: flex; flex-direction: column; gap: 10px; }
+        /* ऑप्शंस और बटन्स की मुख्य रो */
+        .interactive-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start; 
+            width: 100%;
+            gap: 12px;
+            margin-top: 4px;
+        }
+
+        .options-list { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 10px; 
+            width: 82%; 
+        }
+
+        /* साइड बटन्स का स्टाइल */
+        .side-actions-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;   
+            width: 15%; 
+            padding-top: 4px;
+        }
 
         .glass-option, .correct-option { padding: 14px; border-radius: 12px; font-size: 13px; }
 
@@ -124,13 +132,11 @@
             box-shadow: 0 0 15px rgba(34, 197, 94, 0.15);
         }
 
-        /* विस्तृत जानकारी (यह नीचे ही रहेगी ताकि पढ़ने में आसानी हो) */
-        .bottom-info {
-            position: absolute;
-            bottom: 392px;
-            left: 20px;
-            right: 20px; /* अब इसे पूरा फैला दिया क्योंकि यहाँ ऊपर वाले बटन का लफड़ा नहीं है */
+        /* बॉटम इन्फो: अब यह सीधे ऑप्शंस के नीचे चिपक कर आएगा */
+        .bottom-info-box {
             z-index: 10;
+            width: 82%; /* इसे भी ऑप्शंस जितनी चौड़ाई दी ताकि साइड के बटन्स के नीचे न घुसे */
+            margin-top: 4px;
         }
 
         .info-text { font-size: 12px; color: #d1d5db; line-height: 1.5; }
@@ -145,41 +151,22 @@
         .action-btn i { font-size: 24px; margin-bottom: 2px; display: block; }
         .action-btn span { font-size: 10px; font-weight: 700; display: block; }
 
-        /* =======================================================
-           MEDIA QUERIES: स्क्रीन साइज़ के हिसाब से ऑटो-एडजस्टमेंट
-           ======================================================= */
-
-        /* 1. मध्यम और बड़ी स्क्रीन के लिए (जैसे 720px या बड़ी स्क्रीन) */
+        /* === RESPONSIVE MEDIA QUERIES === */
         @media (min-width: 550px) {
-            .content-box {
-                top: 16%;
-                left: 8%;
-                width: 76%;
-                max-width: 480px;
-                gap: 16px;
-            }
-            .side-actions {
-                top: 32%; /* यहाँ भी दोनों का TOP मैच कर दिया */
-                right: 24px;
-                gap: 28px;
-            }
+            .reel-item { padding: 75px 24px 35px 24px; gap: 20px; }
             .question-text { font-size: 22px; }
             .glass-option, .correct-option { padding: 16px; font-size: 15px; }
             .action-btn i { font-size: 28px; }
             .action-btn span { font-size: 11px; }
-            .bottom-info { bottom: 120px; left: 30px; right: 30px; }
+            .side-actions-box { gap: 24px; }
         }
 
-        /* 2. बहुत छोटे फोन या कम हाइट वाली स्क्रीन के लिए (जैसे 360x640) */
         @media (max-height: 650px) {
-           .content-box { top: 6%; gap: 8px; }
-    .side-actions { 
-        top: 26%; /* छोटी स्क्रीन पर ऑप्शंस थोड़े ऊपर होते हैं, इसलिए इसे 26% किया */
-        gap: 16px; 
-    } 
-    .question-text { font-size: 16px; margin-bottom: 2px; }
-    .glass-option, .correct-option { padding: 10px; font-size: 12px; }
-    .bottom-info { bottom: 75px; }
+            .reel-item { padding: 45px 12px 15px 12px; gap: 10px; }
+            .main-content-area { gap: 8px; }
+            .question-text { font-size: 16px; }
+            .glass-option, .correct-option { padding: 10px; font-size: 12px; }
+            .side-actions-box { gap: 14px; }
         }
 
         /* === AD MODAL === */
@@ -254,22 +241,30 @@
           return `<section class="reel-item">
             <div class="reel-bg"></div>
             
-            <div class="content-box">
+            <!-- मुख्य कंटेंट एरिया -->
+            <div class="main-content-area">
               <div class="meta-header">
                 <span class="subject-tag bg-${q.color}">${q.subject}</span>
                 <span class="test-tag text-shadow">${q.test}</span>
               </div>
               <h2 class="question-text text-shadow">${q.question}</h2>
-              <div class="options-list">${q.options.map((_,i)=>optionHTML(q,i)).join("")}</div>
+              
+              <!-- ऑप्शन्स और बटन्स एक साथ -->
+              <div class="interactive-row">
+                <div class="options-list">
+                  ${q.options.map((_,i)=>optionHTML(q,i)).join("")}
+                </div>
+                
+                <div class="side-actions-box">
+                  <button class="action-btn"><i class="fa-solid fa-heart icon-shadow"></i><span>12K</span></button>
+                  <button class="action-btn"><i class="fa-solid fa-bookmark icon-shadow"></i><span>Save</span></button>
+                  <button class="action-btn"><i class="fa-solid fa-share icon-shadow"></i><span>Share</span></button>
+                </div>
+              </div>
             </div>
             
-            <div class="side-actions">
-              <button class="action-btn"><i class="fa-solid fa-heart icon-shadow"></i><span>12K</span></button>
-              <button class="action-btn"><i class="fa-solid fa-bookmark icon-shadow"></i><span>Save</span></button>
-              <button class="action-btn"><i class="fa-solid fa-share icon-shadow"></i><span>Share</span></button>
-            </div>
-            
-            <div class="bottom-info">
+            <!-- विस्तृत जानकारी (अब यह बिल्कुल ऑप्शंस के ठीक नीचे चिपक जाएगी) -->
+            <div class="bottom-info-box">
               <p id="context-${n}" class="info-text text-shadow line-clamp-2">
                 <span class="font-bold text-${q.color}" style="font-weight:bold;">विस्तृत जानकारी:</span> ${q.info}
               </p>
