@@ -102,7 +102,7 @@
               <h2 class="text-[20px] md:text-[22px] font-bold text-white leading-snug text-shadow mb-2">${q.question}</h2>
               <div class="space-y-3">${q.options.map((_,i)=>optionHTML(q,i)).join("")}</div>
             </div>
-            <div class="absolute bottom-24 left-5 right-16 z-10"><p id="context-${n}" class="text-[12px] text-gray-300 leading-relaxed text-shadow line-clamp-2"><span class="font-bold text-${q.color}-400">विस्तृत जानकारी:</span> ${q.info}</p><button id="btn-${n}" onclick="handleReadMore('context-${n}','btn-${n}')" class="text-white bg-white/20 px-3 py-1.5 rounded-lg text-[11px] font-bold mt-2">...Read more</button></div>
+            <div class="absolute bottom-[298px] left-5 right-16 z-10"><p id="context-${n}" class="text-[12px] text-gray-300 leading-relaxed text-shadow line-clamp-2"><span class="font-bold text-${q.color}-400">विस्तृत जानकारी:</span> ${q.info}</p><button id="btn-${n}" onclick="handleReadMore('context-${n}','btn-${n}')" class="text-white bg-white/20 px-3 py-1.5 rounded-lg text-[11px] font-bold mt-2">...Read more</button></div>
             <div class="absolute right-3 top-80 flex flex-col items-center gap-7 z-20"><button><i class="fa-solid fa-heart text-[30px] text-white icon-shadow"></i><span class="block text-[11px] font-bold">12K</span></button><button><i class="fa-solid fa-bookmark text-[30px] text-white icon-shadow"></i><span class="block text-[11px] font-bold">Save</span></button><button><i class="fa-solid fa-share text-[30px] text-white icon-shadow"></i><span class="block text-[11px] font-bold">Share</span></button></div>
           </section>`;
         }
