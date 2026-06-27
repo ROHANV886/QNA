@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>QNA Shorts - Flow UI</title>
+    <title>QNA Shorts - Perfect Balanced Layout</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -38,7 +38,7 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-        /* मुख्य डिब्बा: flex-start करने से सब कुछ ऊपर से एक के नीचे एक सट कर आएगा */
+        /* मुख्य कंटेनर: पैडिंग को बढ़ाकर 165px कर दिया है ताकि कंटेंट और नीचे आ जाए */
         .reel-item {
             height: 100dvh;
             width: 100%;
@@ -46,9 +46,9 @@
             position: relative;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start; /* यहाँ बदलाव किया - अब पूरा माल ऊपर से नीचे बहेगा */
-            gap: 16px; /* हर सेक्शन के बीच का गैप */
-            padding: 60px 16px 30px 16px;
+            justify-content: flex-start; 
+            gap: 14px; 
+            padding: 165px 16px 30px 16px; /* 165px टॉप पैडिंग से सब नीचे आ गया */
         }
 
         .reel-bg {
@@ -59,7 +59,7 @@
             pointer-events: none;
         }
 
-        /* सवाल का एरिया */
+        /* सवाल-जवाब का एरिया */
         .main-content-area {
             z-index: 10;
             display: flex;
@@ -106,14 +106,14 @@
             width: 82%; 
         }
 
-        /* साइड बटन्स का स्टाइल */
+        /* साइड बटन्स का डिब्बा (बिल्कुल ऑप्शंस के सामने) */
         .side-actions-box {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 20px;   
+            gap: 22px;   
             width: 15%; 
-            padding-top: 4px;
+            padding-top: 2px; 
         }
 
         .glass-option, .correct-option { padding: 14px; border-radius: 12px; font-size: 13px; }
@@ -132,11 +132,11 @@
             box-shadow: 0 0 15px rgba(34, 197, 94, 0.15);
         }
 
-        /* बॉटम इन्फो: अब यह सीधे ऑप्शंस के नीचे चिपक कर आएगा */
+        /* विस्तृत जानकारी */
         .bottom-info-box {
             z-index: 10;
-            width: 82%; /* इसे भी ऑप्शंस जितनी चौड़ाई दी ताकि साइड के बटन्स के नीचे न घुसे */
-            margin-top: 4px;
+            width: 82%; 
+            margin-top: 26px;
         }
 
         .info-text { font-size: 12px; color: #d1d5db; line-height: 1.5; }
@@ -153,20 +153,20 @@
 
         /* === RESPONSIVE MEDIA QUERIES === */
         @media (min-width: 550px) {
-            .reel-item { padding: 75px 24px 35px 24px; gap: 20px; }
+            .reel-item { padding: 180px 24px 35px 24px; gap: 20px; }
             .question-text { font-size: 22px; }
             .glass-option, .correct-option { padding: 16px; font-size: 15px; }
             .action-btn i { font-size: 28px; }
             .action-btn span { font-size: 11px; }
-            .side-actions-box { gap: 24px; }
+            .side-actions-box { gap: 26px; }
         }
 
         @media (max-height: 650px) {
-            .reel-item { padding: 45px 12px 15px 12px; gap: 10px; }
+            .reel-item { padding: 100px 12px 15px 12px; gap: 10px; }
             .main-content-area { gap: 8px; }
             .question-text { font-size: 16px; }
             .glass-option, .correct-option { padding: 10px; font-size: 12px; }
-            .side-actions-box { gap: 14px; }
+            .side-actions-box { gap: 16px; }
         }
 
         /* === AD MODAL === */
@@ -241,7 +241,6 @@
           return `<section class="reel-item">
             <div class="reel-bg"></div>
             
-            <!-- मुख्य कंटेंट एरिया -->
             <div class="main-content-area">
               <div class="meta-header">
                 <span class="subject-tag bg-${q.color}">${q.subject}</span>
@@ -249,7 +248,6 @@
               </div>
               <h2 class="question-text text-shadow">${q.question}</h2>
               
-              <!-- ऑप्शन्स और बटन्स एक साथ -->
               <div class="interactive-row">
                 <div class="options-list">
                   ${q.options.map((_,i)=>optionHTML(q,i)).join("")}
@@ -263,7 +261,6 @@
               </div>
             </div>
             
-            <!-- विस्तृत जानकारी (अब यह बिल्कुल ऑप्शंस के ठीक नीचे चिपक जाएगी) -->
             <div class="bottom-info-box">
               <p id="context-${n}" class="info-text text-shadow line-clamp-2">
                 <span class="font-bold text-${q.color}" style="font-weight:bold;">विस्तृत जानकारी:</span> ${q.info}
