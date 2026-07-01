@@ -5,8 +5,37 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>The QNA Dynamic Tests</title>
 <script src="https://cdn.tailwindcss.com"></script>
+<style>
+.scrollbar-hide::-webkit-scrollbar{
+    display:none;
+}
+.scrollbar-hide{
+    -ms-overflow-style:none;
+    scrollbar-width:none;
+}
+
+.filter-btn{
+    white-space:nowrap;
+    padding:8px 16px;
+    border-radius:9999px;
+    background:#fff;
+    border:2px solid #2563eb;
+    color:#2563eb;
+    font-weight:700;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.filter-btn.active{
+    background:#2563eb;
+    color:#fff;
+}
+</style>
 </head>
 <body class="bg-gray-50 p-5">
+  <!-- Filter -->
+<div class="flex gap-2 overflow-x-auto pb-3 mb-6 scrollbar-hide" id="filterBar">
+</div>
 <div class="max-w-6xl mx-auto">
 <h1 class="text-3xl font-black mb-8">🏛️ इतिहास टेस्ट सीरीज़</h1>
 <div id="tests" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
