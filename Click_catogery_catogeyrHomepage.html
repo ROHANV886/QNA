@@ -52,11 +52,7 @@
     </div>
 </header>
   <!-- Filter -->
-   <!-- Filter Button -->
-<div class="px-5 py-3">
-  <a href="./PWa4_filterPage of catogery list .html">  <button class="filter-btn">
-        🔍 Filter
-    </button></a>
+   
 </div>
 <div class="flex gap-2 overflow-x-auto pb-3 mb-6 scrollbar-hide" id="filterBar">
 </div>
@@ -77,7 +73,7 @@ const data=[];
 for(let i=1000;i>=986;i--){
  data.push({
    id:i,
-   title:`इतिहास का महत्वपूर्ण विषय #${i}`,
+
    question:"1857 की क्रांति का नेतृत्व किसने किया?",
    options:[...sampleOptions]
  });
@@ -94,8 +90,6 @@ card.innerHTML=`
 <span class="bg-blue-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase">Unlocked</span>
 <span class="font-bold text-gray-500">टेस्ट #${test.id}</span>
 </div>
-
-<h3 class="font-black text-xl mb-4">${test.title}</h3>
 
 <div class="bg-gray-50 rounded-xl p-4">
 <p class="font-bold mb-4">Q1: ${test.question}</p>
