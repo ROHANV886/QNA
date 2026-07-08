@@ -14,26 +14,39 @@
     scrollbar-width:none;
 }
 
-.filter-btn{
-    white-space:nowrap;
-    padding:8px 16px;
-    border-radius:9999px;
-    background:#fff;
-    border:2px solid #2563eb;
-    color:#2563eb;
-    font-weight:700;
-    cursor:pointer;
-    transition:.3s;
+.mobile-filter-container {
+     display:flex;
+    overflow-x:auto;
+    gap:10px;
+    padding-bottom:5px;
+    scrollbar-width:none;
 }
 
-.filter-btn.active{
-    background:#2563eb;
-    color:#fff;
+.filter-box {
+ flex:0 0 auto;
+    width:auto;
+    min-width:90px;
+    height:40px;
+    padding:0 16px;
+    justify-content:center;
+    border-radius:10px;
+}
+
+.mobile-filter-container::-webkit-scrollbar{
+    display:none;
+}
+.filter-box:hover {
+  background-color: #e8eaed;
+}
+
+.filter-box.active {
+  background-color: #2563eb;
+  color: #ffffff;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
 }
 </style>
 </head>
-<body class="bg-gray-50 p-5  pt-24  ">
-<header class="fixed top-0 left-0 w-full z-50 bg-white shadow-md border-b border-gray-200">
+<body class="bg-gray-50"> <header class="fixed top-0 left-0 w-full z-50 bg-white shadow-md border-b border-gray-200">
     <div class="w-full px-5 py-4 flex items-center justify-between">
         <div class="flex items-center gap-2">
             <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-black text-sm">
@@ -45,83 +58,144 @@
         </div>
 
         <div class="flex items-center gap-3">
-            <p class="font-black text-xl mb-4">
+            <p class="font-black text-xl">
                  History
             </p>
         </div>
     </div>
 </header>
-  <!-- Filter -->
-   
-</div>
-<div class="flex gap-2 overflow-x-auto pb-3 mb-6 scrollbar-hide" id="filterBar">
-</div>
-<div class="max-w-6xl mx-auto">
 
-<div id="tests" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+<div class="max-w-7xl mx-auto px-2 sm:px-4 mt-16 pt-0">
+
+    <!-- Filters -->
+    <div class="bg-white p-3 rounded-2xl border-1 border-gray-200 shadow-sm mb-2">
+    
+
+        <div class="mobile-filter-container" id="mobileFilters">
+        </div>
+    </div>
+
+    <!-- Tests -->
+    <div id="tests" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
+    </div>
+
 </div>
 
 <script>
-const sampleOptions=[
-"A. बहादुर शाह जफर",
-"B. रानी लक्ष्मीबाई",
-"C. कुंवर सिंह",
-"D. तात्या टोपे"
+const sampleOptions = [
+  "A. बहादुर शाह जफर",
+  "B. रानी लक्ष्मीबाई",
+  "C. कुंवर सिंह",
+  "D. तात्या टोपे"
 ];
 
-const data=[];
-for(let i=1000;i>=986;i--){
+const data = [];
+for(let i=1000; i>=986; i--) { 
  data.push({
-   id:i,
-
-   question:"1857 की क्रांति का नेतृत्व किसने किया?",
-   options:[...sampleOptions]
+   id: i,
+   question: "1857 की क्रांति का नेतृत्व किसने किया?",
+   options: [...sampleOptions]
  });
 }
 
-const box=document.getElementById("tests");
+const box = document.getElementById("tests");
+const filterContainer = document.getElementById('mobileFilters');
 
-data.forEach(test=>{
-const card=document.createElement("div");
-card.className="bg-white rounded-3xl p-6 shadow border-2 border-blue-600";
+const filterRanges = [
 
-card.innerHTML=`
-<div class="flex justify-between items-center mb-4">
-<span class="bg-blue-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase">Unlocked</span>
-<span class="font-bold text-gray-500">टेस्ट #${test.id}</span>
-</div>
+  "1-50", 
+  "51-100", 
+  "101-150", 
+  "151-200", 
+  "201-250", 
+  "251-300", 
+  "301-350", 
+  "351-400",
+  "401-450",
+  "451-500"
+];
 
-<div class="bg-gray-50 rounded-xl p-4">
-<p class="font-bold mb-4">Q1: ${test.question}</p>
+function initFilters() {
+    filterContainer.innerHTML = ''; 
+    
+    filterRanges.forEach((range, idx) => {
+        const btn = document.createElement('div');
+        btn.className = idx === 0 ? 'filter-box active' : 'filter-box';
+        btn.innerText = range;
+        
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.filter-box').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            
+            if (range === "📑 सभी टेस्ट") {
+                renderTests(data);
+            } else {
+                const parts = range.split('-');
+                const min = parseInt(parts[0]);
+                const max = parseInt(parts[1]);
+                
+                const filteredData = data.filter(test => test.id >= min && test.id <= max);
+                renderTests(filteredData);
+            }
+        });
+        
+        filterContainer.appendChild(btn);
+    });
+}
 
-<div class="grid grid-cols-2 gap-2 options"></div>
-</div>
+function renderTests(testsToShow) {
+    box.innerHTML = ""; 
+    
+    if(testsToShow.length === 0) {
+        box.innerHTML = `<p class="col-span-full text-center py-10 font-bold text-gray-400 text-xs">इस रेंज में कोई टेस्ट उपलब्ध नहीं है।</p>`;
+        return;
+    }
 
-<a href="upi.html"
-class="block mt-5 text-center bg-blue-600 hover:bg-blue-700 text-white rounded-xl py-3 font-bold">
-टेस्ट जारी रखें
-</a>
-`;
+    testsToShow.forEach(test => {
+        const card = document.createElement("div");
+        card.className = "bg-white rounded-2xl p-4 shadow border-2 border-blue-600 flex flex-col justify-between";
 
-const optBox=card.querySelector(".options");
+        card.innerHTML = `
+        <div>
+            <div class="flex justify-between items-center mb-3">
+                <span class="bg-blue-600 text-white text-[9px] font-black px-2 py-0.5 rounded-full uppercase">Unlocked</span>
+                <span class="font-bold text-xs text-gray-500">टेस्ट #${test.id}</span>
+            </div>
 
-test.options.forEach(op=>{
-const div=document.createElement("div");
-div.className="p-2 border rounded cursor-pointer bg-white hover:bg-gray-100 font-bold text-xs";
-div.textContent=op;
+            <div class="bg-gray-50 rounded-xl p-3">
+                <p class="font-bold text-sm mb-3">Q1: ${test.question}</p>
+                <div class="grid grid-cols-1 gap-1.5 options"></div>
+            </div>
+        </div>
 
-div.onclick=function(){
-optBox.querySelectorAll("div").forEach(x=>{
-x.className="p-2 border rounded cursor-pointer bg-white hover:bg-gray-100 font-bold text-xs";
-});
-this.className="p-2 border-2 border-blue-600 bg-blue-50 text-blue-600 rounded cursor-pointer font-bold text-xs";
-};
+        <a href="upi.html" class="block mt-4 text-center bg-blue-600 hover:bg-blue-700 text-white rounded-xl py-2 text-sm font-bold">
+            टेस्ट जारी रखें
+        </a>
+        `;
 
-optBox.appendChild(div);
-});
+        const optBox = card.querySelector(".options");
 
-box.appendChild(card);
-});
+        test.options.forEach(op => {
+            const div = document.createElement("div");
+            div.className = "p-2 border rounded cursor-pointer bg-white hover:bg-gray-100 font-bold text-[11px]";
+            div.textContent = op;
+
+            div.onclick = function() {
+                optBox.querySelectorAll("div").forEach(x => {
+                    x.className = "p-2 border rounded cursor-pointer bg-white hover:bg-gray-100 font-bold text-[11px]";
+                });
+                this.className = "p-2 border-2 border-blue-600 bg-blue-50 text-blue-600 rounded cursor-pointer font-bold text-[11px]";
+            };
+
+            optBox.appendChild(div);
+        });
+
+        box.appendChild(card);
+    });
+}
+
+initFilters();
+renderTests(data);
 </script>
 </body>
 </html>
