@@ -22,41 +22,39 @@
         }
     </style>
 </head>
-<!-- Header -->
-<header class="w-full bg-slate-950/80 border-b border-gray-900 py-3 flex items-center shrink-0">
-    <div class="max-w-[96%] mx-auto w-full flex items-center justify-between">
-        <div class="text-2xl font-black text-blue-500 tracking-tight">
-            <a href="/homepage.html">The <span class="text-white">QNA</span></a>
+
+<body class="bg-slate-900 text-gray-100 font-sans antialiased overflow-hidden flex justify-center items-center h-screen">
+
+    <div class="w-full max-w-md h-[100dvh] bg-gray-950 flex flex-col relative shadow-2xl border-x border-gray-900">
+        
+        <header class="w-full bg-slate-950/85 border-b border-gray-900 py-3 px-4 flex items-center justify-between shrink-0 z-20">
+            <div class="text-2xl font-black text-blue-500 tracking-tight">
+                <a href="/homepage.html">The <span class="text-white">QNA</span></a>
+            </div>
+            <nav class="flex items-center space-x-4 text-xs font-bold text-gray-300">
+                <a href="/homepage.html" class="hover:text-blue-500 transition">Home</a>
+                <a href="/GK_catogery.html" class="hover:text-blue-500 transition">मंच</a>
+            </nav>
+        </header>
+
+        <main id="reels-wrapper" class="reels-container w-full flex-1 bg-gray-950">
+        </main>
+
+        <div id="explanation-sheet" class="absolute inset-x-0 bottom-0 z-50 bg-gray-900 border-t-2 border-blue-600 rounded-t-3xl shadow-2xl transform translate-y-full transition-transform duration-300 ease-out p-6 text-gray-200">
+            <div class="w-12 h-1.5 bg-gray-700 rounded-full mx-auto mb-4 cursor-pointer" onclick="closeExplanation()"></div>
+            <div class="flex items-center justify-between border-b border-gray-800 pb-3 mb-4">
+                <h3 class="text-base font-black text-white flex items-center gap-2">
+                    📖 उत्तर का प्रामाणिक संदर्भ (Context)
+                </h3>
+                <button onclick="closeExplanation()" class="text-gray-400 hover:text-white font-bold text-sm bg-gray-800 px-2.5 py-1 rounded-full">बंद करें</button>
+            </div>
+            <div id="explanation-text" class="text-sm text-gray-300 leading-relaxed max-h-[250px] overflow-y-auto font-medium">
+            </div>
         </div>
- 
-        <nav class="flex items-center space-x-4 text-xs font-bold text-gray-300">
-            <a href="/homepage.html" class="hover:text-blue-500 transition">Home</a>
-            <a href="/GK_catogery.html" class="hover:text-blue-500 transition">मंच</a>
-        </nav>
+
+        <div id="sheet-overlay" class="absolute inset-0 bg-black/60 z-40 hidden" onclick="closeExplanation()"></div>
+
     </div>
-</header>
-
-<body class="bg-gray-950 text-gray-100 font-sans antialiased overflow-hidden">
-
-    <!-- REELS STYLE MAIN CONTAINER -->
-    <main id="reels-wrapper" class="reels-container w-full bg-gray-950">
-    </main>
-
-    <!-- DYNAMIC BOTTOM EXPLANATION SHEET -->
-    <div id="explanation-sheet" class="fixed inset-x-0 bottom-0 z-50 max-w-lg mx-auto bg-gray-900 border-t-2 border-blue-600 rounded-t-3xl shadow-2xl transform translate-y-full transition-transform duration-300 ease-out p-6 text-gray-200">
-        <div class="w-12 h-1.5 bg-gray-700 rounded-full mx-auto mb-4 cursor-pointer" onclick="closeExplanation()"></div>
-        <div class="flex items-center justify-between border-b border-gray-800 pb-3 mb-4">
-            <h3 class="text-base font-black text-white flex items-center gap-2">
-                📖 उत्तर का प्रामाणिक संदर्भ (Context)
-            </h3>
-            <button onclick="closeExplanation()" class="text-gray-400 hover:text-white font-bold text-sm bg-gray-800 px-2.5 py-1 rounded-full">बंद करें</button>
-        </div>
-        <div id="explanation-text" class="text-sm text-gray-300 leading-relaxed max-h-[300px] overflow-y-auto font-medium">
-        </div>
-    </div>
-
-    <div id="sheet-overlay" class="fixed inset-0 bg-black/60 z-40 hidden" onclick="closeExplanation()"></div>
-
 
     <script>
         // GK क्वेश्चन बैंक
@@ -66,28 +64,26 @@
                 q: "भारतीय संविधान का जनक किसे कहा जाता है?", 
                 a: "डॉ. बी.आर. अम्बेडकर", b: "महात्मा गांधी", c: "जवाहरलाल नेहरू", d: "डॉ. राजेन्द्र प्रसाद", 
                 correct: "A", exam: "UPPCS", year: "2024", likes: 245, views: "1.2K",
-                context: "डॉ. भीमराव अम्बेडकर को भारतीय संविधान का जनक और निर्माता कहा जाता है क्योंकि वह संविधान का मसौदा तैयार करने वाली 'प्रारूप समिति' (Drafting Committee) के अध्यक्ष थे। उन्होंने दुनिया भर के विभिन्न संविधानों का गहरा अध्ययन किया और भारतीय समाज की विविधताओं और अधिकारों को ध्यान में रखते हुए एक मजबूत ढांचा तैयार किया। संविधान सभा में उनकी अद्वितीय भूमिका और कानूनी समझ के कारण ही उन्हें यह गौरवशाली स्थान प्राप्त हुआ है, जो परीक्षाओं में बार-बार पूछा जाने वाला एक प्रामाणिक ऐतिहासिक तथ्य है।"
+                context: "डॉ. भीमराव अम्बेडकर को भारतीय संविधान का जनक और निर्माता कहा जाता है क्योंकि वह संविधान का मसौदा तैयार करने वाली 'प्रारूप समिति' (Drafting Committee) के अध्यक्ष थे। उन्होंने दुनिया भर के विभिन्न संविधानों का गहरा अध्ययन किया और भारतीय समाज की विविधताओं और अधिकारों को ध्यान में रखते हुए एक मजबूत ढांचा तैयार किया। संविधान सभा में उनकी अद्वितीय भूमिका और कानूनी समझ के कारण ही उन्हें यह गौरवशाली स्थान प्राप्त हुआ है।"
             },
             { 
                 id: 2, 
                 q: "भारत में किस राज्य की तटरेखा (Coastline) सबसे लंबी है?", 
                 a: "महाराष्ट्र", b: "तमिलनाडु", c: "गुजरात", d: "आंध्र प्रदेश", 
                 correct: "C", exam: "SSC CGL", year: "2023", likes: 189, views: "940",
-                context: "भारत की मुख्य भूमि की कुल तटरेखा लगभग 5422 किलोमीटर लंबी है, जिसमें अकेले गुजरात राज्य की तटरेखा सबसे लंबी है, जिसकी कुल लंबाई लगभग 1214.7 किलोमीटर है। गुजरात के बाद दूसरे स्थान पर आंध्र प्रदेश आता है। गुजरात की भौगोलिक स्थिति ऐसी है कि इसमें कच्छ और खंभात की खाड़ियां शामिल हैं, जिससे इसकी तटीय सीमा अत्यधिक घुमावदार और लंबी हो जाती है। यह सवाल भूगोल के अंतर्गत सरकारी परीक्षाओं में हमेशा एक अकादमिक and प्रामाणिक तथ्य के रूप में पूछा जाता है।"
+                context: "भारत की मुख्य भूमि की कुल तटरेखा लगभग 5422 किलोमीटर लंबी है, जिसमें अकेले गुजरात राज्य की तटरेखा सबसे लंबी है, जिसकी कुल लंबाई लगभग 1214.7 किलोमीटर है। गुजरात के बाद दूसरे स्थान पर आंध्र प्रदेश आता है। गुजरात की भौगोलिक स्थिति ऐसी है कि इसमें कच्छ और खंभात की खाड़ियां शामिल हैं, जिससे इसकी तटीय सीमा अत्यधिक घुमावदार और लंबी हो जाती है।"
             }
         ];
 
         const wrapper = document.getElementById('reels-wrapper');
         let activeTimers = {};
 
-        // रील कार्ड जनरेटर कोड (मार्जिन और गैप को पूरी तरह फिक्स किया गया है)
+        // रील कार्ड जनरेटर कोड (इसे फिक्स किया गया है ताकि हाइट्स सही रहें)
         function createQuestionReelHTML(item, index) {
             return `
-                <!-- [बदलाव] यहाँ justify-between हटाकर justify-start किया गया है ताकि फालतू वर्टिकल गैप खत्म हो जाए -->
-                <div id="reel-${index}" class="reel-section h-[100dvh] w-full px-4 pt-6 pb-[45px] flex flex-col justify-start border-b border-gray-900 bg-gradient-to-b from-gray-950 to-gray-900 relative" data-correct="${item.correct}" data-index="${index}">
+                <div id="reel-${index}" class="reel-section h-full w-full px-4 pt-4 pb-[20px] flex flex-col justify-between border-b border-gray-900 bg-gradient-to-b from-gray-950 to-gray-900 relative" data-correct="${item.correct}" data-index="${index}">
                     
-                    <!-- Top Bar: Timer & Number -->
-                    <div class="w-full shrink-0 pt-1">
+                    <div class="w-full shrink-0">
                         <div class="flex items-center justify-between text-xs text-gray-400 mb-1.5">
                             <span>सवाल नंबर: #0${index + 1}</span>
                             <span class="text-red-400 font-mono font-bold bg-red-950/40 border border-red-900/40 px-2.5 py-0.5 rounded-full flex items-center gap-1">
@@ -99,10 +95,9 @@
                         </div>
                     </div>
 
-                    <!-- Question & Options Block (mt-6 से सवाल और टाइमर बार में एक सटीक गैप बनेगा) -->
-                <div class="flex flex-col justify-start mt-6 relative">
+                    <div class="flex flex-col justify-start flex-1 mt-4 relative overflow-y-auto">
                         <div class="mb-3">
-                            <h2 class="text-base md:text-lg font-black text-white leading-snug tracking-wide mb-1">
+                            <h2 class="text-base font-black text-white leading-snug tracking-wide mb-1">
                                 ${item.q}
                             </h2>
                             <div class="text-right">
@@ -112,8 +107,7 @@
                             </div>
                         </div>
 
-                        <!-- 4 Options Grid (space-y-2 से ऑप्शंस का बीच का फालतू गैप एकदम खत्म हो गया है) -->
-                        <div class="space-y-2 options-group overflow-y-auto mt-2">
+                        <div class="space-y-2 options-group">
                             <button onclick="checkAnswer(this, 'A')" class="option-btn w-full text-left bg-gray-800/60 border border-gray-700 p-2.5 rounded-lg text-sm font-medium transition flex items-center space-x-3">
                                 <span class="badge bg-gray-700 text-white w-6 h-6 flex items-center justify-center rounded-lg text-xs font-bold shrink-0">A</span>
                                 <span>${item.a}</span>
@@ -133,19 +127,17 @@
                         </div>
                     </div>
 
-                    <!-- Bottom Safety & Social Area (mt-auto लगाने से यह हमेशा स्क्रीन के बॉटम में सही जगह पर लॉक रहेगा) -->
-                  <div class="pt-3 space-y-2 shrink-0 w-full z-10 mt-6">
-                        
-<div class="answer-box hidden w-full bg-green-950/30 p-2.5 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-2">                            <span class="text-green-400 font-black text-xs tracking-wide text-center sm:text-left">
-                                सही उत्तर: Option (${item.correct}) - प्रामाणिक सवाल।
+                    <div class="pt-3 space-y-2 shrink-0 w-full z-10">
+                        <div class="answer-box hidden w-full bg-green-950/30 p-2.5 rounded-xl flex flex-col items-center justify-between gap-2 border border-green-900/40">
+                            <span class="text-green-400 font-black text-xs tracking-wide text-center">
+                                सही उत्तर: Option (${item.correct})
                             </span>
-                            <button onclick="openExplanation(${index})" class="bg-green-600 hover:bg-green-700 text-white text-[11px] font-bold px-3 py-1 rounded-lg transition flex items-center gap-1 shrink-0 shadow-md">
+                            <button onclick="openExplanation(${index})" class="bg-green-600 hover:bg-green-700 text-white text-[11px] font-bold px-3 py-1.5 rounded-lg transition flex items-center gap-1 shrink-0 shadow-md w-full justify-center">
                                 <span>विस्तृत व्याख्या पढ़ें 📖</span>
                             </button>
                         </div>
 
-                        <!-- COMPACT INTERACTIONS BAR -->
-                        <div class="flex items-center justify-between text-xs text-gray-400 ">
+                        <div class="flex items-center justify-between text-xs text-gray-400">
                             <div class="flex items-center space-x-3 bg-gray-900/90 px-3 py-1.5 rounded-full border border-gray-800 shadow-md">
                                 <button onclick="toggleLike(this)" class="flex items-center space-x-1 font-bold hover:text-red-500 transition">
                                     <span>🤍</span> <span><span class="like-count">${item.likes}</span></span>
@@ -155,14 +147,10 @@
                                     <span>👁️</span> <span>${item.views}</span>
                                 </div>
                             </div>
-
-                            <div class="flex items-center space-x-2">
-                                <button onclick="reportQuestionError(${item.id})" class="bg-red-950/50 text-red-400 border border-red-900/60 hover:bg-red-900 hover:text-white font-bold px-3 py-1.5 rounded-full transition text-[11px] flex items-center space-x-1 shadow-sm">
-                                    <span>🚨</span> <span>रिपोर्ट करें</span>
-                                </button>
-                            </div>
+                            <button onclick="reportQuestionError(${item.id})" class="bg-red-950/50 text-red-400 border border-red-900/60 hover:bg-red-900 hover:text-white font-bold px-3 py-1.5 rounded-full transition text-[11px] flex items-center space-x-1 shadow-sm">
+                                <span>🚨</span> <span>रिपोर्ट</span>
+                            </button>
                         </div>
-
                     </div>
                 </div>
             `;
@@ -171,7 +159,7 @@
         // विज्ञापन ब्लॉक
         function createFullScreenAdHTML() {
             return `
-                <div class="reel-section h-[100dvh] w-full px-4 py-12 flex flex-col justify-between bg-gradient-to-b from-indigo-950 via-slate-900 to-indigo-950 border-b border-gray-900 text-center relative">
+                <div class="reel-section h-full w-full px-4 py-12 flex flex-col justify-between bg-gradient-to-b from-indigo-950 via-slate-900 to-indigo-950 border-b border-gray-900 text-center relative">
                     <span class="text-[10px] font-bold text-indigo-400 uppercase tracking-widest pt-1 block mb-4">Sponsored Advertisement</span>
                     <div class="my-auto space-y-4">
                         <div class="w-16 h-16 bg-blue-600 text-white text-2xl font-black flex items-center justify-center rounded-2xl mx-auto shadow-xl">AD</div>
@@ -202,7 +190,7 @@
         }
 
         function reportQuestionError(questionId) {
-            alert(`⚠️ कोर्ट केस सुरक्षा अलर्ट:\n\nसवाल संख्या #${questionId} की रिपोर्ट दर्ज कर ली गई है।`);
+            alert(`⚠️ अलर्ट:\n\nसवाल संख्या #${questionId} की रिपोर्ट दर्ज कर ली गई है।`);
         }
 
         function checkAnswer(selectedBtn, selectedOption) {
@@ -233,6 +221,9 @@
             const timerText = reelElement.querySelector('.timer-text');
             const timerBar = reelElement.querySelector('.timer-bar');
             if(activeTimers[index]) clearInterval(activeTimers[index]);
+            
+            timerBar.classList.remove('bg-red-500');
+            timerBar.classList.add('bg-blue-500');
             timerBar.style.width = '100%';
 
             activeTimers[index] = setInterval(() => {
