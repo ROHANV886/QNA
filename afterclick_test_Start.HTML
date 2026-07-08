@@ -91,7 +91,7 @@
                         <div class="flex items-center justify-between text-xs text-gray-400 mb-1.5">
                             <span>सवाल नंबर: #0${index + 1}</span>
                             <span class="text-red-400 font-mono font-bold bg-red-950/40 border border-red-900/40 px-2.5 py-0.5 rounded-full flex items-center gap-1">
-                                ⏱️ <span class="timer-text">15</span>s
+                                ⏱️ <span class="timer-text">30</span>s
                             </span>
                         </div>
                         <div class="w-full h-1.5 bg-gray-800 rounded-full overflow-hidden">
@@ -229,7 +229,7 @@
         }
 
         function startTimerForReel(reelElement, index) {
-            let timeLeft = 15;
+            let timeLeft = 30;
             const timerText = reelElement.querySelector('.timer-text');
             const timerBar = reelElement.querySelector('.timer-bar');
             if(activeTimers[index]) clearInterval(activeTimers[index]);
@@ -238,7 +238,7 @@
             activeTimers[index] = setInterval(() => {
                 timeLeft--;
                 if(timerText) timerText.innerText = timeLeft;
-                let percentage = (timeLeft / 15) * 100;
+                let percentage = (timeLeft / 30) * 100;
                 if(timerBar) timerBar.style.width = percentage + '%';
 
                 if (timeLeft <= 5 && timerBar) {
