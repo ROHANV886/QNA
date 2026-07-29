@@ -2,159 +2,129 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The QNA - Sign Up</title>
 
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-
-<style>
-body{
-    font-family:'Plus Jakarta Sans',sans-serif;
-    background:#0B0F19;
-}
-.glass{
-    background:rgba(255,255,255,.05);
-    backdrop-filter:blur(16px);
-    border:1px solid rgba(255,255,255,.08);
-}
-input{
-    outline:none;
-}
-</style>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/signup.css">
 
 </head>
-<body class="min-h-screen flex items-center justify-center p-5 text-white">
+<body>
 
-<div class="w-full max-w-md glass rounded-3xl p-8">
+<div class="signup-card">
 
-<div class="text-center">
-<div class="w-16 h-16 rounded-2xl bg-blue-600 flex items-center justify-center mx-auto text-3xl font-black">
-Q
-</div>
+    <div class="header-box">
+        <div class="logo-avatar">Q</div>
+        <h1 class="app-title">The QNA</h1>
+        <p class="app-subtitle">Create your account</p>
+    </div>
 
-<h1 class="text-3xl font-extrabold mt-5">The QNA</h1>
-<p class="text-gray-400 mt-2">Create your account</p>
-</div>
+    <div class="form-group">
+        <input
+            id="name"
+            class="custom-input"
+            placeholder="Full Name"
+            autocomplete="name">
 
-<div class="space-y-4 mt-8">
+        <input
+            id="email"
+            type="email"
+            class="custom-input"
+            placeholder="Email"
+            autocomplete="email">
 
-<input
-id="name"
-class="w-full bg-[#111827] rounded-xl px-4 py-3"
-placeholder="Full Name">
+        <input
+            id="phone"
+            type="tel"
+            maxlength="10"
+            class="custom-input"
+            placeholder="Mobile Number"
+            autocomplete="tel">
+    </div>
 
-<input
-id="email"
-type="email"
-class="w-full bg-[#111827] rounded-xl px-4 py-3"
-placeholder="Email">
+    <button id="continueBtn" class="btn-primary">
+        Continue
+    </button>
 
-<input
-id="phone"
-maxlength="10"
-class="w-full bg-[#111827] rounded-xl px-4 py-3"
-placeholder="Mobile Number">
+    <div class="divider-box">
+        <div class="divider-line"></div>
+        <span class="divider-text">OR</span>
+        <div class="divider-line"></div>
+    </div>
 
-</div>
-
-<button
-id="continueBtn"
-class="w-full mt-4 bg-blue-600 hover:bg-blue-500 rounded-xl py-3 font-bold transition hover:scale-[1.02]">
-
-Continue
-
-</button>
-
-<div class="flex items-center gap-3 my-6">
-<div class="h-px flex-1 bg-white/10"></div>
-<span class="text-xs text-gray-400">OR</span>
-<div class="h-px flex-1 bg-white/10"></div>
-</div>
-
-<button
-id="googleBtn"
-class="w-full bg-white text-black rounded-xl py-3 font-bold transition hover:scale-[1.02]">
-
-Continue with Google
-
-</button>
+    <button id="googleBtn" class="btn-google">
+        Continue with Google
+    </button>
 
 </div>
 
 <script>
-
-// Already Logged In
+// Already Logged In Check
 if(localStorage.getItem("user")){
-    location.href="index.html";
+    location.href = "index.html";
 }
 
 // Signup / Login Function
 function loginUser(){
 
-const name=document.getElementById("name").value.trim();
-const email=document.getElementById("email").value.trim();
-const phone=document.getElementById("phone").value.trim();
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const phone = document.getElementById("phone").value.trim();
 
-if(!name || !email || !phone){
-    alert("Please fill all fields.");
-    return;
-}
+    if(!name || !email || !phone){
+        alert("Please fill all fields.");
+        return;
+    }
 
-const user={
-    id:Date.now(),
-    name:name,
-    email:email,
-    phone:phone,
-    photo:"https://api.dicebear.com/7.x/avataaars/svg?seed="+encodeURIComponent(name),
-    rank:"#142",
-    accuracy:"86%",
-    tests:"24"
-};
+    const user = {
+        id: Date.now(),
+        name: name,
+        email: email,
+        phone: phone,
+        photo: "https://api.dicebear.com/7.x/avataaars/svg?seed=" + encodeURIComponent(name),
+        rank: "#142",
+        accuracy: "86%",
+        tests: "24"
+    };
 
-// Get Existing Users
-let users=JSON.parse(localStorage.getItem("users")) || [];
+    // Get Existing Users
+    let users = JSON.parse(localStorage.getItem("users")) || [];
 
-// Check Existing Email
-const existingUser=users.find(u=>u.email===email);
+    // Check Existing Email
+    const existingUser = users.find(u => u.email === email);
 
-if(existingUser){
+    if(existingUser){
+        // Login
+        localStorage.setItem("user", JSON.stringify(existingUser));
+    } else {
+        // Signup
+        users.push(user);
+        localStorage.setItem("users", JSON.stringify(users));
+        localStorage.setItem("user", JSON.stringify(user));
+    }
 
-    // Login
-    localStorage.setItem("user",JSON.stringify(existingUser));
+    // Disable Buttons during submission
+    const contBtn = document.getElementById("continueBtn");
+    const googBtn = document.getElementById("googleBtn");
 
-}else{
+    contBtn.disabled = true;
+    googBtn.disabled = true;
 
-    // Signup
-    users.push(user);
+    contBtn.innerHTML = "Signing In...";
+    googBtn.innerHTML = "Signing In...";
 
-    localStorage.setItem("users",JSON.stringify(users));
-
-    localStorage.setItem("user",JSON.stringify(user));
-
-}
-
-// Disable Buttons
-document.getElementById("continueBtn").disabled=true;
-document.getElementById("googleBtn").disabled=true;
-
-document.getElementById("continueBtn").innerHTML="Signing In...";
-document.getElementById("googleBtn").innerHTML="Signing In...";
-
-setTimeout(()=>{
-
-location.href="profile.html";
-
-},1000);
+    setTimeout(() => {
+        location.href = "profile.html";
+    }, 1000);
 
 }
 
-// Continue Button
-document.getElementById("continueBtn").onclick=loginUser;
+// Continue Button Event
+document.getElementById("continueBtn").onclick = loginUser;
 
-// Google Button (Temporary)
-document.getElementById("googleBtn").onclick=loginUser;
-
+// Google Button Event (Temporary)
+document.getElementById("googleBtn").onclick = loginUser;
 </script>
 
 </body>

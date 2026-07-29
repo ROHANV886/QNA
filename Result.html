@@ -2,60 +2,84 @@
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The QNA - विस्तृत रिजल्ट रिपोर्ट</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts & Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/Result.css">
+
 </head>
-<body class="bg-gray-900 text-white font-sans p-4">
+<body>
 
     <!-- रिजल्ट और रिपोर्ट सेक्शन -->
-    <div id="result-box" class="max-w-3xl mx-auto mt-10 bg-gray-800 p-8 rounded-3xl border border-gray-700 shadow-2xl">
+    <div id="result-box" class="result-container">
         
-        <!-- स्टूडेंट प्रोफाइल (जो आपने माँगा था) -->
-        <div id="student-profile" class="mb-8 p-6 bg-gray-900 rounded-2xl border border-gray-700">
-            <h1 class="text-3xl font-black text-blue-400 text-center mb-2">आपका विस्तृत रिजल्ट</h1>
-            <div class="flex justify-between items-center text-lg font-bold mt-4">
-                <p>नाम: <span id="display-name" class="text-white">विजय</span></p>
-                <p>पता: <span id="display-address" class="text-white">सनौली</span></p>
+        <!-- स्टूडेंट प्रोफाइल -->
+        <div id="student-profile" class="student-profile-card">
+            <h1 class="profile-title">आपका विस्तृत रिजल्ट</h1>
+            <div class="profile-info">
+                <p>नाम: <span id="display-name" class="info-value">विजय</span></p>
+                <p>पता: <span id="display-address" class="info-value">सनौली</span></p>
             </div>
         </div>
         
         <!-- Stats Grid -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            <div class="bg-gray-700 p-4 rounded-xl text-center"><p class="text-xs text-gray-400">सही</p><p class="text-xl font-black text-green-400" id="stat-correct">50</p></div>
-            <div class="bg-gray-700 p-4 rounded-xl text-center"><p class="text-xs text-gray-400">गलत</p><p class="text-xl font-black text-red-400" id="stat-wrong">0</p></div>
-            <div class="bg-gray-700 p-4 rounded-xl text-center"><p class="text-xs text-gray-400">कुल समय</p><p class="text-xl font-black" id="stat-time">30m</p></div>
-            <div class="bg-gray-700 p-4 rounded-xl text-center"><p class="text-xs text-gray-400">औसत/प्रश्न</p><p class="text-xl font-black" id="stat-avg">0.6s</p></div>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <p class="stat-label">सही</p>
+                <p class="stat-number text-green" id="stat-correct">50</p>
+            </div>
+            <div class="stat-card">
+                <p class="stat-label">गलत</p>
+                <p class="stat-number text-red" id="stat-wrong">0</p>
+            </div>
+            <div class="stat-card">
+                <p class="stat-label">कुल समय</p>
+                <p class="stat-number" id="stat-time">30m</p>
+            </div>
+            <div class="stat-card">
+                <p class="stat-label">औसत/प्रश्न</p>
+                <p class="stat-number" id="stat-avg">0.6s</p>
+            </div>
         </div>
 
         <!-- विस्तृत व्याख्या (Context Analysis) -->
-        <div id="analysis-box" class="space-y-4">
+        <div id="analysis-box" class="analysis-container">
             <!-- यहाँ JS से 50 प्रश्नों का डेटा लोड होगा -->
         </div>
 
-        <div class="mt-10 text-center">
-            <button onclick="window.print()" class="bg-blue-600 px-8 py-3 rounded-full font-bold hover:bg-blue-700 transition">रिजल्ट सबमिट और शेयर करें</button>
+        <!-- शेयर एवं सबमिट बटन -->
+        <div class="action-box">
+            <button onclick="window.print()" class="submit-btn">
+                <i class="fa-solid fa-print" style="margin-right: 8px;"></i>रिजल्ट सबमिट और शेयर करें
+            </button>
         </div>
     </div>
 
+    <!-- JavaScript logic -->
     <script>
         const questions = [
             {q: "भारतीय संविधान का जनक कौन है?", context: "डॉ. बी.आर. अम्बेडकर प्रारूप समिति के अध्यक्ष थे, इसलिए उन्हें जनक कहा जाता है।"},
             {q: "भारत का प्रथम गवर्नर जनरल?", context: "लॉर्ड विलियम बेंटिक 1833 में भारत के प्रथम गवर्नर जनरल बने।"},
-            {q: "सबसे लंबा तटरेखा वाला राज्य?", context: "गुजरात की तटरेखा सबसे लंबी (लगभग 1214 किमी) है।"},
-            // ... अन्य प्रश्न यहाँ हैं
+            {q: "सबसे लंबा तटरेखा वाला राज्य?", context: "गुजरात की तटरेखा सबसे लंबी (लगभग 1214 किमी) है।"}
         ];
 
-        // 50 प्रश्नों तक लूप
-        for(let i=4; i<=50; i++) {
-            questions.push({q: `प्रश्न संख्या ${i} यहाँ है?`, context: "यह एक अभ्यास प्रश्न है जिसका सही विकल्प A है।"});
+        // 50 प्रश्नों तक का लूप
+        for(let i = 4; i <= 50; i++) {
+            questions.push({
+                q: `प्रश्न संख्या ${i} यहाँ है?`, 
+                context: "यह एक अभ्यास प्रश्न है जिसका सही विकल्प A है।"
+            });
         }
 
         // रिजल्ट दिखाने का फंक्शन
         function displayResults() {
             let analysis = questions.map((q, i) => `
-                <div class="p-4 bg-gray-700 rounded-xl border-l-4 border-blue-500">
-                    <p class="font-bold">प्रश्न ${i+1}: ${q.q}</p>
-                    <p class="text-sm text-blue-300 mt-1">संदर्भ: ${q.context}</p>
+                <div class="question-card">
+                    <p class="question-title">प्रश्न ${i+1}: ${q.q}</p>
+                    <p class="question-context">संदर्भ: ${q.context}</p>
                 </div>
             `).join('');
             document.getElementById('analysis-box').innerHTML = analysis;

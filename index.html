@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="hi" class="h-full">
+<html lang="hi">
 
 <head>
     <meta charset="UTF-8">
@@ -12,335 +12,272 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/index.css">
 
-    <style>
-        :root {
-            --bg-dark: #0B0F19;
-            --card-bg: #131B2C;
-            --accent: #3B82F6;
-            --border: rgba(255, 255, 255, 0.06);
-        }
-
-        body {
-            background-color: var(--bg-dark);
-            color: #F8FAFC;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            -webkit-tap-highlight-color: transparent;
-            overscroll-behavior-y: none;
-        }
-
-        .pro-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-        }
-
-        .glass-nav {
-            background: rgba(11, 15, 25, 0.85);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border-top: 1px solid var(--border);
-        }
-
-        .pro-fab {
-            background: linear-gradient(135deg, #2563EB, #06B6D4);
-            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.5);
-            transition: transform 0.2s ease;
-        }
-
-        .pro-fab:active {
-            transform: scale(0.92);
-        }
-
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-
-        .pb-safe {
-            padding-bottom: env(safe-area-inset-bottom, 20px);
-        }
-    </style>
 </head>
 
-<body class="h-full flex flex-col overflow-hidden">
+<body>
 
     <!-- === 1. टॉप हेडर === -->
-    <header class="w-full fixed top-0 z-50 bg-[#0B0F19]/90 backdrop-blur-md border-b border-white/5">
-        <div class="max-w-md mx-auto px-5 py-4 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-                <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-black text-sm">
-                    Q
-                </div>
-                <h1 class="text-xl font-black text-white tracking-wide">The <span class="text-blue-500">QNA</span></h1>
+    <header>
+        <div class="app-container header-inner">
+            <div class="logo-box">
+                <div class="logo-icon">Q</div>
+                <h1 class="logo-title">The <span>QNA</span></h1>
             </div>
-            <div class="flex items-center gap-3">
-                <button class="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-gray-400 active:scale-95 transition">
-                    <i class="fa-solid fa-magnifying-glass text-sm"></i>
+            <div class="header-actions">
+                <button aria-label="Search" class="icon-btn">
+                    <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
-                <button class="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-gray-400 relative active:scale-95 transition">
-                    <i class="fa-regular fa-bell text-sm"></i>
-                    <span class="absolute top-2 right-2 w-1.5 h-1.5 bg-red-500 rounded-full"></span>
+                <button aria-label="Notifications" class="icon-btn">
+                    <i class="fa-regular fa-bell"></i>
+                    <span class="notification-dot"></span>
                 </button>
             </div>
         </div>
     </header>
 
     <!-- === 2. मुख्य होमपेज कंटेंट === -->
-    <main class="flex-1 overflow-y-auto w-full max-w-md mx-auto pt-24 pb-28 px-5 space-y-7 scroll-smooth no-scrollbar">
+    <main class="app-container no-scrollbar">
 
         <!-- हीरो बैनर -->
-        <div class="w-full bg-gradient-to-r from-blue-700 to-indigo-600 rounded-[24px] py-3 px-4 relative overflow-hidden shadow-lg">
-            <i class="fa-solid fa-bolt text-6xl text-white/10 absolute -right-2 -bottom-2 rotate-12"></i>
-            <div class="relative z-10 w-2/3">
-                <span class="bg-white/20 text-white text-[9px] font-bold px-2 py-1 rounded-md uppercase tracking-wider backdrop-blur-sm">
-                    Premium Pass
-                </span>
-                <h2 class="text-lg font-black text-white mt-2 leading-snug">
-                    सभी 1000+ मॉक टेस्ट करें अनलॉक
-                </h2>
-                <p class="text-[11px] text-blue-100 mt-1">
-                    प्रथम माह मात्र ₹1 में
-                </p>
-                <a href="./upi.html">
-                    <button class="mt-3 bg-white text-blue-700 text-xs font-bold py-2 px-4 rounded-xl shadow-md active:scale-95 transition">
-                        Get Pass Now
-                    </button>
+        <div class="hero-banner">
+            <i class="fa-solid fa-bolt banner-bg-icon"></i>
+            <div class="banner-content">
+                <span class="badge-pill">Premium Pass</span>
+                <h2 class="banner-title">सभी 1000+ मॉक टेस्ट करें अनलॉक</h2>
+                <p class="banner-sub">प्रथम माह मात्र ₹1 में</p>
+                <a href="./upi.html" style="display: inline-block;">
+                    <button class="btn-banner">Get Pass Now</button>
                 </a>
             </div>
         </div>
 
-        <!-- कैटेगरीज और शेयर सेक्शन कंटेनर -->
-        <div class="space-y-6">
+        <div class="section-gap">
 
             <!-- सब्जेक्ट्स सेक्शन -->
             <div>
-                <div class="flex justify-between items-center mb-3.5">
-                    <h3 class="text-sm font-bold text-white tracking-wide">Select Subject</h3>
-                    <a href="./GK_catogery.html" class="text-[10px] text-blue-400 font-bold uppercase hover:underline">
-                        Test category
-                    </a>
+                <div class="section-header">
+                    <h3 class="section-title">Select Subject</h3>
+                    <a href="./GK_catogery.html" class="section-link">Test category</a>
                 </div>
 
-                <div class="flex gap-3 overflow-x-auto scrollbar-hide pb-2 snap-x snap-mandatory">
+                <div class="scroll-row no-scrollbar">
                     <!-- History -->
-                    <a href="./PWA_feed8.html" class="flex-shrink-0 w-[72px] flex flex-col items-center gap-2 snap-start">
-                        <div class="w-14 h-14 pro-card flex items-center justify-center text-amber-500 text-xl active:scale-95 transition">
+                    <a href="./PWA_feed8.html" class="item-card">
+                        <div class="pro-card icon-card c-amber">
                             <i class="fa-solid fa-landmark"></i>
                         </div>
-                        <span class="text-[10px] text-gray-300 font-semibold text-center">History</span>
+                        <span class="item-label">History</span>
                     </a>
 
                     <!-- Geography -->
-                    <a href="./PWA_feed8.html" class="flex-shrink-0 w-[72px] flex flex-col items-center gap-2 snap-start">
-                        <div class="w-14 h-14 pro-card flex items-center justify-center text-emerald-500 text-xl active:scale-95 transition">
+                    <a href="./PWA_feed8.html" class="item-card">
+                        <div class="pro-card icon-card c-emerald">
                             <i class="fa-solid fa-earth-asia"></i>
                         </div>
-                        <span class="text-[10px] text-gray-300 font-semibold text-center">Geography</span>
+                        <span class="item-label">Geography</span>
                     </a>
 
                     <!-- Constitution -->
-                    <a href="./PWA_feed8.html" class="flex-shrink-0 w-[72px] flex flex-col items-center gap-2 snap-start">
-                        <div class="w-14 h-14 pro-card flex items-center justify-center text-cyan-400 text-xl active:scale-95 transition">
+                    <a href="./PWA_feed8.html" class="item-card">
+                        <div class="pro-card icon-card c-cyan">
                             <i class="fa-solid fa-scale-balanced"></i>
                         </div>
-                        <span class="text-[10px] text-gray-300 font-semibold text-center">Constitution</span>
+                        <span class="item-label">Constitution</span>
                     </a>
 
                     <!-- Science -->
-                    <a href="./PWA_feed8.html" class="flex-shrink-0 w-[72px] flex flex-col items-center gap-2 snap-start">
-                        <div class="w-14 h-14 pro-card flex items-center justify-center text-purple-400 text-xl active:scale-95 transition">
+                    <a href="./PWA_feed8.html" class="item-card">
+                        <div class="pro-card icon-card c-purple">
                             <i class="fa-solid fa-flask"></i>
                         </div>
-                        <span class="text-[10px] text-gray-300 font-semibold text-center">Science</span>
+                        <span class="item-label">Science</span>
                     </a>
 
                     <!-- Physics -->
-                    <a href="./PWA_feed8.html" class="flex-shrink-0 w-[72px] flex flex-col items-center gap-2 snap-start">
-                        <div class="w-14 h-14 pro-card flex items-center justify-center text-violet-400 text-xl active:scale-95 transition">
+                    <a href="./PWA_feed8.html" class="item-card">
+                        <div class="pro-card icon-card c-violet">
                             <i class="fa-solid fa-magnet"></i>
                         </div>
-                        <span class="text-[10px] text-gray-300 font-semibold text-center">Physics</span>
+                        <span class="item-label">Physics</span>
                     </a>
 
                     <!-- Chemistry -->
-                    <a href="./PWA_feed8.html" class="flex-shrink-0 w-[72px] flex flex-col items-center gap-2 snap-start">
-                        <div class="w-14 h-14 pro-card flex items-center justify-center text-sky-400 text-xl active:scale-95 transition">
+                    <a href="./PWA_feed8.html" class="item-card">
+                        <div class="pro-card icon-card c-sky">
                             <i class="fa-solid fa-vial"></i>
                         </div>
-                        <span class="text-[10px] text-gray-300 font-semibold text-center">Chemistry</span>
+                        <span class="item-label">Chemistry</span>
                     </a>
 
                     <!-- Biology -->
-                    <a href="./PWA_feed8.html" class="flex-shrink-0 w-[72px] flex flex-col items-center gap-2 snap-start">
-                        <div class="w-14 h-14 pro-card flex items-center justify-center text-rose-400 text-xl active:scale-95 transition">
+                    <a href="./PWA_feed8.html" class="item-card">
+                        <div class="pro-card icon-card c-rose">
                             <i class="fa-solid fa-dna"></i>
                         </div>
-                        <span class="text-[10px] text-gray-300 font-semibold text-center">Biology</span>
+                        <span class="item-label">Biology</span>
                     </a>
 
                     <!-- Economics -->
-                    <a href="./PWA_feed8.html" class="flex-shrink-0 w-[72px] flex flex-col items-center gap-2 snap-start">
-                        <div class="w-14 h-14 pro-card flex items-center justify-center text-green-400 text-xl active:scale-95 transition">
+                    <a href="./PWA_feed8.html" class="item-card">
+                        <div class="pro-card icon-card c-green">
                             <i class="fa-solid fa-chart-line"></i>
                         </div>
-                        <span class="text-[10px] text-gray-300 font-semibold text-center">Economics</span>
+                        <span class="item-label">Economics</span>
                     </a>
 
                     <!-- Current Affairs -->
-                    <a href="./PWA_feed8.html" class="flex-shrink-0 w-[72px] flex flex-col items-center gap-2 snap-start">
-                        <div class="w-14 h-14 pro-card flex items-center justify-center text-orange-400 text-xl active:scale-95 transition">
+                    <a href="./PWA_feed8.html" class="item-card">
+                        <div class="pro-card icon-card c-orange">
                             <i class="fa-solid fa-newspaper"></i>
                         </div>
-                        <span class="text-[10px] text-gray-300 font-semibold text-center">Current Affairs</span>
+                        <span class="item-label">Current Affairs</span>
                     </a>
 
                     <!-- Computer -->
-                    <a href="./PWA_feed8.html" class="flex-shrink-0 w-[72px] flex flex-col items-center gap-2 snap-start">
-                        <div class="w-14 h-14 pro-card flex items-center justify-center text-indigo-400 text-xl active:scale-95 transition">
+                    <a href="./PWA_feed8.html" class="item-card">
+                        <div class="pro-card icon-card c-indigo">
                             <i class="fa-solid fa-computer"></i>
                         </div>
-                        <span class="text-[10px] text-gray-300 font-semibold text-center">Computer</span>
+                        <span class="item-label">Computer</span>
                     </a>
 
                     <!-- Static GK -->
-                    <a href="./PWA_feed8.html" class="flex-shrink-0 w-[72px] flex flex-col items-center gap-2 snap-start">
-                        <div class="w-14 h-14 pro-card flex items-center justify-center text-pink-400 text-xl active:scale-95 transition">
+                    <a href="./PWA_feed8.html" class="item-card">
+                        <div class="pro-card icon-card c-pink">
                             <i class="fa-solid fa-thumbtack"></i>
                         </div>
-                        <span class="text-[10px] text-gray-300 font-semibold text-center">Static GK</span>
+                        <span class="item-label">Static GK</span>
                     </a>
                 </div>
             </div>
 
-            <!-- शेयर अप्प सेक्शन (Added Title Here) -->
-           <!-- शेयर अप्प सेक्शन -->
-<div>
-    <h3 class="text-sm font-bold text-white tracking-wide mb-3.5">Follow us on social media</h3>
-    <div class="flex gap-3 overflow-x-auto scrollbar-hide pb-2 snap-x snap-mandatory">
-           <a href="https://www.youtube.com/" target="_blank" class="flex-shrink-0 w-[72px] flex flex-col items-center gap-2 snap-start">
-    <div class="w-14 h-14 pro-card flex items-center justify-center text-red-600 text-xl active:scale-95 transition">
-        <i class="fa-brands fa-youtube"></i>
-    </div>
-    <span class="text-[10px] text-gray-300 font-semibold text-center">YouTube</span>
-</a>
-        <!-- WhatsApp (Direct Share text ke sath) -->
-        <a href="https://api.whatsapp.com/send?text=Hey!%20Check%20out%20The%20QNA%20App%20for%20amazing%20mock%20tests%20and%20daily%20current%20affairs:%20https://theqna.in" target="_blank" class="flex-shrink-0 w-[72px] flex flex-col items-center gap-2 snap-start">
-            <div class="w-14 h-14 pro-card flex items-center justify-center text-emerald-500 text-xl active:scale-95 transition">
-                <i class="fa-brands fa-whatsapp"></i>
+            <!-- सोशल मीडिया सेक्शन -->
+            <div>
+                <h3 class="section-title" style="margin-bottom: 14px;">Follow us on social media</h3>
+                <div class="scroll-row no-scrollbar">
+                    <!-- YouTube -->
+                    <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" class="item-card">
+                        <div class="pro-card icon-card c-youtube">
+                            <i class="fa-brands fa-youtube"></i>
+                        </div>
+                        <span class="item-label">YouTube</span>
+                    </a>
+
+                    <!-- WhatsApp -->
+                    <a href="https://api.whatsapp.com/send?text=Hey!%20Check%20out%20The%20QNA%20App%20for%20amazing%20mock%20tests%20and%20daily%20current%20affairs:%20https://theqna.in"
+                        target="_blank" rel="noopener noreferrer" class="item-card">
+                        <div class="pro-card icon-card c-emerald">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </div>
+                        <span class="item-label">WhatsApp</span>
+                    </a>
+
+                    <!-- Instagram -->
+                    <a href="https://instagram.com/theqna_official" target="_blank" rel="noopener noreferrer" class="item-card">
+                        <div class="pro-card icon-card c-pink">
+                            <i class="fa-brands fa-instagram"></i>
+                        </div>
+                        <span class="item-label">Instagram</span>
+                    </a>
+
+                    <!-- Facebook -->
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://theqna.in" target="_blank"
+                        rel="noopener noreferrer" class="item-card">
+                        <div class="pro-card icon-card c-facebook">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </div>
+                        <span class="item-label">Facebook</span>
+                    </a>
+
+                    <!-- Telegram -->
+                    <a href="https://t.me/YourChannelName" target="_blank" rel="noopener noreferrer" class="item-card">
+                        <div class="pro-card icon-card c-sky">
+                            <i class="fa-brands fa-telegram"></i>
+                        </div>
+                        <span class="item-label">Telegram</span>
+                    </a>
+                </div>
             </div>
-            <span class="text-[10px] text-gray-300 font-semibold text-center">WhatsApp</span>
-        </a>
 
-        <!-- Instagram (Profile ya Custom Link par bhejne ke liye) -->
-        <a href="https://instagram.com/theqna_official" target="_blank" class="flex-shrink-0 w-[72px] flex flex-col items-center gap-2 snap-start">
-            <div class="w-14 h-14 pro-card flex items-center justify-center text-pink-500 text-xl active:scale-95 transition">
-                <i class="fa-brands fa-instagram"></i>
-            </div>
-            <span class="text-[10px] text-gray-300 font-semibold text-center">Instagram</span>
-        </a>
+            <!-- ट्रेंडिंग टेस्ट सीरीज़ -->
+            <div>
+                <h3 class="section-title" style="margin-bottom: 14px;">Trending Test Series</h3>
+                <div class="test-list">
 
-        <!-- Facebook (App Link share karne ke liye) -->
-        <a href="https://www.facebook.com/sharer/sharer.php?u=https://theqna.in" target="_blank" class="flex-shrink-0 w-[72px] flex flex-col items-center gap-2 snap-start">
-            <div class="w-14 h-14 pro-card flex items-center justify-center text-blue-600 text-xl active:scale-95 transition">
-                <i class="fa-brands fa-facebook-f"></i>
-            </div>
-            <span class="text-[10px] text-gray-300 font-semibold text-center">Facebook</span>
-        </a>
-
-        <!-- Telegram (Direct Channel/Group ya Share Text link) -->
-   <a href="https://t.me/YourChannelName" target="_blank" class="flex-shrink-0 w-[72px] flex flex-col items-center gap-2 snap-start">
-    <div class="w-14 h-14 pro-card flex items-center justify-center text-sky-500 text-xl active:scale-95 transition">
-        <i class="fa-brands fa-telegram"></i>
-    </div>
-    <span class="text-[10px] text-gray-300 font-semibold text-center">Telegram</span>
-</a>
-    </div>
-</div>
-
-        </div>
-
-        <!-- ट्रेंडिंग टेस्ट सीरीज़ -->
-        <div>
-            <h3 class="text-sm font-bold text-white tracking-wide mb-3.5">Trending Test Series</h3>
-            <div class="space-y-3">
-                
-                <!-- 1. लाइव टेस्ट -->
-                <div class="pro-card p-3.5 flex items-center gap-4 active:bg-white/5 transition">
-                    <div class="w-12 h-12 bg-blue-500/10 rounded-xl flex items-center justify-center text-blue-500 text-lg shrink-0">
-                        <i class="fa-solid fa-file-lines"></i>
-                    </div>
-                    <div class="flex-1">
-                        <a href="./homeage.html">
-                            <div class="flex justify-between items-start">
-                                <h4 class="text-xs font-bold text-white mb-1">डेली करेंट अफेयर्स 2026</h4>
-                                <span class="bg-green-500/20 text-green-400 text-[8px] font-bold px-1.5 py-0.5 rounded uppercase">Live</span>
+                    <!-- 1. लाइव टेस्ट -->
+                    <a href="./homeage.html" class="pro-card test-card">
+                        <div class="test-icon-box bg-blue-subtle">
+                            <i class="fa-solid fa-file-lines"></i>
+                        </div>
+                        <div class="test-details">
+                            <div class="test-header-row">
+                                <h4 class="test-title">डेली करेंट अफेयर्स 2026</h4>
+                                <span class="badge-live">Live</span>
                             </div>
-                        </a>
-                        <p class="text-[10px] text-gray-500 font-medium">50 Questions • 45 Mins</p>
-                    </div>
-                </div>
-
-                <!-- 2. लॉक्ड टेस्ट सीरीज -->
-                <div class="pro-card p-3.5 flex items-center gap-4 transition cursor-pointer group hover:bg-white/[0.03]">
-                    <div class="w-12 h-12 bg-amber-500/10 rounded-xl flex items-center justify-center text-amber-500 text-lg shrink-0">
-                        <i class="fa-solid fa-monument"></i>
-                    </div>
-                    <div class="flex-1 flex justify-between items-center">
-                        <div>
-                            <h4 class="text-xs font-bold text-white mb-1">आधुनिक भारत का उदय</h4>
-                            <p class="text-[10px] text-gray-500 font-medium">100 Questions • 90 Mins</p>
+                            <p class="test-meta">50 Questions • 45 Mins</p>
                         </div>
-                        
-                        <!-- राइट साइड एक्शन एरिया -->
-                        <div class="flex items-center justify-end">
-                            <i class="fa-solid fa-lock text-gray-600 text-xs block group-hover:hidden"></i>
-                            <a href="./upi.html" class="hidden group-hover:block">
-                                <button class="bg-blue-600 hover:bg-blue-500 text-white text-[10px] font-bold py-1.5 px-3 rounded-lg shadow-md active:scale-95 transition">
-                                    Unlock
-                                </button>
-                            </a>
+                    </a>
+
+                    <!-- 2. लॉक्ड टेस्ट सीरीज -->
+                    <div class="pro-card test-card">
+                        <div class="test-icon-box bg-amber-subtle">
+                            <i class="fa-solid fa-monument"></i>
+                        </div>
+                        <div class="test-details" style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <h4 class="test-title">आधुनिक भारत का उदय</h4>
+                                <p class="test-meta">100 Questions • 90 Mins</p>
+                            </div>
+
+                            <div>
+                                <i class="fa-solid fa-lock group-lock-icon" style="color: var(--text-muted); font-size: 12px;"></i>
+                                <a href="./upi.html" class="group-hover-btn">
+                                    <button class="btn-unlock">Unlock</button>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
 
+                </div>
             </div>
+
         </div>
     </main>
 
     <!-- === 3. बॉटम नेविगेशन बार === -->
-    <nav class="fixed bottom-0 w-full glass-nav z-[100] pb-safe pt-2">
-        <div class="max-w-md mx-auto flex justify-between items-center px-6 pb-2 relative">
-            <a href="./index.html" class="flex flex-col items-center gap-1 w-12 text-blue-500">
-                <i class="fa-solid fa-house text-lg"></i>
-                <span class="text-[9px] font-bold uppercase tracking-wider">Home</span>
-                <div class="w-1 h-1 bg-blue-500 rounded-full mt-0.5 shadow-[0_0_8px_#3B82F6]"></div>
+    <nav>
+        <div class="app-container nav-inner">
+            <a href="./index.html" class="nav-item active">
+                <i class="fa-solid fa-house"></i>
+                <span class="nav-label" style="font-weight: 700;">Home</span>
+                <div class="active-dot"></div>
             </a>
-            <a href="./PWA_feed8.html" class="flex flex-col items-center gap-1 w-12 text-gray-500 hover:text-gray-300 transition mt-1.5">
-                <i class="fa-solid fa-bolt text-lg"></i>
-                <span class="text-[9px] font-semibold uppercase tracking-wider">Feed</span>
+
+            <a href="./PWA_feed8.html" class="nav-item">
+                <i class="fa-solid fa-bolt"></i>
+                <span class="nav-label">Feed</span>
             </a>
- <div class="relative w-16 flex justify-center">
-    <a href="./add-question2.html"
-       class="absolute -bottom-6 w-14 h-14 pro-fab rounded-[20px] flex items-center justify-center text-white text-xl z-50">
-        <i class="fa-solid fa-plus"></i>
-    </a>
-</div>
-            <a href="./Click_catogery_catogeyrHomepage.html" class="flex flex-col items-center gap-1 w-12 text-gray-500 hover:text-gray-300 transition mt-1.5">
-                <i class="fa-solid fa-layer-group text-lg"></i>
-                <span class="text-[9px] font-semibold uppercase tracking-wider">Test</span>
+
+            <div class="fab-wrapper">
+                <a href="./add-question2.html" aria-label="Add Question" class="pro-fab">
+                    <i class="fa-solid fa-plus"></i>
+                </a>
+            </div>
+
+            <a href="./Click_catogery_catogeyrHomepage.html" class="nav-item">
+                <i class="fa-solid fa-layer-group"></i>
+                <span class="nav-label">Test</span>
             </a>
-            <a href="#" onclick="openProfile()" class="flex flex-col items-center gap-1 w-12 text-gray-500 hover:text-gray-300 transition mt-1.5">
-                <i class="fa-regular fa-user text-lg"></i>
-                <span class="text-[9px] font-semibold uppercase tracking-wider">Me</span>
+
+            <a href="#" onclick="openProfile()" class="nav-item">
+                <i class="fa-regular fa-user"></i>
+                <span class="nav-label">Me</span>
             </a>
         </div>
     </nav>

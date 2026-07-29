@@ -1,0 +1,200 @@
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #111827;
+            color: #ffffff;
+            padding: 16px;
+            min-height: 100vh;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        button {
+            border: none;
+            outline: none;
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        /* === 2. मुख्य कंटेनर === */
+        .result-container {
+            max-width: 768px;
+            margin: 40px auto 0 auto;
+            background-color: #1f2937;
+            padding: 32px;
+            border-radius: 24px;
+            border: 1px solid #374151;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        /* === 3. स्टूडेंट प्रोफाइल === */
+        .student-profile-card {
+            margin-bottom: 32px;
+            padding: 24px;
+            background-color: #111827;
+            border-radius: 16px;
+            border: 1px solid #374151;
+        }
+
+        .profile-title {
+            font-size: 28px;
+            font-weight: 900;
+            color: #60a5fa;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .profile-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 18px;
+            font-weight: 700;
+            margin-top: 16px;
+        }
+
+        .info-value {
+            color: #ffffff;
+        }
+
+        /* === 4. स्टैट्स ग्रिड === */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        @media (min-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .stat-card {
+            background-color: #374151;
+            padding: 16px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #9ca3af;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .stat-number {
+            font-size: 20px;
+            font-weight: 900;
+        }
+
+        .text-green { color: #4ade80; }
+        .text-red { color: #f87171; }
+
+        /* === 5. प्रश्न विश्लेषण सूची === */
+        .analysis-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .question-card {
+            padding: 16px;
+            background-color: #374151;
+            border-radius: 12px;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .question-title {
+            font-weight: 700;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        .question-context {
+            font-size: 14px;
+            color: #93c5fd;
+            margin-top: 6px;
+            line-height: 1.4;
+        }
+
+        /* === 6. शेयर व प्रिंट बटन === */
+        .action-box {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .submit-btn {
+            background-color: #2563eb;
+            color: #ffffff;
+            padding: 12px 32px;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 16px;
+            transition: background-color 0.2s ease, transform 0.15s ease;
+            box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
+        }
+
+        .submit-btn:hover {
+            background-color: #1d4ed8;
+        }
+
+        .submit-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* === 7. प्रिंट मीडिया स्टाइल (PDF/Paper Print) === */
+        @media print {
+            body {
+                background-color: #ffffff;
+                color: #000000;
+                padding: 0;
+            }
+            .result-container {
+                box-shadow: none;
+                border: none;
+                background-color: #ffffff;
+                margin: 0;
+                max-width: 100%;
+                padding: 0;
+            }
+            .student-profile-card {
+                background-color: #f3f4f6;
+                border: 1px solid #d1d5db;
+            }
+            .profile-title {
+                color: #1d4ed8;
+            }
+            .info-value {
+                color: #111827;
+            }
+            .stat-card {
+                background-color: #f3f4f6;
+                border: 1px solid #e5e7eb;
+            }
+            .stat-label {
+                color: #4b5563;
+            }
+            .question-card {
+                background-color: #f9fafb;
+                border: 1px solid #e5e7eb;
+                border-left: 4px solid #2563eb;
+                page-break-inside: avoid;
+            }
+            .question-title {
+                color: #111827;
+            }
+            .question-context {
+                color: #1d4ed8;
+            }
+            .action-box {
+                display: none;
+            }
+        }

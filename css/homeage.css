@@ -1,0 +1,442 @@
+ /* CSS Variables & Theme Setup */
+:root { 
+    --gold: #d4af37; 
+    --blue: #00d4ff; 
+    --dark: #020617; 
+    --glass: rgba(15, 23, 42, 0.7); 
+    --border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body.page-body { 
+    background-color: var(--dark); 
+    color: #f8fafc; 
+    font-family: 'Rajdhani', sans-serif; 
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior-y: none;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Common Classes */
+.text-white { color: #ffffff; }
+.hidden { display: none !important; }
+
+/* Custom Glass Cards */
+.glass-card { 
+    background: var(--glass); 
+    backdrop-filter: blur(12px); 
+    -webkit-backdrop-filter: blur(12px); 
+    border: 1px solid var(--border); 
+}
+
+/* Header Styles */
+.main-header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 50;
+    background-color: rgba(2, 6, 23, 0.9);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.header-content {
+    max-width: 28rem; /* 448px */
+    margin: 0 auto;
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand-logo {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #3b82f6;
+    font-family: 'Cinzel', serif;
+    letter-spacing: -0.05em;
+}
+
+.brand-logo a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.header-nav {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+}
+
+.nav-link {
+    color: #9ca3af;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+}
+
+.nav-link.active, .nav-link:hover {
+    color: #60a5fa;
+}
+
+/* Main Container Layout */
+.main-feed {
+    flex: 1;
+    overflow-y: auto;
+    width: 100%;
+    max-width: 28rem;
+    margin: 0 auto;
+    padding-top: 5rem;
+    padding-bottom: 7rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.main-feed::-webkit-scrollbar {
+    display: none;
+}
+
+.section-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.section-title {
+    font-size: 1rem;
+    font-weight: 900;
+    font-family: 'Cinzel', serif;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.live-dot {
+    color: #ef4444;
+    font-size: 1.25rem;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* Reels Grid & Card Styles */
+.reels-feed-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.reel-card {
+    border-radius: 28px;
+    padding: 1.25rem;
+    height: 460px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-gradient-top {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.reel-top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+}
+
+.category-tag {
+    font-size: 9px;
+    font-weight: 700;
+    padding: 0.25rem 0.625rem;
+    border-radius: 9999px;
+}
+
+.reel-timer {
+    font-size: 10px;
+    color: #9ca3af;
+}
+
+.reel-body {
+    z-index: 10;
+}
+
+.reel-question {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.375;
+    margin-bottom: 1rem;
+}
+
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.option-btn {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 0.75rem;
+    border-radius: 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.option-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Option Selected States */
+.opt-correct {
+    background-color: rgba(16, 185, 129, 0.2) !important;
+    border-color: #10b981 !important;
+    color: #34d399 !important;
+}
+
+.opt-wrong {
+    background-color: rgba(244, 63, 94, 0.2) !important;
+    border-color: #f43f5e !important;
+    color: #fb7185 !important;
+}
+
+.opt-dimmed {
+    opacity: 0.3;
+}
+
+.btn-start-test {
+    width: 100%;
+    background-color: #2563eb;
+    color: #ffffff;
+    padding: 0.75rem 0;
+    border-radius: 0.75rem;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    z-index: 10;
+    transition: background-color 0.2s;
+}
+
+.btn-start-test:hover {
+    background-color: #3b82f6;
+}
+
+.icon-play {
+    margin-left: 0.375rem;
+}
+
+/* Add Question Section */
+.add-q-section {
+    padding-bottom: 1rem;
+    margin-top: 2rem;
+}
+
+.add-q-card {
+    border-radius: 28px;
+    padding: 1.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.card-bg-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(37, 99, 235, 0.1), rgba(147, 51, 234, 0.1));
+}
+
+.card-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.add-q-heading {
+    font-size: 1.25rem;
+    font-weight: 900;
+    font-family: 'Cinzel', serif;
+    color: #ffffff;
+}
+
+.add-q-desc {
+    color: #9ca3af;
+    font-size: 0.75rem;
+    line-height: 1.625;
+}
+
+.btn-add-q {
+    display: inline-block;
+    background-color: #2563eb;
+    color: #ffffff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-decoration: none;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    align-self: center;
+}
+
+.icon-plus {
+    margin-left: 0.375rem;
+}
+
+/* Bottom Nav Bar Styles */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 100;
+    background: rgba(2, 6, 23, 0.85);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-top: 1px solid var(--border);
+    padding-top: 0.5rem;
+    padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+}
+
+.bottom-nav-container {
+    max-width: 28rem;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.5rem 0.5rem 1.5rem;
+    position: relative;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.125rem;
+    width: 3rem;
+    color: #6b7280;
+    text-decoration: none;
+}
+
+.nav-item.active {
+    color: #3b82f6;
+}
+
+.nav-icon {
+    font-size: 1rem;
+}
+
+.nav-text {
+    font-size: 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.active-dot {
+    width: 0.25rem;
+    height: 0.25rem;
+    background-color: #3b82f6;
+    border-radius: 9999px;
+    margin-top: 0.125rem;
+    box-shadow: 0 0 8px #3B82F6;
+}
+
+/* Floating Action Button (FAB) */
+.fab-wrapper {
+    position: relative;
+    width: 3.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+.pro-fab {
+    position: absolute;
+    bottom: -1.25rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #2563EB, #06B6D4);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 1.125rem;
+    z-index: 50;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+}
+
+.pro-fab:active {
+    transform: scale(0.95);
+}
+
+/* Themes Mapping */
+.theme-amber .card-gradient-top { background: linear-gradient(to bottom, rgba(217, 119, 6, 0.15), transparent); }
+.theme-amber .category-tag { background-color: rgba(217, 119, 6, 0.2); color: #fbbf24; border: 1px solid rgba(217, 119, 6, 0.3); }
+
+.theme-emerald .card-gradient-top { background: linear-gradient(to bottom, rgba(5, 150, 105, 0.15), transparent); }
+.theme-emerald .category-tag { background-color: rgba(5, 150, 105, 0.2); color: #34d399; border: 1px solid rgba(5, 150, 105, 0.3); }
+
+.theme-blue .card-gradient-top { background: linear-gradient(to bottom, rgba(37, 99, 235, 0.15), transparent); }
+.theme-blue .category-tag { background-color: rgba(37, 99, 235, 0.2); color: #60a5fa; border: 1px solid rgba(37, 99, 235, 0.3); }
+
+.theme-purple .card-gradient-top { background: linear-gradient(to bottom, rgba(147, 51, 234, 0.15), transparent); }
+.theme-purple .category-tag { background-color: rgba(147, 51, 234, 0.2); color: #c084fc; border: 1px solid rgba(147, 51, 234, 0.3); }
+
+.theme-cyan .card-gradient-top { background: linear-gradient(to bottom, rgba(8, 145, 178, 0.15), transparent); }
+.theme-cyan .category-tag { background-color: rgba(8, 145, 178, 0.2); color: #22d3ee; border: 1px solid rgba(8, 145, 178, 0.3); }
+
+.theme-rose .card-gradient-top { background: linear-gradient(to bottom, rgba(225, 29, 72, 0.15), transparent); }
+.theme-rose .category-tag { background-color: rgba(225, 29, 72, 0.2); color: #fb7185; border: 1px solid rgba(225, 29, 72, 0.3); }
+
+.theme-teal .card-gradient-top { background: linear-gradient(to bottom, rgba(13, 148, 136, 0.15), transparent); }
+.theme-teal .category-tag { background-color: rgba(13, 148, 136, 0.2); color: #2dd4bf; border: 1px solid rgba(13, 148, 136, 0.3); }
+
+.theme-orange .card-gradient-top { background: linear-gradient(to bottom, rgba(234, 88, 12, 0.15), transparent); }
+.theme-orange .category-tag { background-color: rgba(234, 88, 12, 0.2); color: #fb923c; border: 1px solid rgba(234, 88, 12, 0.3); }
+
+.theme-indigo .card-gradient-top { background: linear-gradient(to bottom, rgba(79, 70, 229, 0.15), transparent); }
+.theme-indigo .category-tag { background-color: rgba(79, 70, 229, 0.2); color: #818cf8; border: 1px solid rgba(79, 70, 229, 0.3); }
+
+.theme-pink .card-gradient-top { background: linear-gradient(to bottom, rgba(219, 39, 119, 0.15), transparent); }
+.theme-pink .category-tag { background-color: rgba(219, 39, 119, 0.2); color: #f472b6; border: 1px solid rgba(219, 39, 119, 0.3); }

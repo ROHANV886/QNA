@@ -5,54 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Govt Jobs GK रील्स मंच - The QNA</title>
     <meta name="description" content="The QNA पर सरकारी नौकरियों के लिए महत्वपूर्ण GK और करंट अफेयर्स के सवाल नए रील्स अंदाज में सीखें।">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* रील्स मोड स्नैप-लॉकिंग */
-        .reels-container {
-            scroll-snap-type: y mandatory;
-            overflow-y: scroll;
-            height: 100dvh;
-        }
-        .reel-section {
-            scroll-snap-align: start;
-            scroll-snap-stop: always;
-        }
-        .reels-container::-webkit-scrollbar {
-            display: none;
-        }
-    </style>
+    <link rel="stylesheet" href="css/afterclick_test_Start.css">
+
 </head>
 
-<body class="bg-slate-900 text-gray-100 font-sans antialiased overflow-hidden flex justify-center items-center h-screen">
+<body>
 
-    <div class="w-full max-w-md h-[100dvh] bg-gray-950 flex flex-col relative shadow-2xl border-x border-gray-900">
+    <div class="app-container">
         
-        <header class="w-full bg-slate-950/85 border-b border-gray-900 py-3 px-4 flex items-center justify-between shrink-0 z-20">
-            <div class="text-2xl font-black text-blue-500 tracking-tight">
-                <a href="/homepage.html">The <span class="text-white">QNA</span></a>
+        <header class="app-header">
+            <div class="brand-logo">
+                <a href="/homepage.html">The <span>QNA</span></a>
             </div>
-            <nav class="flex items-center space-x-4 text-xs font-bold text-gray-300">
-                <a href="/homepage.html" class="hover:text-blue-500 transition">Home</a>
-                <a href="/GK_catogery.html" class="hover:text-blue-500 transition">मंच</a>
+            <nav class="nav-links">
+                <a href="/homepage.html">Home</a>
+                <a href="/GK_catogery.html">मंच</a>
             </nav>
         </header>
 
-        <main id="reels-wrapper" class="reels-container w-full flex-1 bg-gray-950">
+        <main id="reels-wrapper" class="reels-container">
         </main>
 
-        <div id="explanation-sheet" class="absolute inset-x-0 bottom-0 z-50 bg-gray-900 border-t-2 border-blue-600 rounded-t-3xl shadow-2xl transform translate-y-full transition-transform duration-300 ease-out p-6 text-gray-200">
-            <div class="w-12 h-1.5 bg-gray-700 rounded-full mx-auto mb-4 cursor-pointer" onclick="closeExplanation()"></div>
-            <div class="flex items-center justify-between border-b border-gray-800 pb-3 mb-4">
-                <h3 class="text-base font-black text-white flex items-center gap-2">
-                    📖 उत्तर का प्रामाणिक संदर्भ (Context)
-                </h3>
-                <button onclick="closeExplanation()" class="text-gray-400 hover:text-white font-bold text-sm bg-gray-800 px-2.5 py-1 rounded-full">बंद करें</button>
+        <div id="explanation-sheet" class="bottom-sheet">
+            <div class="sheet-handle" onclick="closeExplanation()"></div>
+            <div class="sheet-header">
+                <h3 class="sheet-title">📖 उत्तर का प्रामाणिक संदर्भ (Context)</h3>
+                <button onclick="closeExplanation()" class="close-btn">बंद करें</button>
             </div>
-            <div id="explanation-text" class="text-sm text-gray-300 leading-relaxed max-h-[250px] overflow-y-auto font-medium">
-            </div>
+            <div id="explanation-text" class="sheet-body"></div>
         </div>
 
-        <div id="sheet-overlay" class="absolute inset-0 bg-black/60 z-40 hidden" onclick="closeExplanation()"></div>
+        <div id="sheet-overlay" class="overlay hidden" onclick="closeExplanation()"></div>
 
     </div>
 
@@ -78,76 +61,70 @@
         const wrapper = document.getElementById('reels-wrapper');
         let activeTimers = {};
 
-        // रील कार्ड जनरेटर कोड (इसे फिक्स किया गया है ताकि हाइट्स सही रहें)
+        // रील कार्ड HTML जनरेटर
         function createQuestionReelHTML(item, index) {
             return `
-                <div id="reel-${index}" class="reel-section h-full w-full px-4 pt-4 pb-[20px] flex flex-col justify-between border-b border-gray-900 bg-gradient-to-b from-gray-950 to-gray-900 relative" data-correct="${item.correct}" data-index="${index}">
+                <div id="reel-${index}" class="reel-section" data-correct="${item.correct}" data-index="${index}">
                     
-                    <div class="w-full shrink-0">
-                        <div class="flex items-center justify-between text-xs text-gray-400 mb-1.5">
+                    <div class="reel-top-bar">
+                        <div class="reel-meta">
                             <span>सवाल नंबर: #0${index + 1}</span>
-                            <span class="text-red-400 font-mono font-bold bg-red-950/40 border border-red-900/40 px-2.5 py-0.5 rounded-full flex items-center gap-1">
+                            <span class="timer-badge">
                                 ⏱️ <span class="timer-text">30</span>s
                             </span>
                         </div>
-                        <div class="w-full h-1.5 bg-gray-800 rounded-full overflow-hidden">
-                            <div class="timer-bar h-full bg-blue-500 w-full transition-all duration-1000 ease-linear"></div>
+                        <div class="progress-track">
+                            <div class="timer-bar bg-blue"></div>
                         </div>
                     </div>
 
-                    <div class="flex flex-col justify-start flex-1 mt-4 relative overflow-y-auto">
-                        <div class="mb-3">
-                            <h2 class="text-base font-black text-white leading-snug tracking-wide mb-1">
-                                ${item.q}
-                            </h2>
-                            <div class="text-right">
-                                <span class="inline-block bg-gray-800 text-[9px] text-gray-400 font-extrabold px-2 py-0.5 rounded border border-gray-700 uppercase tracking-wider">
-                                    📋 ${item.exam} (${item.year})
-                                </span>
+                    <div class="reel-content">
+                        <div>
+                            <h2 class="question-title">${item.q}</h2>
+                            <div class="exam-tag-wrapper">
+                                <span class="exam-tag">📋 ${item.exam} (${item.year})</span>
                             </div>
                         </div>
 
-                        <div class="space-y-2 options-group">
-                            <button onclick="checkAnswer(this, 'A')" class="option-btn w-full text-left bg-gray-800/60 border border-gray-700 p-2.5 rounded-lg text-sm font-medium transition flex items-center space-x-3">
-                                <span class="badge bg-gray-700 text-white w-6 h-6 flex items-center justify-center rounded-lg text-xs font-bold shrink-0">A</span>
+                        <div class="options-group">
+                            <button onclick="checkAnswer(this, 'A')" class="option-btn">
+                                <span class="option-badge">A</span>
                                 <span>${item.a}</span>
                             </button>
-                            <button onclick="checkAnswer(this, 'B')" class="option-btn w-full text-left bg-gray-800/60 border border-gray-700 p-2.5 rounded-lg text-sm font-medium transition flex items-center space-x-3">
-                                <span class="badge bg-gray-700 text-white w-6 h-6 flex items-center justify-center rounded-lg text-xs font-bold shrink-0">B</span>
+                            <button onclick="checkAnswer(this, 'B')" class="option-btn">
+                                <span class="option-badge">B</span>
                                 <span>${item.b}</span>
                             </button>
-                            <button onclick="checkAnswer(this, 'C')" class="option-btn w-full text-left bg-gray-800/60 border border-gray-700 p-2.5 rounded-lg text-sm font-medium transition flex items-center space-x-3">
-                                <span class="badge bg-gray-700 text-white w-6 h-6 flex items-center justify-center rounded-lg text-xs font-bold shrink-0">C</span>
+                            <button onclick="checkAnswer(this, 'C')" class="option-btn">
+                                <span class="option-badge">C</span>
                                 <span>${item.c}</span>
                             </button>
-                            <button onclick="checkAnswer(this, 'D')" class="option-btn w-full text-left bg-gray-800/60 border border-gray-700 p-2.5 rounded-lg text-sm font-medium transition flex items-center space-x-3">
-                                <span class="badge bg-gray-700 text-white w-6 h-6 flex items-center justify-center rounded-lg text-xs font-bold shrink-0">D</span>
+                            <button onclick="checkAnswer(this, 'D')" class="option-btn">
+                                <span class="option-badge">D</span>
                                 <span>${item.d}</span>
                             </button>
                         </div>
                     </div>
 
-                    <div class="pt-3 space-y-2 shrink-0 w-full z-10">
-                        <div class="answer-box hidden w-full bg-green-950/30 p-2.5 rounded-xl flex flex-col items-center justify-between gap-2 border border-green-900/40">
-                            <span class="text-green-400 font-black text-xs tracking-wide text-center">
-                                सही उत्तर: Option (${item.correct})
-                            </span>
-                            <button onclick="openExplanation(${index})" class="bg-green-600 hover:bg-green-700 text-white text-[11px] font-bold px-3 py-1.5 rounded-lg transition flex items-center gap-1 shrink-0 shadow-md w-full justify-center">
+                    <div class="reel-footer">
+                        <div class="answer-box hidden">
+                            <span class="answer-text">सही उत्तर: Option (${item.correct})</span>
+                            <button onclick="openExplanation(${index})" class="explanation-btn">
                                 <span>विस्तृत व्याख्या पढ़ें 📖</span>
                             </button>
                         </div>
 
-                        <div class="flex items-center justify-between text-xs text-gray-400">
-                            <div class="flex items-center space-x-3 bg-gray-900/90 px-3 py-1.5 rounded-full border border-gray-800 shadow-md">
-                                <button onclick="toggleLike(this)" class="flex items-center space-x-1 font-bold hover:text-red-500 transition">
-                                    <span>🤍</span> <span><span class="like-count">${item.likes}</span></span>
+                        <div class="actions-bar">
+                            <div class="metrics-pill">
+                                <button onclick="toggleLike(this)" class="action-btn-inline">
+                                    <span class="heart-icon">🤍</span> <span><span class="like-count">${item.likes}</span></span>
                                 </button>
-                                <span class="text-gray-700">|</span>
-                                <div class="flex items-center space-x-1 font-bold">
+                                <span style="color: #374151;">|</span>
+                                <div class="action-btn-inline">
                                     <span>👁️</span> <span>${item.views}</span>
                                 </div>
                             </div>
-                            <button onclick="reportQuestionError(${item.id})" class="bg-red-950/50 text-red-400 border border-red-900/60 hover:bg-red-900 hover:text-white font-bold px-3 py-1.5 rounded-full transition text-[11px] flex items-center space-x-1 shadow-sm">
+                            <button onclick="reportQuestionError(${item.id})" class="report-btn">
                                 <span>🚨</span> <span>रिपोर्ट</span>
                             </button>
                         </div>
@@ -156,37 +133,33 @@
             `;
         }
 
-        // विज्ञापन ब्लॉक
+        // फुल स्क्रीन एड्स लेआउट
         function createFullScreenAdHTML() {
             return `
-                <div class="reel-section h-full w-full px-4 py-12 flex flex-col justify-between bg-gradient-to-b from-indigo-950 via-slate-900 to-indigo-950 border-b border-gray-900 text-center relative">
-                    <span class="text-[10px] font-bold text-indigo-400 uppercase tracking-widest pt-1 block mb-4">Sponsored Advertisement</span>
-                    <div class="my-auto space-y-4">
-                        <div class="w-16 h-16 bg-blue-600 text-white text-2xl font-black flex items-center justify-center rounded-2xl mx-auto shadow-xl">AD</div>
-                        <h3 class="text-xl font-extrabold text-white px-4 leading-tight">Google AdSense Full-Display</h3>
-                        <p class="text-xs text-gray-400 max-w-xs mx-auto">High CPM Interstitial Full-Screen Ad Slot.</p>
+                <div class="reel-section ad-section">
+                    <span class="ad-label">Sponsored Advertisement</span>
+                    <div class="ad-box">
+                        <div class="ad-icon">AD</div>
+                        <h3 class="ad-heading">Google AdSense Full-Display</h3>
+                        <p class="ad-subtext">High CPM Interstitial Full-Screen Ad Slot.</p>
                     </div>
-                    <div class="pb-6 animate-bounce text-xs text-indigo-300 font-bold">⬇️ आगे बढ़ने के लिए स्क्रॉल करें</div>
+                    <div class="ad-scroll-notice">⬇️ आगे बढ़ने के लिए स्क्रॉल करें</div>
                 </div>
             `;
         }
 
-        // व्याख्या खोलने और बंद करने का लॉजिक
+        // व्याख्या मोडल लॉजिक
         function openExplanation(originalIndex) {
             const itemIndex = originalIndex % gkQuestionBank.length;
             const item = gkQuestionBank[itemIndex];
             document.getElementById('explanation-text').innerText = item.context;
             document.getElementById('sheet-overlay').classList.remove('hidden');
-            const sheet = document.getElementById('explanation-sheet');
-            sheet.classList.remove('translate-y-full');
-            sheet.classList.add('translate-y-0');
+            document.getElementById('explanation-sheet').classList.add('open');
         }
 
         function closeExplanation() {
             document.getElementById('sheet-overlay').classList.add('hidden');
-            const sheet = document.getElementById('explanation-sheet');
-            sheet.classList.remove('translate-y-0');
-            sheet.classList.add('translate-y-full');
+            document.getElementById('explanation-sheet').classList.remove('open');
         }
 
         function reportQuestionError(questionId) {
@@ -204,13 +177,11 @@
 
             allButtons.forEach(btn => btn.disabled = true);
             allButtons.forEach(btn => {
-                const optionLetter = btn.querySelector('.badge').innerText;
+                const optionLetter = btn.querySelector('.option-badge').innerText;
                 if (optionLetter === correctOption) {
-                    btn.classList.remove('bg-gray-800/60', 'border-gray-700');
-                    btn.classList.add('bg-green-600', 'border-green-500', 'text-white');
+                    btn.classList.add('btn-correct');
                 } else if (optionLetter === selectedOption && selectedOption !== correctOption) {
-                    btn.classList.remove('bg-gray-800/60', 'border-gray-700');
-                    btn.classList.add('bg-red-600', 'border-red-500', 'text-white');
+                    btn.classList.add('btn-incorrect');
                 }
             });
             reel.querySelector('.answer-box').classList.remove('hidden');
@@ -222,8 +193,8 @@
             const timerBar = reelElement.querySelector('.timer-bar');
             if(activeTimers[index]) clearInterval(activeTimers[index]);
             
-            timerBar.classList.remove('bg-red-500');
-            timerBar.classList.add('bg-blue-500');
+            timerBar.classList.remove('bg-red');
+            timerBar.classList.add('bg-blue');
             timerBar.style.width = '100%';
 
             activeTimers[index] = setInterval(() => {
@@ -233,14 +204,14 @@
                 if(timerBar) timerBar.style.width = percentage + '%';
 
                 if (timeLeft <= 5 && timerBar) {
-                    timerBar.classList.remove('bg-blue-500');
-                    timerBar.classList.add('bg-red-500');
+                    timerBar.classList.remove('bg-blue');
+                    timerBar.classList.add('bg-red');
                 }
 
                 if (timeLeft <= 0) {
                     clearInterval(activeTimers[index]);
                     const correctOption = reelElement.getAttribute('data-correct');
-                    const firstCorrectBtn = Array.from(reelElement.querySelectorAll('.option-btn')).find(btn => btn.querySelector('.badge').innerText === correctOption);
+                    const firstCorrectBtn = Array.from(reelElement.querySelectorAll('.option-btn')).find(btn => btn.querySelector('.option-badge').innerText === correctOption);
                     if(firstCorrectBtn) checkAnswer(firstCorrectBtn, null);
                 }
             }, 1000);
@@ -278,13 +249,17 @@
         }
 
         function toggleLike(btn) {
-            const heartIcon = btn.querySelector('span:first-child');
+            const heartIcon = btn.querySelector('.heart-icon');
             const countSpan = btn.querySelector('.like-count');
             let currentCount = parseInt(countSpan.innerText);
             if (heartIcon.innerText === '🤍') {
-                heartIcon.innerText = '❤️'; countSpan.innerText = currentCount + 1; btn.classList.add('text-red-500');
+                heartIcon.innerText = '❤️'; 
+                countSpan.innerText = currentCount + 1; 
+                btn.classList.add('liked');
             } else {
-                heartIcon.innerText = '🤍'; countSpan.innerText = currentCount - 1; btn.classList.remove('text-red-500');
+                heartIcon.innerText = '🤍'; 
+                countSpan.innerText = currentCount - 1; 
+                btn.classList.remove('liked');
             }
         }
 
